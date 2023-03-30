@@ -18,6 +18,11 @@ public class ScreenManager : MonoBehaviour
             SetScreenSize();
             Debug.Log("Screen size");
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void SetScreenSize()
