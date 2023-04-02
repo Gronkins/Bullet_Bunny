@@ -7,7 +7,7 @@ public class ScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(512, 288, true);
+        //Screen.SetResolution(512, 288, true);
     }
 
     // Update is called once per frame
@@ -15,7 +15,7 @@ public class ScreenManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SetScreenSize();
+            //SetScreenSize();
             Debug.Log("Screen size");
         }
 

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckRadius;
     public Vector2 groundCheckSize;
     public bool isGrounded;
+    [SerializeField]
     bool isJumping;
     
     [SerializeField]
@@ -59,10 +60,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //float horizontal = Input.GetAxisRaw("Horizontal");
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
-        //float vertical = Input.GetAxisRaw("Vertical");
         //float lastMoveHorizontal = Input.GetAxis("Horizontal");
 
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask); //Ground check with circle
@@ -71,6 +70,9 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
+        //isJumping = !isGrounded;
+        //animator.SetBool("IsJumping", isJumping);
 
         if (isDashing)
         {
@@ -87,36 +89,20 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing == false)
         {
             rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y);
-            //rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
-
-
             //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
         }
         else
                 if (isDashing == true)
                 {
-                    //rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
                     //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
                     rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
-        }
-
-
-        //rigidBody2D.velocity = new Vector2(horizontalm * movementSpeed, verticalm * movementSpeed);
-
-        //movement.y = Input.GetAxisRaw("Vertical");
-        //movement.x = Input.GetAxis("Horizontal");
+                }
 
 
         //Jump
         if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)))
         {
-            /*
-            rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
-            isJumping = true;
-            animator.SetBool("IsJumping", true);
-            */
             StartCoroutine(Jump());
-
             //rigidBody2D.velocity = new Vector2(vertical, jumpHeight);
         }
 
@@ -148,23 +134,16 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded == true)
         {
             numOfDashes = maxDashes;
-        }
-
-        if(isGrounded == true)
-        {
+            animator.SetBool("IsJumping", false);
             isJumping = false;
         }
-        
-        if(isJumping == false)
-        {
-            animator.SetBool("IsJumping", false);
-        }
+
     }
 
     private IEnumerator Jump()
     {
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         isJumping = true;
         animator.SetBool("IsJumping", true);
         yield return new WaitForSeconds(0.2f);
@@ -195,10 +174,6 @@ public class PlayerMovement : MonoBehaviour
             dashDirection = new Vector2(lastMoveHorizontal, 0);
         }
 
-        //rigidBody2D.velocity = new Vector2(horizontalm, verticalm).normalized * dashStrength;
-
-
-        //rigidBody2D.velocity = dashDirection.normalized * dashStrength; old
         rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength);
 
         yield return new WaitForSeconds(dashTime);
