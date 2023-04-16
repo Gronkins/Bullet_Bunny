@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D boxCollider2D;
     public Animator animator;
     public LayerMask layerMask;
+    public LayerMask hazardLayerMask;
     public TrailRenderer trailRenderer;
 
 
@@ -21,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float movementSpeed = 10.0f;
     [SerializeField]
-    float jumpHeight = 20.0f;
+    float jumpHeight = 16.0f;
 
     [SerializeField]
     bool canDash = true;
@@ -38,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
     public float vertical;
 
     bool isFacingRight;
+
+    [SerializeField]
+    bool isAttacking;
+    float attackTime = 0.15f;
+    float attackCounter = 0.15f;
 
     Vector2 dashDirection;
     
@@ -74,6 +80,35 @@ public class PlayerMovement : MonoBehaviour
         //isJumping = !isGrounded;
         //animator.SetBool("IsJumping", isJumping);
 
+        /*
+        if (isAttacking)
+        {
+            attackCounter -= Time.deltaTime;
+
+            if (attackCounter <= 0)
+            {
+                animator.SetBool("IsAttacking", false);
+                isAttacking = false;
+            }
+        }
+        */
+        
+        if (Input.GetKeyDown(KeyCode.JoystickButton2) && (!isAttacking))
+        {
+            /*attackCounter = attackTime;
+            animator.SetBool("IsAttacking", true);
+            isAttacking = true;
+            */
+            StartCoroutine(Attack());
+        }
+
+        if (isAttacking)
+        {
+            //return;
+        }
+
+
+
         if (isDashing)
         {
             return;
@@ -86,17 +121,18 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("LastMoveHorizontal", Input.GetAxisRaw("Horizontal"));
         }
 
-        if (isDashing == false)
-        {
-            rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y);
-            //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
-        }
-        else
-                if (isDashing == true)
+            if (isDashing == false)
+            {
+                rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y);
+                //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
+             }
+             else
+                 if (isDashing == true)
                 {
                     //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
                     rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
                 }
+
 
 
         //Jump
@@ -119,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash)
+        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash && !isDashing)
         {
             StartCoroutine(Dash());
         }
@@ -152,6 +188,16 @@ public class PlayerMovement : MonoBehaviour
 
         yield return null;
     }
+
+    private IEnumerator Attack()
+    {
+        isAttacking = true;
+        animator.SetBool("IsAttacking", true);
+        yield return new WaitForSeconds(0.25f);
+        isAttacking = false;
+        animator.SetBool("IsAttacking", false);
+        yield return null;
+    }
     
     private IEnumerator Dash()
     {
@@ -164,11 +210,13 @@ public class PlayerMovement : MonoBehaviour
         float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
         rigidBody2D.gravityScale = 0.0f;
         rigidBody2D.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.01f);
+        numOfDashes -= 1;
         //rigidBody2D.velocity = new Vector2(transform.localScale.x * dashStrength, 0.0f);
-        
-        
+
+
         //rigidBody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashStrength;
-        
+
         if (dashDirection == Vector2.zero)
         {
             dashDirection = new Vector2(lastMoveHorizontal, 0);
@@ -182,7 +230,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsDashing", false);
         isDashing = false;
         trailRenderer.emitting = false;
-        numOfDashes -= 1;
         yield return new WaitForSeconds(dashCooldown);
         //canDash = true;
     }
@@ -211,12 +258,12 @@ public class PlayerMovement : MonoBehaviour
 
     int QuantizeAxis(float axis)
     {
-        if (axis < -0.35f)
+        if (axis < -0.25f) //default was 0.35f
         {
             return -1;
         }
         
-        if (axis > 0.35f)
+        if (axis > 0.25f)
         {
             return 1;
         }
