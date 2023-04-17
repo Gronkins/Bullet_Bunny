@@ -416,6 +416,9 @@ MonoBehaviour:
   target: {fileID: 914849022}
   cameraSpeed: 0.125
   maxHorizontalDistance: 2
+  smoothTime: 0.3
+  useVerticalCamera: 0
+  useHorizontalCamera: 0
 --- !u!1 &660723437
 GameObject:
   m_ObjectHideFlags: 0
@@ -5367,7 +5370,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -20, y: -12, z: 0}
-  m_Size: {x: 41, y: 23, z: 1}
+  m_Size: {x: 41, y: 28, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -5425,9 +5428,27 @@ CompositeCollider2D:
   - m_Collider: {fileID: 1878576826}
     m_ColliderPaths:
     - - X: 200000000
+        Y: 109999900
+      - X: 189999959
+        Y: 109999900
+      - X: 189999900
+        Y: 109999959
+      - X: 189999900
+        Y: 110000100
+      - X: 159999959
+        Y: 110000100
+      - X: 159999900
+        Y: 110000041
+      - X: 159999900
         Y: 110000000
+      - X: -179999900
+        Y: 110000000
+      - X: -179999900
+        Y: 109999959
+      - X: -179999959
+        Y: 109999900
       - X: -190000000
-        Y: 110000000
+        Y: 109999900
       - X: -190000000
         Y: -110000000
       - X: 200000000
@@ -5468,8 +5489,14 @@ CompositeCollider2D:
         Y: 0
       - X: -170000000
         Y: 100000000
-      - X: 190000000
+      - X: 159999900
         Y: 100000000
+      - X: 159999900
+        Y: 99999959
+      - X: 159999959
+        Y: 99999900
+      - X: 190000000
+        Y: 99999900
       - X: 190000000
         Y: 70000000
       - X: -130000000
@@ -5507,8 +5534,8 @@ CompositeCollider2D:
   m_CompositePaths:
     m_Paths:
     - - {x: 19.999971, y: -11}
-      - {x: 19.999971, y: 11}
-      - {x: -19, y: 10.99997}
+      - {x: 19.999971, y: 10.99999}
+      - {x: -19, y: 10.999961}
       - {x: -18.999971, y: -11}
     - - {x: 9, y: -9.99997}
       - {x: 5, y: -9.99997}
@@ -5537,7 +5564,7 @@ CompositeCollider2D:
       - {x: -13.00003, y: 0}
       - {x: -17, y: 0.0000294}
       - {x: -16.999971, y: 10}
-      - {x: 19, y: 9.99997}
+      - {x: 19, y: 9.999961}
       - {x: 18.999971, y: 7}
       - {x: -13, y: 6.9999704}
       - {x: -12.99997, y: 5}
