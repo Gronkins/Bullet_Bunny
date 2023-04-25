@@ -35,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
     float dashTime = 0.2f;
     float dashCooldown = 1.0f;
 
+    [SerializeField]
+    float threshold = 0.01f; //0.35f is default
+
     public float horizontal;
     public float vertical;
 
@@ -123,14 +126,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (isDashing == false)
             {
-                rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y);
+                rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //movement code
+                
+            
                 //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
              }
              else
                  if (isDashing == true)
                 {
                     //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
-                    rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
+                    //rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
                 }
 
 
@@ -205,7 +210,9 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         animator.SetBool("IsDashing", true);
         trailRenderer.emitting = true;
-        dashDirection = new Vector2(QuantizeAxis(Input.GetAxisRaw("Horizontal")), QuantizeAxis(Input.GetAxisRaw("Vertical")));
+        //dashDirection = new Vector2(QuantizeAxis(Input.GetAxisRaw("Horizontal")), QuantizeAxis(Input.GetAxisRaw("Vertical")));
+        dashDirection = new Vector2(horizontal, vertical);
+
         float originalGravity = rigidBody2D.gravityScale;
         float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
         rigidBody2D.gravityScale = 0.0f;
@@ -258,12 +265,12 @@ public class PlayerMovement : MonoBehaviour
 
     int QuantizeAxis(float axis)
     {
-        if (axis < -0.25f) //default was 0.35f
+        if (axis < -threshold)
         {
             return -1;
         }
         
-        if (axis > 0.25f)
+        if (axis > threshold)
         {
             return 1;
         }
