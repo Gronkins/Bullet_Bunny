@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); //Ground check with box
 
         animator.SetFloat("Horizontal", horizontal);
+        animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         //isJumping = !isGrounded;
