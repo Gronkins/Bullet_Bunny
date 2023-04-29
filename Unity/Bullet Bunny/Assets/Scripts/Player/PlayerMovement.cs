@@ -148,18 +148,6 @@ public class PlayerMovement : MonoBehaviour
             //rigidBody2D.velocity = new Vector2(vertical, jumpHeight);
         }
 
-        //Sprint
-        if (isGrounded == true && ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton7)) || (Input.GetAxis("Sprint") == 1)))
-        {
-            movementSpeed = 15.0f;
-        }
-
-        //Stop sprinting
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.JoystickButton7) || (Input.GetAxis("Sprint") == 0))
-        {
-            movementSpeed = 10.0f;
-        }
-
         //Dash
         if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash && !isDashing)
         {
@@ -178,6 +166,11 @@ public class PlayerMovement : MonoBehaviour
             numOfDashes = maxDashes;
             animator.SetBool("IsJumping", false);
             isJumping = false;
+        }
+
+        if (isGrounded == false)
+        {
+            animator.SetBool("IsJumping", true);
         }
 
     }
