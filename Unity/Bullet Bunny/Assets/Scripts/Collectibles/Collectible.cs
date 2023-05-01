@@ -20,11 +20,11 @@ public class Collectible : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.collider.tag == "Player")
+        if (collider.tag == "Player")
         {
-            Debug.Log("Is touching");
+            Debug.Log("Is touching collectible");
             playerMovement.numOfDashes = playerMovement.maxDashes;
             Destroy(gameObject);
         }

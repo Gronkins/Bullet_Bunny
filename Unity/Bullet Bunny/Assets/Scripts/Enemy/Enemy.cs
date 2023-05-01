@@ -26,9 +26,20 @@ public class Enemy : MonoBehaviour
             playerStats.playerHealth -= 1;
         }
 
+        /*
         if (collision.collider.tag == "PlayerWeapon")
         {
             Debug.Log("Is touching");
+            Destroy(gameObject);
+        }
+        */
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "PlayerWeapon")
+        {
+            Debug.Log("Is touching enemy");
             Destroy(gameObject);
         }
     }
