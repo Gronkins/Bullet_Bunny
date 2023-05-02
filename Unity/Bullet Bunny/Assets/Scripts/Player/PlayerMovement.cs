@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float dashStrength = 20.0f;
     float dashTime = 0.2f;
-    float dashCooldown = 1.0f;
+    float dashCooldown = 0.1f; //Default was 1.0f
 
     [SerializeField]
     float threshold = 0.01f; //0.35f is default
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash && !isDashing)
+        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash /*&& !isDashing*/)
         {
             StartCoroutine(Dash());
         }
