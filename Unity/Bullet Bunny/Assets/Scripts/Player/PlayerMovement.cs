@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     public float horizontal;
     public float vertical;
 
+    public float absoluteHorizontal;
+
     bool isFacingRight;
 
     [SerializeField]
@@ -70,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
+        absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
         //float lastMoveHorizontal = Input.GetAxis("Horizontal");
 
@@ -80,6 +83,9 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
+        //absoluteHorizontal = Mathf.Abs(horizontal);
+        animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
 
         //isJumping = !isGrounded;
         //animator.SetBool("IsJumping", isJumping);
@@ -96,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         */
-        
+
         if (Input.GetKeyDown(KeyCode.JoystickButton2) && (!isAttacking))
         {
             /*attackCounter = attackTime;
