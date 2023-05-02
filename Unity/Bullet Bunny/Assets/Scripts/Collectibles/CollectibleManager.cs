@@ -6,7 +6,7 @@ public class CollectibleManager : MonoBehaviour
 {
     public float respawnTime = 5.0f;
 
-    private Collectible[] collectibles;
+    Collectible[] collectibles;
     
     // Start is called before the first frame update
     void Start()
