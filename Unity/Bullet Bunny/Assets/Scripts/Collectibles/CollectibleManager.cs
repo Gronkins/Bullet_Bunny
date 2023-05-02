@@ -6,12 +6,12 @@ public class CollectibleManager : MonoBehaviour
 {
     public float respawnTime = 5.0f;
 
-    Collectible[] collectibles;
+   //Collectible[] collectibles;
     
     // Start is called before the first frame update
     void Start()
     {
-        collectibles = FindObjectsOfType<Collectible>();
+        //collectibles = FindObjectsOfType<Collectible>();
     }
 
     // Update is called once per frame
