@@ -33,7 +33,7 @@ public class ScreenManager : MonoBehaviour
             Application.Quit();
         }
 
-        if (playerStats.playerHealth <= 0 || Input.GetKeyDown(KeyCode.R))
+        if (playerStats.playerHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -47,7 +47,7 @@ public class ScreenManager : MonoBehaviour
         Screen.SetResolution(width, height, fullscreen);
     }
 
-    void LoadNextScene()
+    public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
