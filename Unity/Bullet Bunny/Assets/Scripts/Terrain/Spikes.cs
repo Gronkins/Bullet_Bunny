@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Spikes : MonoBehaviour
 {
     PlayerStats playerStats;
+    TilemapRenderer tilemapRenderer;
     
     // Start is called before the first frame update
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
+        //tilemapRenderer = FindObjectOfType<TilemapRenderer>();
+        tilemapRenderer = GetComponent<TilemapRenderer>();
+        tilemapRenderer.material.color = new Color(1f, 1f, 1f, 0f);
     }
 
     // Update is called once per frame
