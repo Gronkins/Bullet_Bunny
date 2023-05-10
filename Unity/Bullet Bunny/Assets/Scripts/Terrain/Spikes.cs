@@ -28,7 +28,7 @@ public class Spikes : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             Debug.Log("Is touching");
-            playerStats.playerHealth -= 1;
+            //playerStats.playerHealth -= 1;
         }
 
         if (collision.collider.tag == "PlayerWeapon")
