@@ -195,7 +195,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1068193875
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -400,7 +400,7 @@ Tilemap:
       - {fileID: 21300000, guid: 20bcbf6713151be4383579244dbbad29, type: 3}
       - {fileID: 21300000, guid: b7423e7c15264bd45bbf6cea34dc6535, type: 3}
       - {fileID: 21300000, guid: a52988dd212bd7f40bdaed5d77be4407, type: 3}
-      m_AnimationSpeed: 30.000002
+      m_AnimationSpeed: 30
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 8, y: -8, z: 0}
@@ -845,14 +845,38 @@ CompositeCollider2D:
         Y: -82500000
       - X: 90000000
         Y: -82500000
-    - - X: -50000000
-        Y: -77500000
-      - X: -70000000
-        Y: -77500000
-      - X: -70000000
-        Y: -80000000
-      - X: -50000000
-        Y: -80000000
+    - - X: -61249900
+        Y: -80000041
+      - X: -61249900
+        Y: -78749959
+      - X: -61249959
+        Y: -78749900
+      - X: -68750041
+        Y: -78749900
+      - X: -68750100
+        Y: -78749959
+      - X: -68750100
+        Y: -80000041
+      - X: -68750041
+        Y: -80000100
+      - X: -61249959
+        Y: -80000100
+    - - X: -51249900
+        Y: -80000041
+      - X: -51249900
+        Y: -78749959
+      - X: -51249959
+        Y: -78749900
+      - X: -58750041
+        Y: -78749900
+      - X: -58750100
+        Y: -78749959
+      - X: -58750100
+        Y: -80000041
+      - X: -58750041
+        Y: -80000100
+      - X: -51249959
+        Y: -80000100
     - - X: 98750000
         Y: -78750000
       - X: 91250000
@@ -861,38 +885,6 @@ CompositeCollider2D:
         Y: -80000000
       - X: 98750000
         Y: -80000000
-    - - X: 38750000
-        Y: -178750000
-      - X: 31250000
-        Y: -178750000
-      - X: 31250000
-        Y: -180000000
-      - X: 38750000
-        Y: -180000000
-    - - X: 48750000
-        Y: -178750000
-      - X: 41250000
-        Y: -178750000
-      - X: 41250000
-        Y: -180000000
-      - X: 48750000
-        Y: -180000000
-    - - X: 58750000
-        Y: -178750000
-      - X: 51250000
-        Y: -178750000
-      - X: 51250000
-        Y: -180000000
-      - X: 58750000
-        Y: -180000000
-    - - X: 68750000
-        Y: -178750000
-      - X: 61250000
-        Y: -178750000
-      - X: 61250000
-        Y: -180000000
-      - X: 68750000
-        Y: -180000000
     - - X: 78750000
         Y: -178750000
       - X: 71250000
@@ -1101,6 +1093,46 @@ CompositeCollider2D:
         Y: -180000000
       - X: -71250000
         Y: -180000000
+    - - X: 38750000
+        Y: -178750000
+      - X: 31250000
+        Y: -178750000
+      - X: 31250000
+        Y: -180000000
+      - X: 38750000
+        Y: -180000000
+    - - X: 48750000
+        Y: -178750000
+      - X: 41250000
+        Y: -178750000
+      - X: 41250000
+        Y: -180000000
+      - X: 48750000
+        Y: -180000000
+    - - X: 58750000
+        Y: -178750000
+      - X: 51250000
+        Y: -178750000
+      - X: 51250000
+        Y: -180000000
+      - X: 58750000
+        Y: -180000000
+    - - X: 68750000
+        Y: -178750000
+      - X: 61250000
+        Y: -178750000
+      - X: 61250000
+        Y: -180000000
+      - X: 68750000
+        Y: -180000000
+    - - X: -21250000
+        Y: -178750000
+      - X: -28750000
+        Y: -178750000
+      - X: -28750000
+        Y: -180000000
+      - X: -21250000
+        Y: -180000000
     - - X: -61250000
         Y: -178750000
       - X: -68750000
@@ -1133,13 +1165,13 @@ CompositeCollider2D:
         Y: -180000000
       - X: 158750000
         Y: -180000000
-    - - X: -21250000
+    - - X: 28750000
         Y: -178750000
-      - X: -28750000
+      - X: 21250000
         Y: -178750000
-      - X: -28750000
+      - X: 21250000
         Y: -180000000
-      - X: -21250000
+      - X: 28750000
         Y: -180000000
     - - X: -11250000
         Y: -178750000
@@ -1173,24 +1205,20 @@ CompositeCollider2D:
         Y: -180000000
       - X: 18750000
         Y: -180000000
-    - - X: 28750000
-        Y: -178750000
-      - X: 21250000
-        Y: -178750000
-      - X: 21250000
-        Y: -180000000
-      - X: 28750000
-        Y: -180000000
   m_CompositePaths:
     m_Paths:
     - - {x: 8.99997, y: -8.25}
       - {x: 8.99997, y: -7.75}
       - {x: 3, y: -7.7500296}
       - {x: 3.0000293, y: -8.25}
-    - - {x: -5.000029, y: -8}
-      - {x: -5.000029, y: -7.75}
-      - {x: -7, y: -7.7500296}
-      - {x: -6.9999704, y: -8}
+    - - {x: -6.1250253, y: -8.00001}
+      - {x: -6.1250253, y: -7.8749905}
+      - {x: -6.8750095, y: -7.8750257}
+      - {x: -6.8749743, y: -8.00001}
+    - - {x: -5.1250253, y: -8.00001}
+      - {x: -5.1250253, y: -7.8749905}
+      - {x: -5.87501, y: -7.8750257}
+      - {x: -5.8749747, y: -8.00001}
     - - {x: 9.87497, y: -8}
       - {x: 9.87497, y: -7.875}
       - {x: 9.125, y: -7.8750296}
@@ -1435,7 +1463,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1068193875
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1917,8 +1945,8 @@ Tilemap:
   - first: {x: -7, y: -8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 9
-      m_TileSpriteIndex: 9
+      m_TileIndex: 7
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1927,8 +1955,8 @@ Tilemap:
   - first: {x: -6, y: -8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 9
-      m_TileSpriteIndex: 9
+      m_TileIndex: 7
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2020,11 +2048,11 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 41
+  - m_RefCount: 43
     m_Data: {fileID: 11400000, guid: fbf4dc551df5f4c4789f80b29b9d215f, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 8
+  - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: 374c4328a2b5fa7458720bd40522608e, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: eb0da603f76056e4699667c38ba5831e, type: 2}
@@ -2043,11 +2071,11 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 41
+  - m_RefCount: 43
     m_Data: {fileID: 21300000, guid: 457e2e550ff806746929cdf503450baf, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 8
+  - m_RefCount: 6
     m_Data: {fileID: 1437706830, guid: 2646037042a158b49b85080a9dc96bb9, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1513026657, guid: 2646037042a158b49b85080a9dc96bb9, type: 3}
@@ -2411,7 +2439,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 800900171
-  m_SortingLayer: 0
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -36040,7 +36068,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1068193875
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -36288,7 +36316,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1068193875
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

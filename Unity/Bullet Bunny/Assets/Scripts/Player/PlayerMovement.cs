@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     float dashCooldown = 0.1f; //Default was 1.0f
 
     [SerializeField]
-    float threshold = 0.01f; //0.35f is default
+    float threshold = 0.15f; //0.35f is default, later changed to 0.01f
 
     public float horizontal;
     public float vertical;
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         }
         */
 
-        if (Input.GetKeyDown(KeyCode.JoystickButton2) && (!isAttacking))
+        if ((Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) && !isAttacking))
         {
             /*attackCounter = attackTime;
             animator.SetBool("IsAttacking", true);
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash /*&& !isDashing*/)
+        if ((Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash /*&& !isDashing*/)
         {
             StartCoroutine(Dash());
         }
