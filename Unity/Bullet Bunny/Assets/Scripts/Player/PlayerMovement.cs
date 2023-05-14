@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     float dashTime = 0.2f;
     float dashCooldown = 0.1f; //Default was 1.0f
 
-    [SerializeField]
+    //[SerializeField]
     float threshold = 0.15f; //0.35f is default, later changed to 0.01f
 
     public float horizontal;
