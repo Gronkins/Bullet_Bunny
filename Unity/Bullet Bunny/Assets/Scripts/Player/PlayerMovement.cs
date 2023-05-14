@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         }
         */
 
-        if ((Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) && !isAttacking))
+        if (((Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.JoystickButton4)) && !isAttacking))
         {
             /*attackCounter = attackTime;
             animator.SetBool("IsAttacking", true);
@@ -148,14 +148,14 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Jump
-        if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)))
+        if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)))
         {
             StartCoroutine(Jump());
             //rigidBody2D.velocity = new Vector2(vertical, jumpHeight);
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton0)) && canDash /*&& !isDashing*/)
+        if ((Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash /*&& !isDashing*/)
         {
             StartCoroutine(Dash());
         }
