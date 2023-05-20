@@ -35,8 +35,16 @@ public class ScreenManager : MonoBehaviour
 
         if (playerStats.playerHealth <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StartCoroutine(PlayerDeath());
         }
+    }
+
+    IEnumerator PlayerDeath()
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        yield return null;
     }
 
     void SetScreenSize()

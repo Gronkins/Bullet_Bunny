@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerStats playerStats;
+    
     public Rigidbody2D rigidBody2D;
     public BoxCollider2D boxCollider2D;
     public Animator animator;
@@ -45,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool isFacingRight;
 
+    bool isAlive;
+
     [SerializeField]
     bool isAttacking;
     float attackTime = 0.15f;
@@ -62,15 +66,27 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         trailRenderer = GetComponent<TrailRenderer>();
+        playerStats = GetComponent<PlayerStats>();
 
         numOfDashes = maxDashes;
         lastMoveHorizontal = 1;
         isFacingRight = true;
+        isAlive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(playerStats.playerHealth <= 0)
+        {
+            animator.SetBool("IsAlive", false);
+
+            rigidBody2D.gravityScale = 0.0f;
+            rigidBody2D.velocity = Vector2.zero;
+
+            return;
+        }
+        
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
@@ -78,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask); //Ground check with circle
 
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); //Ground check with box
+        
 
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
@@ -86,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
         //absoluteHorizontal = Mathf.Abs(horizontal);
         animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
+
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); //Ground check with box
 
         //isJumping = !isGrounded;
         //animator.SetBool("IsJumping", isJumping);
