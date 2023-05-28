@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class CollectibleManager : MonoBehaviour
 {
-    public float respawnTime = 5.0f;
-
-   //Collectible[] collectibles;
+    float respawnTime = 3.0f;
     
     // Start is called before the first frame update
     void Start()
