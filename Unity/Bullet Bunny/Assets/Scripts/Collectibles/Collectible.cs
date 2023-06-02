@@ -11,7 +11,6 @@ public class Collectible : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //playerStats = GetComponent<PlayerStats>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         collectibleManager = FindObjectOfType<CollectibleManager>();
     }
@@ -27,10 +26,8 @@ public class Collectible : MonoBehaviour
         if (collider.tag == "Player")
         {
             Debug.Log("Is touching collectible");
-            playerMovement.numOfDashes = playerMovement.maxDashes;
-            //Destroy(gameObject);
-            //gameObject.SetActive(false);
-            collectibleManager.DeactivateCollectible(this);
+            playerMovement.numOfDashes = playerMovement.maxDashes; //Reset dashes
+            collectibleManager.DeactivateCollectible(this); //Turn off the collectible
         }
     }
 }

@@ -25,14 +25,13 @@ public class CameraManager : MonoBehaviour
 
         if (useVerticalCamera == true)
         {
-
-            //Vertical
+            //Get player's position
             playerPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
 
+            //If camera is too far from player move towards them
             if (Mathf.Abs(transform.position.y - target.position.y) > maxHorizontalDistance)
             {
-                Vector3 smoothedPosition = Vector3.Lerp(transform.position, playerPosition, cameraSpeed);
-                //transform.position = smoothedPosition;
+                Vector3 newPosition = Vector3.Lerp(transform.position, playerPosition, cameraSpeed);
                 transform.position = Vector3.SmoothDamp(transform.position, playerPosition, ref velocity, smoothTime);
             }
 
@@ -40,14 +39,13 @@ public class CameraManager : MonoBehaviour
 
         if (useHorizontalCamera == true)
         {
-
-            //Horizontal
+            //Get player's position
             playerPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
 
+            //If camera is too far from player move towards them
             if (Mathf.Abs(transform.position.x - target.position.x) > maxHorizontalDistance)
             {
-                Vector3 smoothedPosition = Vector3.Lerp(transform.position, playerPosition, cameraSpeed);
-                //transform.position = smoothedPosition;
+                Vector3 newPosition = Vector3.Lerp(transform.position, playerPosition, cameraSpeed);
                 transform.position = Vector3.SmoothDamp(transform.position, playerPosition, ref velocity, smoothTime);
             }
 

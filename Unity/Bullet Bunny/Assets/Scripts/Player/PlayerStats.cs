@@ -23,15 +23,11 @@ public class PlayerStats : MonoBehaviour
         if (collision.collider.tag == "Enemy")
         {
             Debug.Log("Is touching");
-            //playerHealth -= 1;
-            //Destroy(collision.gameObject);
         }
 
         if (collision.collider.tag == "Hazards")
         {
             Debug.Log("Is touching");
-            //playerHealth -= 1;
-            //Destroy(collision.gameObject);
         }
     }
 }

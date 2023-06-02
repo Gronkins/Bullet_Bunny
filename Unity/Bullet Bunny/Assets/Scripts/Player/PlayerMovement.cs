@@ -7,15 +7,15 @@ public class PlayerMovement : MonoBehaviour
     public PlayerStats playerStats;
     
     public Rigidbody2D rigidBody2D;
-    public BoxCollider2D boxCollider2D;
+    public BoxCollider2D boxCollider2D; //Terrain box collider, not used for Buck's hurtbox
     public Animator animator;
-    public LayerMask layerMask;
+    public LayerMask layerMask; //This is the layermask for the terrain
     public LayerMask hazardLayerMask;
     public TrailRenderer trailRenderer;
 
 
     public Transform groundCheck;
-    public float groundCheckRadius;
+    public float groundCheckRadius; //Left over from when the groundcheck was a sphere, it's kept in just cased we want to use a sphere for the ground check again
     public Vector2 groundCheckSize;
     public bool isGrounded;
     [SerializeField]
@@ -35,14 +35,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float dashStrength = 20.0f;
     float dashTime = 0.2f;
-    float dashCooldown = 0.1f; //Default was 1.0f
+    float dashCooldown = 0.1f; //Initial value was 1.0f
 
     //[SerializeField]
-    float threshold = 0.15f; //0.35f is default, later changed to 0.01f
+    float threshold = 0.15f; //0.35f is the initial value, later changed to 0.01f
 
+    //Variables for collecting horizontal and vertical input
     public float horizontal;
     public float vertical;
 
+    //Absolute horizontal means if there is any horizontal input at all, this variable will be possible
     public float absoluteHorizontal;
 
     bool isFacingRight;
@@ -57,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 dashDirection;
     
 
+    //Records the last direction the player was facing, useful for idling
     public float lastMoveHorizontal;
     //float lastMoveVertical;
 
@@ -68,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
         playerStats = GetComponent<PlayerStats>();
 
+        //Initialising variables
         numOfDashes = maxDashes;
         lastMoveHorizontal = 1;
         isFacingRight = true;
@@ -77,12 +81,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Controls the player's death
         if(playerStats.playerHealth <= 0)
         {
             animator.SetBool("IsAlive", false);
 
-            rigidBody2D.gravityScale = 0.0f;
-            rigidBody2D.velocity = Vector2.zero;
+            rigidBody2D.gravityScale = 0.0f; //Turns off gravity so Buck's explosion doesn't move
+            rigidBody2D.velocity = Vector2.zero; //Sets veloicty to zero so you don't keep moving
 
             return;
         }
@@ -90,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
-        //float lastMoveHorizontal = Input.GetAxis("Horizontal");
 
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask); //Ground check with circle
 
@@ -100,33 +104,14 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
-        //absoluteHorizontal = Mathf.Abs(horizontal);
         animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
 
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); //Ground check with box
 
-        //isJumping = !isGrounded;
-        //animator.SetBool("IsJumping", isJumping);
 
-        /*
-        if (isAttacking)
-        {
-            attackCounter -= Time.deltaTime;
-
-            if (attackCounter <= 0)
-            {
-                animator.SetBool("IsAttacking", false);
-                isAttacking = false;
-            }
-        }
-        */
 
         if (((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.JoystickButton4)) && !isAttacking))
         {
-            /*attackCounter = attackTime;
-            animator.SetBool("IsAttacking", true);
-            isAttacking = true;
-            */
             StartCoroutine(Attack());
         }
 
@@ -154,13 +139,11 @@ public class PlayerMovement : MonoBehaviour
                 rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //movement code
                 
             
-                //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
              }
              else
                  if (isDashing == true)
                 {
-                    //rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y);
-                    //rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
+
                 }
 
 
@@ -169,11 +152,10 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
         {
             StartCoroutine(Jump());
-            //rigidBody2D.velocity = new Vector2(vertical, jumpHeight);
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash /*&& !isDashing*/)
+        if ((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash)
         {
             StartCoroutine(Dash());
         }
@@ -206,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         animator.SetBool("IsJumping", true);
         yield return new WaitForSeconds(0.2f);
-        //isJumping = false;
 
 
         yield return null;
@@ -224,11 +205,9 @@ public class PlayerMovement : MonoBehaviour
     
     private IEnumerator Dash()
     {
-        //canDash = false;
         isDashing = true;
         animator.SetBool("IsDashing", true);
         trailRenderer.emitting = true;
-        //dashDirection = new Vector2(QuantizeAxis(Input.GetAxisRaw("Horizontal")), QuantizeAxis(Input.GetAxisRaw("Vertical")));
         dashDirection = new Vector2(horizontal, vertical);
 
         float originalGravity = rigidBody2D.gravityScale;
@@ -237,10 +216,6 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D.velocity = Vector2.zero;
         yield return new WaitForSeconds(0.01f);
         numOfDashes -= 1;
-        //rigidBody2D.velocity = new Vector2(transform.localScale.x * dashStrength, 0.0f);
-
-
-        //rigidBody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashStrength;
 
         if (dashDirection == Vector2.zero)
         {
@@ -256,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         trailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCooldown);
-        //canDash = true;
     }
     
     void FixedUpdate()

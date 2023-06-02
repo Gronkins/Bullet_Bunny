@@ -12,7 +12,6 @@ public class Spikes : MonoBehaviour
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
-        //tilemapRenderer = FindObjectOfType<TilemapRenderer>();
         tilemapRenderer = GetComponent<TilemapRenderer>();
         tilemapRenderer.material.color = new Color(1f, 1f, 1f, 0f);
     }
@@ -28,13 +27,11 @@ public class Spikes : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             Debug.Log("Is touching");
-            //playerStats.playerHealth -= 1;
         }
 
         if (collision.collider.tag == "PlayerWeapon")
         {
-            //Debug.Log("Is touching");
-            //Destroy(gameObject);
+            //This was for testing, but now I'm too scared to remove it :)
         }
     }
 }

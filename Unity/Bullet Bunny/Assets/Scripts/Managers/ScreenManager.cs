@@ -18,6 +18,7 @@ public class ScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Cylcing through levels with 1, and 2 for testing
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             LoadNextScene();
@@ -28,6 +29,7 @@ public class ScreenManager : MonoBehaviour
             LoadPreviousScene();
         }
 
+        //Closes the game
         if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
@@ -41,7 +43,9 @@ public class ScreenManager : MonoBehaviour
 
     IEnumerator PlayerDeath()
     {
+        //Waits for a moment, then restarts the current scene
         yield return new WaitForSeconds(0.3f);
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         yield return null;
@@ -57,6 +61,8 @@ public class ScreenManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        //Loads the next scene, if at the final scene, goes back to the first one
+        
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         int nextSceneIndex = currentSceneIndex += 1;
@@ -71,6 +77,8 @@ public class ScreenManager : MonoBehaviour
 
     void LoadPreviousScene()
     {
+        //Loads the previous scene, if at the first scene, loads the final scene
+        
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         int previousSceneIndex = currentSceneIndex -= 1;

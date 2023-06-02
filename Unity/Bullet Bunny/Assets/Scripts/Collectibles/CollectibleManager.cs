@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CollectibleManager : MonoBehaviour
 {
-    float respawnTime = 3.0f;
+    float respawnTime = 2.5f;
     
     // Start is called before the first frame update
     void Start()
     {
-        //collectibles = FindObjectsOfType<Collectible>();
+
     }
 
     // Update is called once per frame
