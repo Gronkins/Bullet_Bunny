@@ -20,9 +20,10 @@ public class PlayerHurtbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        //Checks if a hazard collides with the player's hurtbox
         if (collider.CompareTag("Hazards") && gameObject.CompareTag("PlayerHurtbox"))
         {
-            Debug.Log("Player collider with hazard");
+            Debug.Log("Player collided with hazard");
             playerStats.playerHealth -= 1;
         }
     }
