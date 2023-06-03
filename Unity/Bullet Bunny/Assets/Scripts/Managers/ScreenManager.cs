@@ -35,15 +35,16 @@ public class ScreenManager : MonoBehaviour
             Application.Quit();
         }
 
+        //If the player resets zero or less HP, calls the death state
         if (playerStats.playerHealth <= 0)
         {
             StartCoroutine(PlayerDeath());
         }
     }
 
+    //Waits for a moment, then restarts the current scene
     IEnumerator PlayerDeath()
     {
-        //Waits for a moment, then restarts the current scene
         yield return new WaitForSeconds(0.3f);
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

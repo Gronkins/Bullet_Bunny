@@ -13,7 +13,7 @@ public class Spikes : MonoBehaviour
     {
         playerStats = FindObjectOfType<PlayerStats>();
         tilemapRenderer = GetComponent<TilemapRenderer>();
-        tilemapRenderer.material.color = new Color(1f, 1f, 1f, 0f);
+        tilemapRenderer.material.color = new Color(1f, 1f, 1f, 0f); //Hides the red hazards in-game
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class Spikes : MonoBehaviour
 
     }
 
+    //Used for testing
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")
@@ -31,7 +32,7 @@ public class Spikes : MonoBehaviour
 
         if (collision.collider.tag == "PlayerWeapon")
         {
-            //This was for testing, but now I'm too scared to remove it :)
+
         }
     }
 }

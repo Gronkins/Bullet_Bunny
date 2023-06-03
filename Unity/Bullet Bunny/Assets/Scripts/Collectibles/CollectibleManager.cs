@@ -18,6 +18,7 @@ public class CollectibleManager : MonoBehaviour
         
     }
 
+    //Once the collectible is deactivated, it waits, then reactivates the collectible
     public void DeactivateCollectible(Collectible collectible)
     {
         collectible.gameObject.SetActive(false);

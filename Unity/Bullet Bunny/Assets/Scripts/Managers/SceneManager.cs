@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//This class was used for testing
 public class SceneManagerScript : MonoBehaviour
 {
     void Start()
