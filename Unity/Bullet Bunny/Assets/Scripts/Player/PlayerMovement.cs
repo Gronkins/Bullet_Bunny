@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform groundCheck;
     public float groundCheckRadius; //Left over from when the groundcheck was a sphere, it's kept in just cased we want to use a sphere for the ground check again
-    public Vector2 groundCheckSize;
+    public Vector2 groundCheckSize; //Ground check for the square
     public bool isGrounded;
     [SerializeField]
     bool isJumping;
@@ -92,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         
+        
+        //Collecting horizontal and vertical input
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
@@ -99,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask); //Ground check with circle
 
         
-
+        //Setting animator variables
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
@@ -110,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.JoystickButton4)) && !isAttacking))
+        //Attack
+        if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.JoystickButton4)) && !isAttacking)
         {
             StartCoroutine(Attack());
         }
@@ -127,24 +130,25 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        //Collects horizontal input only if the plyaer is moving, useful for idling
         if (QuantizeAxis(Input.GetAxisRaw("Horizontal")) == 1 || QuantizeAxis(Input.GetAxisRaw("Horizontal")) == -1)
         {
-            //Records the last direction the player was facing such as left, right, up or down and sets the animation to that
+            //Records the last direction the player was facing such as left or right and sets the animation to that
             lastMoveHorizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
             animator.SetFloat("LastMoveHorizontal", Input.GetAxisRaw("Horizontal"));
         }
 
-            if (isDashing == false)
-            {
-                rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //movement code
-                
             
-             }
-             else
-                 if (isDashing == true)
-                {
-
-                }
+        //The player can move like normal if they are not dashing
+        if (isDashing == false)
+        {
+            rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //Movement code
+        }
+        else
+            if (isDashing == true)
+            {
+                //No movement while dashing
+            }
 
 
 
@@ -167,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
         else
             canDash = true;
 
+        //Resets the number of dashes once the player touches the ground
         if (isGrounded == true)
         {
             numOfDashes = maxDashes;
@@ -184,11 +189,10 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Jump()
     {
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f); //Waits for the player to actually get off the ground
         isJumping = true;
         animator.SetBool("IsJumping", true);
         yield return new WaitForSeconds(0.2f);
-
 
         yield return null;
     }
@@ -197,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isAttacking = true;
         animator.SetBool("IsAttacking", true);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.25f); //Waits for the attack animation to finish
         isAttacking = false;
         animator.SetBool("IsAttacking", false);
         yield return null;
@@ -208,25 +212,28 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         animator.SetBool("IsDashing", true);
         trailRenderer.emitting = true;
-        dashDirection = new Vector2(horizontal, vertical);
+        dashDirection = new Vector2(horizontal, vertical); //Collects dash direction input
 
-        float originalGravity = rigidBody2D.gravityScale;
-        float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
-        rigidBody2D.gravityScale = 0.0f;
-        rigidBody2D.velocity = Vector2.zero;
+        float originalGravity = rigidBody2D.gravityScale; //Stores original gravity
+        float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
+        
+        rigidBody2D.gravityScale = 0.0f; //Sets player gravity to zero, so they can dash in the air unaffected by gravity
+        rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
         yield return new WaitForSeconds(0.01f);
         numOfDashes -= 1;
 
+        //If there is no directional input the player will face in the direction they were last facing
         if (dashDirection == Vector2.zero)
         {
             dashDirection = new Vector2(lastMoveHorizontal, 0);
         }
 
-        rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength);
+        rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength); //Dash movement
 
-        yield return new WaitForSeconds(dashTime);
-        rigidBody2D.gravityScale = originalGravity;
-        rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed);
+        yield return new WaitForSeconds(dashTime); //Waits for dash to finish
+
+        rigidBody2D.gravityScale = originalGravity; //Resets gravity to normal
+        rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
         animator.SetBool("IsDashing", false);
         isDashing = false;
         trailRenderer.emitting = false;
@@ -235,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
+        //Flips the player's sprite if they move
         if (lastMoveHorizontal > 0 && !isFacingRight)
         {
             FlipSprite();
@@ -246,15 +254,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Umm... Actually you are flipping the player's gameObject and not the sprite (nerd emoji)
     void FlipSprite()
     {
         Vector3 currentScale = gameObject.transform.localScale;
-        currentScale.x *= -1;
+        currentScale.x *= -1; //Inverses the player's game object
         gameObject.transform.localScale = currentScale;
 
         isFacingRight = !isFacingRight;
     }
 
+    //Used in input collection, locks player's movement to 8 directions and is also used to create 'areas' for joystick input so it's more forgiving to input diagonals
     int QuantizeAxis(float axis)
     {
         if (axis < -threshold)
