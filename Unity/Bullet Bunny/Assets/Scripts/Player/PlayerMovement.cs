@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Absolute horizontal means if there is any horizontal input at all, this variable will be possible
     public float absoluteHorizontal;
+    public float absoluteVertical;
 
     bool isFacingRight;
 
@@ -96,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         //Collecting horizontal and vertical input
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
+        absoluteVertical = Mathf.Abs(Input.GetAxisRaw("Vertical"));
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
 
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask); //Ground check with circle
@@ -107,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
+        animator.SetFloat("AbsoluteVertical", Mathf.Abs(absoluteVertical));
 
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); //Ground check with box
 
