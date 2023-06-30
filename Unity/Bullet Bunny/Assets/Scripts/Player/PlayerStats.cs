@@ -23,12 +23,12 @@ public class PlayerStats : MonoBehaviour
     {
         if (collision.collider.tag == "Enemy")
         {
-            Debug.Log("Is touching");
+            //Debug.Log("Is touching");
         }
 
         if (collision.collider.tag == "Hazards")
         {
-            Debug.Log("Is touching");
+            //Debug.Log("Is touching");
         }
     }
 }

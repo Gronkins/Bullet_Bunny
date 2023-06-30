@@ -22,24 +22,24 @@ public class Enemy : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            Debug.Log("Is touching");
+            Debug.Log("Enemy hit player");
             playerStats.playerHealth -= 1;
         }
 
-        /*
+        
         if (collision.collider.tag == "PlayerWeapon")
         {
-            Debug.Log("Is touching");
+            Debug.Log("Is hit with player Weapon");
             Destroy(gameObject);
         }
-        */
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        Debug.Log("Collided with something");
         if (collider.tag == "PlayerWeapon")
         {
-            Debug.Log("Is touching enemy");
+            Debug.Log("Player hit enemy with weapon");
             Destroy(gameObject);
         }
     }

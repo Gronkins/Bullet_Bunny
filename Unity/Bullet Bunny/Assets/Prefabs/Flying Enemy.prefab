@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1235224695}
   m_Layer: 0
   m_Name: Lightning
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 2692440091862191422}
   - component: {fileID: 2692440091862191421}
   - component: {fileID: 2692440091862191420}
-  - component: {fileID: 2692440091862191393}
   - component: {fileID: 1559684271}
   m_Layer: 0
   m_Name: Flying Enemy
@@ -141,7 +140,7 @@ Transform:
   m_Children:
   - {fileID: 1235224693}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2692440091862191423
 SpriteRenderer:
@@ -225,7 +224,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 2
 --- !u!61 &2692440091862191420
@@ -254,40 +253,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5381312, y: 1.5039194}
   m_EdgeRadius: 0
---- !u!60 &2692440091862191393
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2692440091862191419}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.8125, y: 0.75}
-      - {x: -0.4375, y: 0.75}
-      - {x: -0.9375, y: 0.625}
-      - {x: -0.9375, y: -0.875}
-      - {x: -0.625, y: -1}
-      - {x: 0.8125, y: -1}
-      - {x: 0.9375, y: -0.9375}
-      - {x: 0.9375, y: 0.625}
-  m_UseDelaunayMesh: 0
 --- !u!95 &1559684271
 Animator:
   serializedVersion: 4
