@@ -189,6 +189,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void ApplyUpwardsForce()
+    {
+        rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
+        isJumping = true;
+        animator.SetBool("IsJumping", true);
+    }
+
     private IEnumerator Jump()
     {
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 327329522}
   m_Layer: 7
   m_Name: Square (1)
-  m_TagString: PlayerWeapon
+  m_TagString: PlayerDownwardsWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327329520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2692, y: 0.0601, z: 0}
-  m_LocalScale: {x: 1.673741, y: 2.0963197, z: 1}
+  m_LocalPosition: {x: 0.2526, y: 0.263, z: 0}
+  m_LocalScale: {x: 1.4748783, y: 1.6903805, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1345341855}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 1345341856}
   m_Layer: 7
   m_Name: HitBoxDown
-  m_TagString: PlayerWeapon
+  m_TagString: PlayerDownwardsWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,7 +268,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.33805954, y: -0.036225557}
+  m_Offset: {x: 0.33805954, y: 0.1406436}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -279,7 +279,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4826348, y: 1.9924273}
+  m_Size: {x: 1.4826348, y: 1.638689}
   m_EdgeRadius: 0
 --- !u!1 &1664561436
 GameObject:

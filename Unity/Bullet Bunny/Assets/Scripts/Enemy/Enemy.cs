@@ -5,11 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     PlayerStats playerStats;
+    PlayerMovement playerMovement;
     
     // Start is called before the first frame update
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -40,6 +42,13 @@ public class Enemy : MonoBehaviour
         if (collider.tag == "PlayerWeapon")
         {
             Debug.Log("Player hit enemy with weapon");
+            Destroy(gameObject);
+        }
+
+        if (collider.tag == "PlayerDownwardsWeapon")
+        {
+            Debug.Log("Player hit enemy with downwards attack");
+            playerMovement.ApplyUpwardsForce();
             Destroy(gameObject);
         }
     }
