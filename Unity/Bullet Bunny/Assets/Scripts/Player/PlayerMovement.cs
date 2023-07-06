@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     bool canDash = true;
     bool isDashing;
+    [SerializeField]
+    float upwardsForce = 18.0f;
 
     public int maxDashes = 2;
     public int numOfDashes;
@@ -191,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ApplyUpwardsForce()
     {
-        rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
+        rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, upwardsForce);
         isJumping = true;
         animator.SetBool("IsJumping", true);
     }
