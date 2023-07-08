@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = QuantizeAxis(Input.GetAxisRaw("Vertical"));
 
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask); //Ground check with circle
+        isGrounded = IsGrounded();
 
         
         //Setting animator variables
@@ -163,12 +164,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Jump
-        /*
+        
         if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
         {
-            StartCoroutine(Jump());
+            //StartCoroutine(Jump());
         }
-        */
+        
 
         if (IsGrounded() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
         {
@@ -214,19 +215,19 @@ public class PlayerMovement : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-       // Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize); // This works, but it's annoying so I commented it out, re-enable if editing the boxCast
+        Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize); // This works, but it's annoying so I commented it out, re-enable if editing the boxCast
     }
     
     private bool IsGrounded()
     {
         if(Physics2D.BoxCast(transform.position, boxSize, 0f, -transform.up, maxDistance, layerMask))
         {
-            isGrounded = true;
+            // isGrounded = true;
             return true;
         }
         else
         {
-            isGrounded = false;
+            // isGrounded = false;
             return false;
         }
     }

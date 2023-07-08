@@ -12,12 +12,6 @@ public class PlayerHurtbox : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //Checks if a hazard collides with the player's hurtbox

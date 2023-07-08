@@ -488,7 +488,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.21}
+  m_Offset: {x: 0, y: -0.145}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -499,7 +499,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 1.56}
+  m_Size: {x: 0.98, y: 1.69}
   m_EdgeRadius: 0
 --- !u!1 &4793043952829774299
 GameObject:
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
   rigidBody2D: {fileID: 4793043954245440623}
-  boxSize: {x: 1.07, y: 0.1, z: 0}
+  boxSize: {x: 1.12, y: 0.1, z: 0}
   maxDistance: 1
   boxCollider2D: {fileID: 4793043954245440912}
   animator: {fileID: 4793043954245440914}
@@ -701,7 +701,7 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   groundCheck: {fileID: 4793043952829774300}
   groundCheckRadius: 0.1
-  groundCheckSize: {x: 1.11091, y: 0.2}
+  groundCheckSize: {x: 10.7, y: 0.2}
   isGrounded: 0
   isJumping: 0
   movementSpeed: 10
