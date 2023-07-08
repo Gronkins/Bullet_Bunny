@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public PlayerStats playerStats;
     
     public Rigidbody2D rigidBody2D;
+
+    public Vector3 boxSize;
+    public float maxDistance;
+
     public BoxCollider2D boxCollider2D; //Terrain box collider, not used for Buck's hurtbox
     public Animator animator;
     public LayerMask layerMask; //This is the layermask for the terrain
@@ -158,7 +162,14 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Jump
+        /*
         if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
+        {
+            StartCoroutine(Jump());
+        }
+        */
+
+        if (IsGrounded() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
         {
             StartCoroutine(Jump());
         }
@@ -196,6 +207,26 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, upwardsForce);
         isJumping = true;
         animator.SetBool("IsJumping", true);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+       // Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize);
+    }
+    
+    private bool IsGrounded()
+    {
+        if(Physics2D.BoxCast(transform.position, boxSize, 0f, -transform.up, maxDistance, layerMask))
+        {
+            isGrounded = true;
+            return true;
+        }
+        else
+        {
+            isGrounded = false;
+            return false;
+        }
     }
 
     private IEnumerator Jump()
