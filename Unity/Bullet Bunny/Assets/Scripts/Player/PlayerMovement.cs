@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
     
     public Rigidbody2D rigidBody2D;
 
-    public Vector3 boxSize;
-    public float maxDistance;
+    public Vector3 boxSize; // Box size for the new ground check boxCast
+    public float maxDistance; // Maximum distance for the box size for the boxCast (the Y direction)
 
     public BoxCollider2D boxCollider2D; //Terrain box collider, not used for Buck's hurtbox
     public Animator animator;
@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public TrailRenderer trailRenderer;
 
 
+    // These ground check variables are outdated, will be removed... later...
     public Transform groundCheck;
     public float groundCheckRadius; //Left over from when the groundcheck was a sphere, it's kept in just cased we want to use a sphere for the ground check again
     public Vector2 groundCheckSize; //Ground check for the square
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
         animator.SetFloat("AbsoluteVertical", Mathf.Abs(absoluteVertical));
 
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); //Ground check with box
+        // isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); // Outdated ground check code
 
 
 
@@ -209,10 +210,11 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", true);
     }
 
+    // This is just so the new ground check boxCast can be seen in the editor
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-       // Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize);
+       // Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize); // This works, but it's annoying so I commented it out, re-enable if editing the boxCast
     }
     
     private bool IsGrounded()
