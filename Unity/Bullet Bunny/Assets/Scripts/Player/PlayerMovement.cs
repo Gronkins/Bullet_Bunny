@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     [SerializeField]
     bool isJumping;
+    public bool isOnPlatform;
     
     [SerializeField]
     float movementSpeed = 10.0f;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     public float absoluteVertical;
 
     bool isFacingRight;
+    private float maximumFallVelocity = -25f;
 
     bool isAlive;
 
@@ -99,8 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-        
-        
+
         //Collecting horizontal and vertical input
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
@@ -154,6 +155,11 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing == false)
         {
             rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //Movement code
+
+            if (rigidBody2D.velocity.y < maximumFallVelocity)
+            {
+                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, maximumFallVelocity);
+            }
         }
         else
             if (isDashing == true)
@@ -220,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool IsGrounded()
     {
-        if(Physics2D.BoxCast(transform.position, boxSize, 0f, -transform.up, maxDistance, layerMask))
+        if(Physics2D.BoxCast(transform.position, boxSize, 0f, -transform.up, maxDistance, layerMask) || isOnPlatform)
         {
             // isGrounded = true;
             return true;

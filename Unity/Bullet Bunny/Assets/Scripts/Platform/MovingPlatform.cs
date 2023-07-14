@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
     public int startingPoint;
     public float yOffset;
     public Transform[] points;
+    private PlayerMovement playerMovement;
 
     private int i;
     
@@ -15,7 +16,8 @@ public class MovingPlatform : MonoBehaviour
     void Start()
     {
         transform.position = points[startingPoint].position;
-        yOffset = 0.2f;
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        yOffset = 0.0251f;
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class MovingPlatform : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
         }
     }
-
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         //if(collision.transform.position.y > transform.position.y)
@@ -44,6 +46,20 @@ public class MovingPlatform : MonoBehaviour
             if(transform.position.y < collision.transform.position.y - yOffset)
             {
                 collision.transform.SetParent(transform);
+                playerMovement.isOnPlatform = true;
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        //if(collision.transform.position.y > transform.position.y)
+        if (collision.collider.CompareTag("Player"))
+        {
+            if(transform.position.y < collision.transform.position.y - yOffset)
+            {
+                collision.transform.SetParent(transform);
+                playerMovement.isOnPlatform = true;
             }
         }
     }
@@ -53,6 +69,8 @@ public class MovingPlatform : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             collision.transform.SetParent(null);
+            playerMovement.isOnPlatform = false;
         }
     }
+    
 }
