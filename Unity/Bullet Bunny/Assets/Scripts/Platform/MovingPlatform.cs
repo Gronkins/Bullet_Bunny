@@ -6,6 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     public float speed;
     public int startingPoint;
+    public float yOffset;
     public Transform[] points;
 
     private int i;
@@ -14,6 +15,7 @@ public class MovingPlatform : MonoBehaviour
     void Start()
     {
         transform.position = points[startingPoint].position;
+        yOffset = 0.2f;
     }
 
     // Update is called once per frame
@@ -31,6 +33,26 @@ public class MovingPlatform : MonoBehaviour
             }
             
             transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if(collision.transform.position.y > transform.position.y)
+        if (collision.collider.CompareTag("Player"))
+        {
+            if(transform.position.y < collision.transform.position.y - yOffset)
+            {
+                collision.transform.SetParent(transform);
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            collision.transform.SetParent(null);
         }
     }
 }
