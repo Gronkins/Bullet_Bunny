@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - PlayerWeapon
   - Hazards
+  - PlayerDownwardsWeapon
+  - PlayerHurtbox
   layers:
   - Default
   - TransparentFX
@@ -49,6 +51,9 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3226773421
+    locked: 0
+  - name: Decoration
+    uniqueID: 2481687191
     locked: 0
   - name: Collectible
     uniqueID: 829629611

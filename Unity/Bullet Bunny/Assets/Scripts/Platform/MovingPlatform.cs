@@ -17,7 +17,7 @@ public class MovingPlatform : MonoBehaviour
     {
         transform.position = points[startingPoint].position;
         playerMovement = FindObjectOfType<PlayerMovement>();
-        yOffset = 0.0251f;
+        //yOffset = 0.0251f;
     }
 
     // Update is called once per frame
