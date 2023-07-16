@@ -221,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize); // This works, but it's annoying so I commented it out, re-enable if editing the boxCast
+        // Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize); // Code to draw the box cast for the ground check, uncomment if editing it
     }
     
     private bool IsGrounded()
