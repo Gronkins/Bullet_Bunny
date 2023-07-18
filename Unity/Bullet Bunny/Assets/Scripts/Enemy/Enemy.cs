@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     PlayerMovement playerMovement;
     
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
         playerMovement = FindObjectOfType<PlayerMovement>();
