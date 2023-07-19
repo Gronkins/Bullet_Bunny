@@ -6,12 +6,14 @@ public class Enemy : MonoBehaviour
 {
     PlayerStats playerStats;
     PlayerMovement playerMovement;
+    protected Animator animator;
     
     // Start is called before the first frame update
     protected virtual void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
         playerMovement = FindObjectOfType<PlayerMovement>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame

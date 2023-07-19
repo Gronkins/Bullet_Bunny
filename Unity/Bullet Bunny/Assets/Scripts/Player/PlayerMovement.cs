@@ -66,6 +66,9 @@ public class PlayerMovement : MonoBehaviour
     float attackTime = 0.15f;
     float attackCounter = 0.15f;
 
+    public bool isEditingGizmos;
+    public Vector3 yOffset;
+
     Vector2 dashDirection;
     
 
@@ -221,12 +224,15 @@ public class PlayerMovement : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        // Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize); // Code to draw the box cast for the ground check, uncomment if editing it
+        if (isEditingGizmos)
+        {
+            Gizmos.DrawCube(transform.position - transform.up * maxDistance - yOffset, boxSize); // Code to draw the box cast for the ground check, uncomment if editing it
+        }
     }
     
     private bool IsGrounded()
     {
-        if(Physics2D.BoxCast(transform.position, boxSize, 0f, -transform.up, maxDistance, layerMask) || isOnPlatform)
+        if(Physics2D.BoxCast(transform.position - yOffset, boxSize, 0f, -transform.up, maxDistance, layerMask) || isOnPlatform)
         {
             // isGrounded = true;
             return true;

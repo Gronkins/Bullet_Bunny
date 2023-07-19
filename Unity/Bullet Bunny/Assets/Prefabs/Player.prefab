@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 327329521}
   - component: {fileID: 327329523}
   - component: {fileID: 327329522}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Square (1)
   m_TagString: PlayerDownwardsWeapon
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -799110719
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 1307652261}
   - component: {fileID: 1307652263}
   - component: {fileID: 1307652262}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Square (1)
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -799110719
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345341855}
   - component: {fileID: 1345341856}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: HitBoxDown
   m_TagString: PlayerDownwardsWeapon
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 1664561437}
   - component: {fileID: 1664561438}
   - component: {fileID: 1664561439}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Square
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -799110719
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -401,10 +401,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1669322053}
-  - component: {fileID: 1669322055}
   - component: {fileID: 1669322054}
   - component: {fileID: 1040626323}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hurtbox
   m_TagString: PlayerHurtbox
   m_Icon: {fileID: 0}
@@ -426,43 +425,6 @@ Transform:
   m_Father: {fileID: 4793043954245440622}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1669322055
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669322052}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.25514698, y: 0.76103115}
-      - {x: -0.25698757, y: 0.44007683}
-      - {x: -0.49669266, y: -0.1308837}
-      - {x: -0.63682556, y: -0.9236579}
-      - {x: -0.7069855, y: -1}
-      - {x: 0.46247673, y: -0.9904413}
-      - {x: 0.4124756, y: -0.93400335}
-      - {x: 0.372797, y: -0.5422778}
-      - {x: 0.4397087, y: -0.1999979}
-      - {x: 0.36369514, y: 0.16177607}
-      - {x: 0.052573204, y: 0.7514725}
-  m_UseDelaunayMesh: 0
 --- !u!114 &1669322054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,7 +450,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.145}
+  m_Offset: {x: 0, y: -0.15}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -499,7 +461,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 1.69}
+  m_Size: {x: 1.06, y: 1.7}
   m_EdgeRadius: 0
 --- !u!1 &4793043952829774299
 GameObject:
@@ -510,7 +472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4793043952829774300}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +510,7 @@ GameObject:
   - component: {fileID: 4793043954245440914}
   - component: {fileID: 4793043954245440915}
   - component: {fileID: 4793043954245440916}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -614,7 +576,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -799110719
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: e73d428c5652f864fb28e63bd2d9daf1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -688,7 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
   rigidBody2D: {fileID: 4793043954245440623}
-  boxSize: {x: 1.12, y: 0.1, z: 0}
+  boxSize: {x: 1.12, y: 0.3, z: 0}
   maxDistance: 1
   boxCollider2D: {fileID: 4793043954245440912}
   animator: {fileID: 4793043954245440914}
@@ -704,6 +666,7 @@ MonoBehaviour:
   groundCheckSize: {x: 10.7, y: 0.2}
   isGrounded: 0
   isJumping: 0
+  isOnPlatform: 0
   movementSpeed: 10
   jumpHeight: 16
   canDash: 1
@@ -716,6 +679,8 @@ MonoBehaviour:
   absoluteHorizontal: 0
   absoluteVertical: 0
   isAttacking: 0
+  isEditingGizmos: 0
+  yOffset: {x: 0, y: 0.07, z: 0}
   lastMoveHorizontal: 0
 --- !u!95 &4793043954245440914
 Animator:
@@ -777,7 +742,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -799110719
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_Time: 0.35
   m_Parameters:
@@ -871,7 +836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4793043954285524945}
   - component: {fileID: 4793043954285524946}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: HitBoxUp
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
@@ -930,7 +895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4793043954490982014}
   - component: {fileID: 4793043954490982015}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: HitBoxSide
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}

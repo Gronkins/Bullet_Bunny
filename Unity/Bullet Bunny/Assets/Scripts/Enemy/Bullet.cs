@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private float bulletSpeed;
     private float bulletLifetime;
     private Vector3 direction;
+    private bool isFacingDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,12 @@ public class Bullet : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
         StartCoroutine(DestroyBullet());
         //rigidbody2D = GetComponent<Rigidbody2D>();
+        if (isFacingDown)
+        {
+            //transform.Rotate(0f, 0f, 90f);
+            Quaternion rotation = Quaternion.Euler(0f, 0f, 90f);
+            transform.rotation *= rotation;
+        }
     }
 
     // Update is called once per frame
@@ -25,11 +32,12 @@ public class Bullet : MonoBehaviour
         transform.position += direction * bulletSpeed * Time.deltaTime;
     }
 
-    public void Initialise(Vector3 targetPosition, float speed, float lifetime)
+    public void Initialise(Vector3 targetPosition, float speed, float lifetime, bool isFacingDownwards)
     {
         bulletSpeed = speed;
         direction = targetPosition;
         bulletLifetime = lifetime;
+        isFacingDown = isFacingDownwards;
 
     }
 

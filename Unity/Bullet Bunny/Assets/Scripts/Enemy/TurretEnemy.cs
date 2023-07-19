@@ -11,6 +11,7 @@ public class TurretEnemy : Enemy
     public float bulletLifetime = 5f;
     private float timer;
     private Vector3 direction;
+    public bool isFacingDown = false;
     
     // Start is called before the first frame update
     protected override void Start()
@@ -36,13 +37,24 @@ public class TurretEnemy : Enemy
             timer = attackTime;
             SpawnProjectile();
         }
+
+        animator.SetBool("IsFacingDown", isFacingDown);
+
+        if (isFacingDown)
+        {
+            direction = Vector3.down;
+        }
+        else
+        {
+            direction = Vector3.left;
+        }
     }
 
     private void SpawnProjectile()
     {
         GameObject bulletObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
-        bullet.Initialise(direction, bulletSpeed, bulletLifetime);
+        bullet.Initialise(direction, bulletSpeed, bulletLifetime, isFacingDown);
     }
 
     private void FlipGameObject()
