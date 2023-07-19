@@ -26006,6 +26006,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1630425571}
     - target: {fileID: 8446711976256063880, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
+      propertyPath: topLimit
+      value: 11.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446711976256063880, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
+      propertyPath: leftLimit
+      value: -3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446711976256063880, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
+      propertyPath: rightLimit
+      value: 42.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446711976256063880, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
+      propertyPath: bottomLimit
+      value: -10.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446711976256063880, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
       propertyPath: useHorizontalCamera
       value: 1
       objectReference: {fileID: 0}
@@ -26015,7 +26031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8446711976256063882, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.52
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8446711976256063882, guid: 60fa3400ab4b4d64ab7be9a2373eb1d8, type: 3}
       propertyPath: m_LocalPosition.y

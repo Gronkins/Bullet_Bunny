@@ -12,12 +12,17 @@ public class CameraManager : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     public bool useVerticalCamera;
     public bool useHorizontalCamera;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    public bool isUsingBounds;
+
+    [SerializeField]
+    private float leftLimit;
+    [SerializeField]
+    private float rightLimit;
+    [SerializeField]
+    private float bottomLimit;
+    [SerializeField]
+    private float topLimit;
 
     // Update is called once per frame
     void Update()
@@ -51,5 +56,27 @@ public class CameraManager : MonoBehaviour
 
         }
         
+    }
+
+    private void LateUpdate()
+    {
+        if (isUsingBounds)
+        {
+            //transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftLimit, rightLimit), Mathf.Clamp(transform.position.y, bottomLimit, topLimit), transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftLimit, rightLimit), Mathf.Clamp(transform.position.y, bottomLimit, topLimit), transform.position.z);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        // Top Line
+        Gizmos.DrawLine(new Vector2(leftLimit, topLimit), new Vector2(rightLimit, topLimit));
+        // Right Line
+        Gizmos.DrawLine(new Vector2(rightLimit, topLimit), new Vector2(rightLimit, bottomLimit));
+        // Bottom Line
+        Gizmos.DrawLine(new Vector2(rightLimit, bottomLimit), new Vector2(leftLimit, bottomLimit));
+        // Left Line
+        Gizmos.DrawLine(new Vector2(leftLimit, bottomLimit), new Vector2(leftLimit, topLimit));
     }
 }
