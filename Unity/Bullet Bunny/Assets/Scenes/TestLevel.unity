@@ -137,11 +137,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1040626323, guid: 06cdb41b5afb23d48afdcfae7b091bd5, type: 3}
       propertyPath: m_Size.x
-      value: 1.05
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040626323, guid: 06cdb41b5afb23d48afdcfae7b091bd5, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 1040626323, guid: 06cdb41b5afb23d48afdcfae7b091bd5, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040626323, guid: 06cdb41b5afb23d48afdcfae7b091bd5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1040626323, guid: 06cdb41b5afb23d48afdcfae7b091bd5, type: 3}
       propertyPath: m_IsTrigger
@@ -27190,6 +27198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 35136051817018115, guid: 3af518cc8e0e26e449d8312e2edeb5f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 35136051817018121, guid: 3af518cc8e0e26e449d8312e2edeb5f7, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -27541,7 +27553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6240308020635769741, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6240308020635769741, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
       propertyPath: m_LocalPosition.z
