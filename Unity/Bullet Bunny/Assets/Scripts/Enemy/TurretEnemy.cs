@@ -44,7 +44,11 @@ public class TurretEnemy : Enemy
         {
             direction = Vector3.down;
         }
-        else
+        else if(isFacingRight)
+        {
+            direction = Vector3.right;
+        }
+        else if(!isFacingRight)
         {
             direction = Vector3.left;
         }
