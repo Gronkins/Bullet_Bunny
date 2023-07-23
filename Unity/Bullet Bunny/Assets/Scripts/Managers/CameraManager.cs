@@ -16,12 +16,16 @@ public class CameraManager : MonoBehaviour
     public bool isUsingBounds;
 
     [SerializeField]
+    [Tooltip("This value should be negative")]
     private float leftLimit;
     [SerializeField]
+    [Tooltip("This value should be positive")]
     private float rightLimit;
     [SerializeField]
+    [Tooltip("This value should be negative")]
     private float bottomLimit;
     [SerializeField]
+    [Tooltip("This value should be positive")]
     private float topLimit;
 
     // Update is called once per frame
