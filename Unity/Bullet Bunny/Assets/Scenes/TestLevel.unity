@@ -9243,7 +9243,7 @@ GameObject:
   - component: {fileID: 1878576827}
   m_Layer: 6
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27469,6 +27469,10 @@ PrefabInstance:
       propertyPath: isFacingRight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5603961086164690809, guid: e655c96f15d9c2e4c9e24198a3b48663, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7536830143506031149, guid: e655c96f15d9c2e4c9e24198a3b48663, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -27517,6 +27521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_RatTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 7536830143506031158, guid: e655c96f15d9c2e4c9e24198a3b48663, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e655c96f15d9c2e4c9e24198a3b48663, type: 3}
@@ -27528,6 +27536,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4507351382415023744, guid: 7cd9f1e248f6bad489a0db24972d7c9d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.00013
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507351382562688222, guid: 7cd9f1e248f6bad489a0db24972d7c9d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00001001358
+      objectReference: {fileID: 0}
     - target: {fileID: 4507351383923016616, guid: 7cd9f1e248f6bad489a0db24972d7c9d, type: 3}
       propertyPath: m_Name
       value: RatMineEnemyPrefab

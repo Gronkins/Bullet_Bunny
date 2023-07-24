@@ -50,13 +50,13 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        /*
-        if (collision.collider.tag == "PlayerWeapon")
+        Debug.Log("Collided with something");
+
+        if (collision.collider.tag == "Terrain")
         {
-            Debug.Log("Is hit with player Weapon");
+            Debug.Log("Collided with terrain");
             Destroy(gameObject);
         }
-        */
     }
 
     private IEnumerator DestroyBullet()
