@@ -6,13 +6,11 @@ public class ElecricityAnimatorController : MonoBehaviour
 {
     private Animator animator;
     public ElectricityDirection electricityDirection;
-    private BoxCollider2D boxCollider;
     
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider2D>();
         SetAnimation();
     }
 
@@ -35,13 +33,6 @@ public class ElecricityAnimatorController : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position, new Vector3(0.2f, 0.2f, 0.2f));
-        //Gizmos.DrawSphere(transform.position, 1);
     }
 }
 
