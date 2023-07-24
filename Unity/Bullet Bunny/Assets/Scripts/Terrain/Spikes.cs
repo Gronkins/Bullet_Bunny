@@ -6,20 +6,30 @@ using UnityEngine.Tilemaps;
 public class Spikes : MonoBehaviour
 {
     PlayerStats playerStats;
-    TilemapRenderer tilemapRenderer;
+    private SpriteRenderer spriteRenderer;
+    private TilemapRenderer tilemapRenderer;
     
     // Start is called before the first frame update
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
-        tilemapRenderer = GetComponent<TilemapRenderer>();
-        tilemapRenderer.material.color = new Color(1f, 1f, 1f, 0f); //Hides the red hazards in-game
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        SetMaterial();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetMaterial()
     {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.material.color = new Color(1f, 1f, 1f, 0f); //Hides the red hazards in-game
+        }
 
+        if (tilemapRenderer != null)
+        {
+            tilemapRenderer.material.color = new Color(1f, 1f, 1f, 0f); //Hides the red hazards in-game
+        }
     }
 
     //Used for testing
