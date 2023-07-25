@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Moveable : MonoBehaviour
+public class MoveBetweenPoints : MonoBehaviour
 {
     public float speed;
     public int startingPoint;
