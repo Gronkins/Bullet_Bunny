@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "PlayerHurtbox")
+        if (collision.collider.tag == "PlayerHurtbox" || collision.collider.tag == "Player")
         {
             Debug.Log("Enemy hit player");
             playerStats.playerHealth -= 1;
