@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     PlayerStats playerStats;
     PlayerMovement playerMovement;
     protected Animator animator;
+    public GameObject explosionPrefab;
     
     // Start is called before the first frame update
     protected virtual void Start()
@@ -14,12 +15,6 @@ public class Enemy : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -34,7 +29,7 @@ public class Enemy : MonoBehaviour
         if (collision.collider.tag == "PlayerWeapon")
         {
             Debug.Log("Is hit with player Weapon");
-            Destroy(gameObject);
+            EnemyDeath();
         }
     }
 
@@ -44,16 +39,20 @@ public class Enemy : MonoBehaviour
         if (collider.tag == "PlayerWeapon")
         {
             Debug.Log("Player hit enemy with weapon");
-            Destroy(gameObject);
+            EnemyDeath();
         }
 
         if (collider.tag == "PlayerDownwardsWeapon")
         {
             Debug.Log("Player hit enemy with downwards attack");
             playerMovement.ApplyUpwardsForce();
-            Destroy(gameObject);
+            EnemyDeath();
         }
     }
 
-
+    private void EnemyDeath()
+    {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }
