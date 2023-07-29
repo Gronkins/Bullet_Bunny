@@ -12984,22 +12984,6 @@ CompositeCollider2D:
         Y: -110000100
       - X: 28750041
         Y: -110000100
-    - - X: 108750100
-        Y: -110000041
-      - X: 108750100
-        Y: -108749959
-      - X: 108750041
-        Y: -108749900
-      - X: 101249959
-        Y: -108749900
-      - X: 101249900
-        Y: -108749959
-      - X: 101249900
-        Y: -110000041
-      - X: 101249959
-        Y: -110000100
-      - X: 108750041
-        Y: -110000100
     - - X: 118750100
         Y: -110000041
       - X: 118750100
@@ -13255,6 +13239,22 @@ CompositeCollider2D:
       - X: 91249959
         Y: -110000100
       - X: 98750041
+        Y: -110000100
+    - - X: 108750100
+        Y: -110000041
+      - X: 108750100
+        Y: -108749959
+      - X: 108750041
+        Y: -108749900
+      - X: 101249959
+        Y: -108749900
+      - X: 101249900
+        Y: -108749959
+      - X: 101249900
+        Y: -110000041
+      - X: 101249959
+        Y: -110000100
+      - X: 108750041
         Y: -110000100
   m_CompositePaths:
     m_Paths:
@@ -14453,7 +14453,7 @@ GameObject:
   - component: {fileID: 1878576827}
   m_Layer: 6
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18265,7 +18265,7 @@ Tilemap:
       - {fileID: 21300000, guid: d53bf67946d24e147844da43ce17ea21, type: 3}
       - {fileID: 21300000, guid: 8ea2284e30f79ac4bb8206467eb34651, type: 3}
       - {fileID: 21300000, guid: ea9faed7e6d60df4cac0d945bc8ac75c, type: 3}
-      m_AnimationSpeed: 30.000002
+      m_AnimationSpeed: 30
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -13, y: 1, z: 0}
@@ -18279,7 +18279,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9c7dc83c8564dd5499ec7fd8c629fccb, type: 3}
       - {fileID: 21300000, guid: 7261db144b0c30e47acc6fb389b16042, type: 3}
       - {fileID: 21300000, guid: a82cf26700a94584bbaafc0680cee7c1, type: 3}
-      m_AnimationSpeed: 30
+      m_AnimationSpeed: 30.000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -12, y: 1, z: 0}
