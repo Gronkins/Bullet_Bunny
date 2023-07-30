@@ -34,6 +34,11 @@ public class ElecricityAnimatorController : MonoBehaviour
                 break;
         }
     }
+
+    public void DisableGameObject()
+    {
+        gameObject.SetActive(false);
+    }
 }
 
 public enum ElectricityDirection
