@@ -47,6 +47,7 @@ public class ScreenManager : MonoBehaviour
     {
         Destroy(playerStats.upHitbox);
         Destroy(playerStats.sideHitbox);
+        Destroy(playerStats.downHitbox);
         yield return new WaitForSeconds(0.3f);
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
