@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     public GameObject sideHitbox;
     public GameObject upHitbox;
+    public GameObject downHitbox;
     
     public int playerHealth = 1; //The player technically has health, but only 1, and everything deals 1 damage. Pretty much it's easier to manage the player dying this way
 
