@@ -45,6 +45,8 @@ public class ScreenManager : MonoBehaviour
     //Waits for a moment, then restarts the current scene
     IEnumerator PlayerDeath()
     {
+        Destroy(playerStats.upHitbox);
+        Destroy(playerStats.sideHitbox);
         yield return new WaitForSeconds(0.3f);
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

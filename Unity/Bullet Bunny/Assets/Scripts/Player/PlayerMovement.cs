@@ -98,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
         if(playerStats.playerHealth <= 0)
         {
             animator.SetBool("IsAlive", false);
+            boxCollider2D.enabled = false;
+            rigidBody2D.simulated = false;
 
             rigidBody2D.gravityScale = 0.0f; //Turns off gravity so Buck's explosion doesn't move
             rigidBody2D.velocity = Vector2.zero; //Sets veloicty to zero so you don't keep moving

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public GameObject sideHitbox;
+    public GameObject upHitbox;
+    
     public int playerHealth = 1; //The player technically has health, but only 1, and everything deals 1 damage. Pretty much it's easier to manage the player dying this way
 
     // Start is called before the first frame update
@@ -15,7 +18,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     //These are for testing

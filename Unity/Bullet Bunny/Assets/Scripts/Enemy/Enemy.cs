@@ -36,13 +36,13 @@ public class Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Collided with something");
-        if (collider.tag == "PlayerWeapon")
+        if (collider.tag == "PlayerWeapon" && playerStats.playerHealth > 0)
         {
             Debug.Log("Player hit enemy with weapon");
             EnemyDeath();
         }
 
-        if (collider.tag == "PlayerDownwardsWeapon")
+        if (collider.tag == "PlayerDownwardsWeapon" && playerStats.playerHealth > 0)
         {
             Debug.Log("Player hit enemy with downwards attack");
             playerMovement.ApplyUpwardsForce();
@@ -52,7 +52,10 @@ public class Enemy : MonoBehaviour
 
     private void EnemyDeath()
     {
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        if (playerStats.playerHealth > 0)
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }
