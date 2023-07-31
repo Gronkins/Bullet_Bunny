@@ -277,6 +277,14 @@ public class PlayerMovement : MonoBehaviour
         trailRenderer.emitting = true;
         dashDirection = new Vector2(horizontal, vertical); //Collects dash direction input
 
+        if (dashDirection == Vector2.down)
+        {
+            if(isGrounded == false)
+            {
+                StopCoroutine(Dash());
+            }
+        }
+
         float originalGravity = rigidBody2D.gravityScale; //Stores original gravity
         float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
         
