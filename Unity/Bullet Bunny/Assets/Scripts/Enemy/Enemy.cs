@@ -36,12 +36,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-        void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player" && isAlive == true)
         {
             Debug.Log("Enemy hit player");
-            playerStats.playerHealth -= 1;
+            HandleEnemyCollision();
         }
 
         
@@ -52,7 +52,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void EnemyDeath()
+    protected virtual void HandleEnemyCollision()
+    {
+        playerStats.playerHealth -=1;
+    }
+
+    protected void EnemyDeath()
     {
         isAlive = false;
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
