@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     PlayerMovement playerMovement;
     protected Animator animator;
     public GameObject explosionPrefab;
+    private bool isAlive;
     
     // Start is called before the first frame update
     protected virtual void Start()
@@ -15,22 +16,7 @@ public class Enemy : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         animator = GetComponent<Animator>();
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Player")
-        {
-            Debug.Log("Enemy hit player");
-            playerStats.playerHealth -= 1;
-        }
-
-        
-        if (collision.collider.tag == "PlayerWeapon")
-        {
-            Debug.Log("Is hit with player Weapon");
-            EnemyDeath();
-        }
+        isAlive = true;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -50,12 +36,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
+        void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player" && isAlive == true)
+        {
+            Debug.Log("Enemy hit player");
+            playerStats.playerHealth -= 1;
+        }
+
+        
+        if (collision.collider.tag == "PlayerWeapon")
+        {
+            Debug.Log("Is hit with player Weapon");
+            EnemyDeath();
+        }
+    }
+
     private void EnemyDeath()
     {
-        if (playerStats.playerHealth > 0)
-        {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+        isAlive = false;
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
