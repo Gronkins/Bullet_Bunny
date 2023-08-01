@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private float bulletSpeed;
     private float bulletLifetime;
     private Vector3 direction;
+    private bool isFacingRight = false;
     private bool isFacingDown = false;
 
     // Start is called before the first frame update
@@ -17,11 +18,18 @@ public class Bullet : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
         StartCoroutine(DestroyBullet());
         //rigidbody2D = GetComponent<Rigidbody2D>();
+        
+        
         if (isFacingDown)
         {
             //transform.Rotate(0f, 0f, 90f);
             Quaternion rotation = Quaternion.Euler(0f, 0f, 90f);
             transform.rotation *= rotation;
+        }
+
+        if (isFacingRight && !isFacingDown)
+        {
+            FlipGameObject();
         }
     }
 
@@ -32,11 +40,12 @@ public class Bullet : MonoBehaviour
         transform.position += direction * bulletSpeed * Time.deltaTime;
     }
 
-    public void Initialise(Vector3 targetPosition, float speed, float lifetime, bool isFacingDownwards)
+    public void Initialise(Vector3 targetPosition, float speed, float lifetime, bool isFacingDownwards, bool isFacingRightSide)
     {
         bulletSpeed = speed;
         direction = targetPosition;
         bulletLifetime = lifetime;
+        isFacingRight = isFacingRightSide;
         isFacingDown = isFacingDownwards;
 
     }
@@ -76,4 +85,14 @@ public class Bullet : MonoBehaviour
         }
     }
     */
+
+    private void FlipGameObject()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1; //Inverses the player's game object
+        gameObject.transform.localScale = currentScale;
+
+        isFacingRight = true;
+        direction = Vector3.right;
+    }
 }

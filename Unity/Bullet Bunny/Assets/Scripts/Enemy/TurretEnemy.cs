@@ -10,6 +10,7 @@ public class TurretEnemy : Enemy
     public float attackTime = 3f;
     public float bulletSpeed = 5f;
     public float bulletLifetime = 5f;
+    public float yOffset;
     private float timer;
     private Vector3 direction;
     
@@ -23,6 +24,11 @@ public class TurretEnemy : Enemy
         if (isFacingRight)
         {
             FlipGameObject();
+        }
+
+        if(!isFacingDown)
+        {
+            yOffset = 0.25f;
         }
     }
 
@@ -57,9 +63,9 @@ public class TurretEnemy : Enemy
 
     private void SpawnProjectile()
     {
-        GameObject bulletObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bulletObject = Instantiate(bulletPrefab, transform.position - new Vector3(0, yOffset, 0), Quaternion.identity);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
-        bullet.Initialise(direction, bulletSpeed, bulletLifetime, isFacingDown);
+        bullet.Initialise(direction, bulletSpeed, bulletLifetime, isFacingDown, isFacingRight);
     }
 
     private void FlipGameObject()
