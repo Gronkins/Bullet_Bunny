@@ -5,6 +5,7 @@ using UnityEngine;
 public class CarrotIconHUD : MonoBehaviour
 {
     private GameObject player;
+    private CagedBunny cagedBunny;
     public float interactRadius = 10f;
 
     private SpriteRenderer icon;
@@ -13,6 +14,7 @@ public class CarrotIconHUD : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        cagedBunny = GetComponentInParent<CagedBunny>();
         icon = GetComponent<SpriteRenderer>();
 
         icon.color = new Color(1, 1, 1, 0);
@@ -25,7 +27,7 @@ public class CarrotIconHUD : MonoBehaviour
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
 
-            if (distance <= interactRadius)
+            if (distance <= interactRadius && !cagedBunny.isFree)
             {
                 icon.color = new Color(1, 1, 1, 1);
             }

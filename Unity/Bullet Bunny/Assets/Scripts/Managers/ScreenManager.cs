@@ -12,6 +12,7 @@ public class ScreenManager : MonoBehaviour
     {
         //Screen.SetResolution(512, 288, true);
         playerStats = FindObjectOfType<PlayerStats>();
+        Application.targetFrameRate = 30;
         //playerStats = player.GetComponent<PlayerStats>();
     }
 
