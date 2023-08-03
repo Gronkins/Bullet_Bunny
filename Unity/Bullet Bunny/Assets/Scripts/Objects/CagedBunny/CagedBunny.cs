@@ -7,7 +7,7 @@ public class CagedBunny : MonoBehaviour
     private ScreenManager screenManager;
     private Animator animator;
     public bool isFree;
-    public float timeToWait;
+    public float timeToWait = 5f;
 
     private void Start()
     {
@@ -22,6 +22,7 @@ public class CagedBunny : MonoBehaviour
             //Debug.Log("You monster.");
             isFree = true;
             animator.SetBool("IsFree", true);
+            StartCoroutine(WaitBeforeLoadingNextScene());
             //screenManager.LoadNextScene();
         }
     }
@@ -29,5 +30,6 @@ public class CagedBunny : MonoBehaviour
     private IEnumerator WaitBeforeLoadingNextScene()
     {
         yield return new WaitForSeconds(timeToWait);
+        screenManager.LoadNextScene();
     }
 }
