@@ -7,14 +7,14 @@ public class CagedBunny : MonoBehaviour
     private ScreenManager screenManager;
     private Animator animator;
 
-    private RatGate ratGate;
+    private RatGateAnimatorController ratGate;
     public bool isFree;
     private float timeToWait = 2.5f;
 
     private void Start()
     {
         screenManager = FindObjectOfType<ScreenManager>();
-        ratGate = FindObjectOfType<RatGate>();
+        ratGate = FindObjectOfType<RatGateAnimatorController>();
         animator = GetComponent<Animator>();
     }
 

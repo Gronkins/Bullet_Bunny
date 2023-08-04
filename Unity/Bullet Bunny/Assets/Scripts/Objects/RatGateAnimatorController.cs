@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RatGate : MonoBehaviour
+public class RatGateAnimatorController : MonoBehaviour
 {
     private Animator animator;
     private CagedBunny cagedBunny;
