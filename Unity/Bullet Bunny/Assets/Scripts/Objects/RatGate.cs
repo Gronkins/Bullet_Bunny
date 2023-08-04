@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class RatGate : MonoBehaviour
 {
-    public bool isFacingRight = false;
+    private Animator animator;
+    private CagedBunny cagedBunny;
+
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if (isFacingRight)
-        {
-            FlipGameObject();
-        }
+        animator = GetComponent<Animator>();
+        cagedBunny = FindObjectOfType<CagedBunny>();
     }
 
-    private void FlipGameObject()
+    public void OpenGate()
     {
-        Vector3 currentScale = gameObject.transform.localScale;
-        currentScale.x *= -1; //Inverses the player's game object
-        gameObject.transform.localScale = currentScale;
+        animator.SetBool("IsOpen", true);
     }
 }

@@ -6,12 +6,15 @@ public class CagedBunny : MonoBehaviour
 {
     private ScreenManager screenManager;
     private Animator animator;
+
+    private RatGate ratGate;
     public bool isFree;
-    public float timeToWait = 5f;
+    private float timeToWait = 2.5f;
 
     private void Start()
     {
         screenManager = FindObjectOfType<ScreenManager>();
+        ratGate = FindObjectOfType<RatGate>();
         animator = GetComponent<Animator>();
     }
 
@@ -23,13 +26,13 @@ public class CagedBunny : MonoBehaviour
             isFree = true;
             animator.SetBool("IsFree", true);
             StartCoroutine(WaitBeforeLoadingNextScene());
-            //screenManager.LoadNextScene();
         }
     }
 
     private IEnumerator WaitBeforeLoadingNextScene()
     {
         yield return new WaitForSeconds(timeToWait);
-        screenManager.LoadNextScene();
+        ratGate.OpenGate();
+        //screenManager.LoadNextScene();
     }
 }
