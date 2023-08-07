@@ -49,7 +49,6 @@ public class Bullet : MonoBehaviour
         isFacingDown = isFacingDownwards;
 
     }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "PlayerHurtbox" || collision.collider.tag == "Player")
@@ -59,9 +58,28 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Debug.Log("Collided with something");
+        Debug.Log("Collided with something (Bullet)");
 
         if (collision.collider.tag == "Terrain")
+        {
+            Debug.Log("Collided with terrain");
+            Destroy(gameObject);
+        }
+    }
+    
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "PlayerHurtbox" || collider.tag == "Player")
+        {
+            Debug.Log("Enemy hit player");
+            playerStats.playerHealth -= 1;
+            Destroy(gameObject);
+        }
+
+        Debug.Log("Collided with something (Bullet)");
+
+        if (collider.tag == "Terrain")
         {
             Debug.Log("Collided with terrain");
             Destroy(gameObject);
