@@ -657,13 +657,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  hazardLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
   trailRenderer: {fileID: 0}
-  groundCheck: {fileID: 4793043952829774300}
-  groundCheckRadius: 0.1
-  groundCheckSize: {x: 10.7, y: 0.2}
+  bulletJumpParticles: {fileID: 5592245324429522909, guid: ca9fcfe08e5b8e4488c7021e7349c121, type: 3}
   isGrounded: 0
   isJumping: 0
   isOnPlatform: 0
@@ -710,7 +705,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4793043954245440620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
