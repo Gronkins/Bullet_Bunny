@@ -39,7 +39,6 @@ public class TurretEnemy : Enemy
 
         if (timer <= 0)
         {
-            Debug.Log("Shoot!");
             timer = attackTime;
             animator.SetTrigger("Firing");
             SpawnProjectile();

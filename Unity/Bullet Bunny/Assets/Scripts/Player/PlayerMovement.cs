@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float upwardsForce = 18.0f;
 
+    private bool canBulletJump;
     public int maxDashes = 2;
     public int numOfDashes;
     [SerializeField]
@@ -70,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 yOffset;
 
     Vector2 dashDirection;
+
+    private TutorialCharacter tutorialCharacter;
     
 
     //Records the last direction the player was facing, useful for idling
@@ -83,12 +86,20 @@ public class PlayerMovement : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         trailRenderer = GetComponent<TrailRenderer>();
         playerStats = GetComponent<PlayerStats>();
+        tutorialCharacter = GetComponent<TutorialCharacter>();
 
         //Initialising variables
         numOfDashes = maxDashes;
         lastMoveHorizontal = 1;
         isFacingRight = true;
         isAlive = true;
+        canBulletJump = true;
+
+        if (tutorialCharacter != null)
+        {
+            animator.runtimeAnimatorController = tutorialCharacter.tutorialAnimatorController;
+            canBulletJump = false;
+        }
     }
 
     // Update is called once per frame
@@ -188,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash)
+        if ((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash  && canBulletJump)
         {
             StartCoroutine(Dash());
         }
@@ -213,6 +224,16 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", true);
         }
 
+    }
+
+    public void PickUpGun()
+    {
+        if (tutorialCharacter != null)
+        {
+            animator.runtimeAnimatorController = tutorialCharacter.originalAnimatorController;
+            Destroy(tutorialCharacter);
+            canBulletJump = true;  
+        }
     }
 
     public void ApplyUpwardsForce()
