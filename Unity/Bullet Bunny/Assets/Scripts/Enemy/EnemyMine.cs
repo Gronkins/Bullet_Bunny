@@ -20,9 +20,9 @@ public class EnemyMine : Enemy
         animator.SetBool("IsArming", isArmed);
     }
 
-    protected override void HandleEnemyCollision()
+    protected override void DealDamageToPlayer()
     {
-        base.HandleEnemyCollision();
+        base.DealDamageToPlayer();
         
         if (isArmed)
         {

@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         if (collision.collider.tag == "Player" && isAlive == true)
         {
             Debug.Log("Enemy hit player");
-            HandleEnemyCollision();
+            DealDamageToPlayer();
         }
 
         
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void HandleEnemyCollision()
+    protected virtual void DealDamageToPlayer()
     {
         playerStats.playerHealth -=1;
     }
