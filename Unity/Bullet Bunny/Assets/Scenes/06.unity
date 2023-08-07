@@ -13049,7 +13049,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotgunPickUpPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9111276011392384667, guid: 499b2b75d7878714f977ce6cdd4f008c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2336929443bdd9340b905f1e01f34c7f, type: 3}
+    m_RemovedComponents:
+    - {fileID: 1689318384, guid: 499b2b75d7878714f977ce6cdd4f008c, type: 3}
+    - {fileID: 1689318383, guid: 499b2b75d7878714f977ce6cdd4f008c, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 499b2b75d7878714f977ce6cdd4f008c, type: 3}
 --- !u!1 &1878576822
@@ -17173,6 +17179,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2147164738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9111276011392384669, guid: 499b2b75d7878714f977ce6cdd4f008c, type: 3}
+  m_PrefabInstance: {fileID: 1689318381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2147164741
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147164738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f24219681c27bcb4ea8c05608598cc69, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4478646707455406721
 PrefabInstance:
   m_ObjectHideFlags: 0
