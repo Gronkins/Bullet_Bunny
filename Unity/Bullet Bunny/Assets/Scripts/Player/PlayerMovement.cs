@@ -14,14 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D boxCollider2D; //Terrain box collider, not used for Buck's hurtbox
     public Animator animator;
     public LayerMask layerMask; //This is the layermask for the terrain
-    public LayerMask hazardLayerMask;
     public TrailRenderer trailRenderer;
+    public GameObject bulletJumpParticles;
 
-
-    // These ground check variables are outdated, will be removed... later...
-    public Transform groundCheck;
-    public float groundCheckRadius; //Left over from when the groundcheck was a sphere, it's kept in just cased we want to use a sphere for the ground check again
-    public Vector2 groundCheckSize; //Ground check for the square
     public bool isGrounded;
     [SerializeField]
     bool isJumping;
@@ -36,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     bool canDash = true;
     bool isDashing;
     [SerializeField]
-    float upwardsForce = 18.0f;
+    float upwardsForce = 16.0f;
 
     private bool canBulletJump;
     public int maxDashes = 2;
@@ -201,7 +196,14 @@ public class PlayerMovement : MonoBehaviour
         //Dash
         if ((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash  && canBulletJump)
         {
-            StartCoroutine(Dash());
+            dashDirection = new Vector2(horizontal, vertical); //Collects dash direction input
+
+            //StartCoroutine(Dash());
+
+            if (!(dashDirection == new Vector2(0, -1) && isGrounded))
+            {
+                StartCoroutine(Dash());
+            }
         }
 
         if (numOfDashes < 1)
@@ -296,8 +298,8 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         animator.SetBool("IsDashing", true);
         trailRenderer.emitting = true;
-        dashDirection = new Vector2(horizontal, vertical); //Collects dash direction input
 
+        /*
         if (dashDirection == Vector2.down)
         {
             if(isGrounded == false)
@@ -305,6 +307,11 @@ public class PlayerMovement : MonoBehaviour
                 StopCoroutine(Dash());
             }
         }
+        */
+
+
+        GameObject dashParticle = Instantiate(bulletJumpParticles, transform.position - new Vector3(horizontal, vertical, 0), Quaternion.identity);
+        dashParticle.transform.Rotate(0f, 0f, 45f);
 
         float originalGravity = rigidBody2D.gravityScale; //Stores original gravity
         float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
