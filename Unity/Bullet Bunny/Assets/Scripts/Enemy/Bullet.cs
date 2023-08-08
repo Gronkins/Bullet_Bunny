@@ -11,11 +11,15 @@ public class Bullet : MonoBehaviour
     private Vector3 direction;
     private bool isFacingRight = false;
     private bool isFacingDown = false;
+    private Animator animator;
+    private bool hasCollided = false;
 
     // Start is called before the first frame update
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
+        animator = GetComponent<Animator>();
+
         StartCoroutine(DestroyBullet());
         //rigidbody2D = GetComponent<Rigidbody2D>();
         
@@ -37,7 +41,10 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         //rigidbody2D.velocity = new Vector2(-bulletSpeed, rigidbody2D.velocity.y);
-        transform.position += direction * bulletSpeed * Time.deltaTime;
+        if (!hasCollided)
+        {
+            transform.position += direction * bulletSpeed * Time.deltaTime;
+        }
     }
 
     public void Initialise(Vector3 targetPosition, float speed, float lifetime, bool isFacingDownwards, bool isFacingRightSide)
@@ -53,9 +60,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.tag == "PlayerHurtbox" || collision.collider.tag == "Player")
         {
-            Debug.Log("Enemy hit player");
+            Debug.Log("Bullet hit player");
             playerStats.playerHealth -= 1;
-            Destroy(gameObject);
+            HandleBulletDestruction();
         }
 
         Debug.Log("Collided with something (Bullet)");
@@ -63,7 +70,7 @@ public class Bullet : MonoBehaviour
         if (collision.collider.tag == "Terrain")
         {
             Debug.Log("Collided with terrain");
-            Destroy(gameObject);
+            HandleBulletDestruction();
         }
     }
     
@@ -72,9 +79,10 @@ public class Bullet : MonoBehaviour
     {
         if (collider.tag == "PlayerHurtbox" || collider.tag == "Player")
         {
-            Debug.Log("Enemy hit player");
+            Debug.Log("Bullet hit player");
             playerStats.playerHealth -= 1;
-            Destroy(gameObject);
+            HandleBulletDestruction();
+            //Destroy(gameObject);
         }
 
         Debug.Log("Collided with something (Bullet)");
@@ -82,7 +90,8 @@ public class Bullet : MonoBehaviour
         if (collider.tag == "Terrain")
         {
             Debug.Log("Collided with terrain");
-            Destroy(gameObject);
+            HandleBulletDestruction();
+            //Destroy(gameObject);
         }
     }
 
@@ -92,17 +101,16 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /*
-    void OnTriggerEnter2D(Collider2D collider)
+    private void HandleBulletDestruction()
     {
-        Debug.Log("Collided with something");
-        if (collider.tag == "PlayerWeapon")
-        {
-            Debug.Log("Player hit enemy with weapon");
-            Destroy(gameObject);
-        }
+        hasCollided = true;
+        animator.SetTrigger("Destroy");
     }
-    */
+
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
+    }
 
     private void FlipGameObject()
     {

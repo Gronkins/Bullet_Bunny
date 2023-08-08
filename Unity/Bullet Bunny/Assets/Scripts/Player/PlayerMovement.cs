@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D boxCollider2D; //Terrain box collider, not used for Buck's hurtbox
     public Animator animator;
     public LayerMask layerMask; //This is the layermask for the terrain
-    public TrailRenderer trailRenderer;
     public GameObject bulletJumpParticles;
 
     public bool isGrounded;
@@ -79,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        trailRenderer = GetComponent<TrailRenderer>();
         playerStats = GetComponent<PlayerStats>();
         tutorialCharacter = GetComponent<TutorialCharacter>();
 
@@ -297,7 +295,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         animator.SetBool("IsDashing", true);
-        trailRenderer.emitting = true;
 
         /*
         if (dashDirection == Vector2.down)
@@ -334,7 +331,6 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
         animator.SetBool("IsDashing", false);
         isDashing = false;
-        trailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCooldown);
     }
 
