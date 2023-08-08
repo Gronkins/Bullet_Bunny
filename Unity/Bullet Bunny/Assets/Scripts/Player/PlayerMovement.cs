@@ -342,16 +342,16 @@ public class PlayerMovement : MonoBehaviour
             case Vector2 direction when direction == new Vector2(0, 0): // No Dash Input
                 Debug.Log("No input");
                 break;
-            case Vector2 direction when direction == new Vector2(-1, 1): // Dashing Left-Up
+            case Vector2 direction when direction == new Vector2(-1, 1): // Dashing Up Left
                 dashParticle.transform.Rotate(0f, 0f, 225f);
                 break;
-            case Vector2 direction when direction == new Vector2(1, 1): // Dashing Right-Up
+            case Vector2 direction when direction == new Vector2(1, 1): // Dashing Up Right
                 dashParticle.transform.Rotate(0f, 0f, -225f);
                 break;
-            case Vector2 direction when direction == new Vector2(1, -1): // Dashing Right-Down
+            case Vector2 direction when direction == new Vector2(1, -1): // Dashing Down Right
                 dashParticle.transform.Rotate(0f, 0f, 45f);
                 break;
-            case Vector2 direction when direction == new Vector2(-1, -1): // Dashing Left-Down
+            case Vector2 direction when direction == new Vector2(-1, -1): // Dashing Down Left
                 dashParticle.transform.Rotate(0f, 0f, -45f);
                 break;
             case Vector2 direction when direction == new Vector2(-1, 0): // Dashing Left
