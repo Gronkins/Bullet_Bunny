@@ -308,10 +308,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         */
-
+        
+        //If there is no directional input the player will face in the direction they were last facing
+        if (dashDirection == Vector2.zero)
+        {
+            dashDirection = new Vector2(lastMoveHorizontal, 0);
+        }
 
         GameObject dashParticle = Instantiate(bulletJumpParticles, transform.position - new Vector3(horizontal, vertical, 0), Quaternion.identity);
-        dashParticle.transform.Rotate(0f, 0f, 45f);
+        HandleBulletJumpParticles(dashParticle);
 
         float originalGravity = rigidBody2D.gravityScale; //Stores original gravity
         float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
@@ -320,12 +325,6 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
         yield return new WaitForSeconds(0.01f);
         numOfDashes -= 1;
-
-        //If there is no directional input the player will face in the direction they were last facing
-        if (dashDirection == Vector2.zero)
-        {
-            dashDirection = new Vector2(lastMoveHorizontal, 0);
-        }
 
         rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength); //Dash movement
 
@@ -337,6 +336,33 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         trailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCooldown);
+    }
+
+    private void HandleBulletJumpParticles(GameObject dashParticle)
+    {
+        // Dash direction is (horizontal, vertical)
+        switch (dashDirection)
+        {
+            case Vector2 direction when direction == new Vector2(0, 0): // No Dash Input
+                Debug.Log("No input");
+                break;
+            case Vector2 direction when direction == new Vector2(-1, 0): // Dashing Left
+                dashParticle.transform.Rotate(0f, 0f, -90f);
+                break;
+            case Vector2 direction when direction == new Vector2(1, 0): // Dashing Right
+                dashParticle.transform.Rotate(0f, 0f, 90f);
+                break;
+            case Vector2 direction when direction == new Vector2(0, 1): // Dashing Up
+                dashParticle.transform.Rotate(0f, 0f, 180f);
+                break;
+            case Vector2 direction when direction == new Vector2(0, -1): // Dashing Down
+                dashParticle.transform.Rotate(0f, 0f, 0f);
+                break;
+
+            default:
+                break;
+        }
+    
     }
     
     void FixedUpdate()
