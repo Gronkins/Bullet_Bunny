@@ -60,16 +60,16 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.tag == "PlayerHurtbox" || collision.collider.tag == "Player")
         {
-            Debug.Log("Bullet hit player");
+            //Debug.Log("Bullet hit player");
             playerStats.playerHealth -= 1;
             HandleBulletDestruction();
         }
 
-        Debug.Log("Collided with something (Bullet)");
+        //Debug.Log("Collided with something (Bullet)");
 
         if (collision.collider.tag == "Terrain")
         {
-            Debug.Log("Collided with terrain");
+            //Debug.Log("Collided with terrain");
             HandleBulletDestruction();
         }
     }
@@ -79,7 +79,7 @@ public class Bullet : MonoBehaviour
     {
         if (collider.tag == "PlayerHurtbox" || collider.tag == "Player")
         {
-            Debug.Log("Bullet hit player");
+            //Debug.Log("Bullet hit player");
             playerStats.playerHealth -= 1;
             HandleBulletDestruction();
             //Destroy(gameObject);
@@ -89,7 +89,7 @@ public class Bullet : MonoBehaviour
 
         if (collider.tag == "Terrain")
         {
-            Debug.Log("Collided with terrain");
+            //Debug.Log("Collided with terrain");
             HandleBulletDestruction();
             //Destroy(gameObject);
         }
