@@ -25,7 +25,10 @@ public class MoveThenStop : MonoBehaviour
         }
         else
         {
-            enemyMine.SetIsArming();
+            if (enemyMine != null)
+            {
+                enemyMine.SetIsArming();
+            }
         }
     }
     

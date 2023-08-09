@@ -243,6 +243,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", true);
     }
 
+    public void ApplyUpwardsForce(float newUpwardsForce)
+    {
+        rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, newUpwardsForce);
+        isJumping = true;
+        animator.SetBool("IsJumping", true);
+    }
+
     // This is just so the new ground check boxCast can be seen in the editor
     void OnDrawGizmos()
     {

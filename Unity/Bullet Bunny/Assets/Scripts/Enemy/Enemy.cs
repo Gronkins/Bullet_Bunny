@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         isAlive = true;
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Collided with something");
         if (collider.tag == "PlayerWeapon" && playerStats.playerHealth > 0)
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player" && isAlive == true)
         {
