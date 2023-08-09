@@ -6,7 +6,7 @@ public class AcidBubbleEnemy : Enemy
 {
     private PlayerStats newPlayerStats;
     private PlayerMovement newPlayerMovement;
-    [SerializeField] private float upwardsForce;
+    [SerializeField] private float upwardsForce = 25f;
 
     protected override void Start() 
     {
