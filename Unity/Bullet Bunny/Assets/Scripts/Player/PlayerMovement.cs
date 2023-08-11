@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isSliding;
+    
     public PlayerStats playerStats;
     
     public Rigidbody2D rigidBody2D;
@@ -111,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (isSliding)
+        {
+            ApplySlideForce();
+        }
+
         //Collecting horizontal and vertical input
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
@@ -161,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
             
         //The player can move like normal if they are not dashing
-        if (isDashing == false)
+        if (isDashing == false && !isSliding)
         {
             rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //Movement code
 
@@ -224,6 +231,16 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", true);
         }
 
+    }
+
+    private void ApplySlideForce()
+    {
+        //if (isJumping)
+        //{
+            //rigidBody2D.velocity = new Vector2(movementSpeed * 0.5f, jumpHeight);
+        //}
+        //else
+        rigidBody2D.velocity = new Vector2(movementSpeed * 0.5f, rigidBody2D.velocity.y);
     }
 
     public void PickUpGun()
