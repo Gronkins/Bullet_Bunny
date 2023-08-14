@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 dashDirection;
 
     private TutorialCharacter tutorialCharacter;
+    private AmmoDisplay ammoDisplay;
+    private GameObject ammoObject;
     
 
     //Records the last direction the player was facing, useful for idling
@@ -82,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         playerStats = GetComponent<PlayerStats>();
         tutorialCharacter = GetComponent<TutorialCharacter>();
+        ammoDisplay = GetComponentInChildren<AmmoDisplay>();
 
         //Initialising variables
         numOfDashes = maxDashes;
@@ -94,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.runtimeAnimatorController = tutorialCharacter.tutorialAnimatorController;
             canBulletJump = false;
+            ammoDisplay.gameObject.SetActive(false);
         }
     }
 
@@ -249,7 +253,9 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.runtimeAnimatorController = tutorialCharacter.originalAnimatorController;
             Destroy(tutorialCharacter);
-            canBulletJump = true;  
+            ammoDisplay.enabled = true;
+            canBulletJump = true;
+            ammoDisplay.gameObject.SetActive(true);
         }
     }
 
