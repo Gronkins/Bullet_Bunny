@@ -409,11 +409,13 @@ public class PlayerMovement : MonoBehaviour
         if (lastMoveHorizontal > 0 && !isFacingRight)
         {
             FlipSprite();
+            ammoDisplay.FlipSprite();
         }
         
         if (lastMoveHorizontal < 0 && isFacingRight)
         {
             FlipSprite();
+            ammoDisplay.FlipSprite();
         }
     }
 

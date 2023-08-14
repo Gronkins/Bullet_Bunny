@@ -19,4 +19,11 @@ public class AmmoDisplay : MonoBehaviour
     {
         animator.SetInteger("NumOfBullets", playerMovement.numOfDashes);
     }
+
+    public void FlipSprite()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1; //Inverses the player's game object
+        gameObject.transform.localScale = currentScale;
+    }
 }
