@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5592245324429522911}
   - component: {fileID: 5592245324429522908}
   - component: {fileID: 4554131631759347802}
+  - component: {fileID: 4063791278384616266}
   m_Layer: 0
   m_Name: BulletJumpParticles
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5592245324429522911
 Animator:
@@ -116,5 +117,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66139dd3922802e4bbaea25e37fed7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4063791278384616266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592245324429522909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9f80761e06a5d4f926e239abebd986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

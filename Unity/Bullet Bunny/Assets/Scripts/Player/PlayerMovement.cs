@@ -366,6 +366,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleBulletJumpParticles(GameObject dashParticle)
     {
+        BulletJumpParticlesController dashParticleScript = dashParticle.GetComponent<BulletJumpParticlesController>();
+        dashParticleScript.Initialise(dashDirection);
+        
+        if (isFacingRight)
+        {
+            dashParticleScript.FlipSprite();
+        }
+        
+        
+        /*
         // Dash direction is (horizontal, vertical)
         switch (dashDirection)
         {
@@ -400,6 +410,7 @@ public class PlayerMovement : MonoBehaviour
             default:
                 break;
         }
+        */
     
     }
     
