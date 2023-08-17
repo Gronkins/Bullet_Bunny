@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public bool isSliding;
+    public bool hasSlideSpeed;
     
     public PlayerStats playerStats;
     
@@ -33,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     bool isDashing;
     [SerializeField]
     float upwardsForce = 16.0f;
+
+    public float slideSpeed = 1.2f;
 
     private bool canBulletJump;
     public int maxDashes = 2;
@@ -71,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
     private TutorialCharacter tutorialCharacter;
     private AmmoDisplay ammoDisplay;
     private GameObject ammoObject;
+
+    private IEnumerator slideCorotine;
     
 
     //Records the last direction the player was facing, useful for idling
@@ -99,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
             canBulletJump = false;
             ammoDisplay.gameObject.SetActive(false);
         }
+
+        slideCorotine = EndSlidingMomentum();
     }
 
     // Update is called once per frame
@@ -108,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if(playerStats.playerHealth <= 0)
         {
             animator.SetBool("IsAlive", false);
+            ammoDisplay.gameObject.SetActive(false);
             boxCollider2D.enabled = false;
             rigidBody2D.simulated = false;
 
@@ -117,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (isSliding)
+        if (hasSlideSpeed)
         {
             ApplySlideForce();
         }
@@ -244,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
             //rigidBody2D.velocity = new Vector2(movementSpeed * 0.5f, jumpHeight);
         //}
         //else
-        rigidBody2D.velocity = new Vector2(movementSpeed * 0.5f, rigidBody2D.velocity.y);
+        rigidBody2D.velocity = new Vector2(movementSpeed * slideSpeed, rigidBody2D.velocity.y);
     }
 
     public void PickUpGun()
@@ -286,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         if(Physics2D.BoxCast(transform.position - yOffset, boxSize, 0f, -transform.up, maxDistance, layerMask) || isOnPlatform)
-        {
+        {            
             // isGrounded = true;
             return true;
         }
@@ -454,5 +463,47 @@ public class PlayerMovement : MonoBehaviour
         }
         
         return 0;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag("Sliding"))
+        {
+            isSliding = true;
+            hasSlideSpeed = true;
+            StopCoroutine(slideCorotine);
+        }
+
+        if(collision.collider.CompareTag("Terrain"))
+        {
+            isSliding = false;
+            hasSlideSpeed = false;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag("Sliding"))
+        {
+            isSliding = true;
+            hasSlideSpeed = true;
+            StopCoroutine(slideCorotine);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag("Sliding"))
+        {
+            //isSliding = false;
+            StartCoroutine(EndSlidingMomentum());
+        }
+    }
+
+    private IEnumerator EndSlidingMomentum()
+    {
+        yield return new WaitForSeconds(4.0f);
+
+        hasSlideSpeed = false;
     }
 }
