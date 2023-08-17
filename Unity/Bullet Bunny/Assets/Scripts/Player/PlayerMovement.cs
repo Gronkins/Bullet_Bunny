@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float upwardsForce = 16.0f;
 
-    public float slideSpeed = 2.0f;
+    public float slideSpeed = 1.2f;
 
     private bool canBulletJump;
     public int maxDashes = 2;
