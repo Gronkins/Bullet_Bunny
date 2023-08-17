@@ -116,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if(playerStats.playerHealth <= 0)
         {
             animator.SetBool("IsAlive", false);
+            ammoDisplay.gameObject.SetActive(false);
             boxCollider2D.enabled = false;
             rigidBody2D.simulated = false;
 
