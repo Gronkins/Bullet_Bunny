@@ -33,8 +33,15 @@ public class EnemyMine : Enemy
 
     protected override void EnemyDeath()
     {
-        isAlive = false;
-        animator.SetBool("IsAlive", false);
+        if (isArmed)
+        {
+            isAlive = false;
+            animator.SetBool("IsAlive", false);
+        }
+        else
+        {
+            base.EnemyDeath();
+        }
     }
 
     public void DestroySelf()
