@@ -33,7 +33,6 @@ public class EnemyMine : Enemy
 
     protected override void EnemyDeath()
     {
-        // Do nothing on death
         isAlive = false;
         animator.SetBool("IsAlive", false);
     }
