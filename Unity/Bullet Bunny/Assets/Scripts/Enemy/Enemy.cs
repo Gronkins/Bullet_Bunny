@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     PlayerMovement playerMovement;
     protected Animator animator;
     public GameObject explosionPrefab;
-    private bool isAlive;
+    protected bool isAlive;
     
     // Start is called before the first frame update
     protected virtual void Start()
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         playerStats.playerHealth -=1;
     }
 
-    protected void EnemyDeath()
+    protected virtual void EnemyDeath()
     {
         isAlive = false;
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);

@@ -12,6 +12,7 @@ public class EnemyMine : Enemy
         base.Start();
         isArmed = false;
         animator.SetBool("IsArming", isArmed);
+        animator.SetBool("IsAlive", true);
     }
 
     public void SetIsArming()
@@ -28,5 +29,17 @@ public class EnemyMine : Enemy
         {
             EnemyDeath();
         }
+    }
+
+    protected override void EnemyDeath()
+    {
+        // Do nothing on death
+        isAlive = false;
+        animator.SetBool("IsAlive", false);
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }
