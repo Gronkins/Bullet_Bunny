@@ -27,20 +27,8 @@ public class EnemyMine : Enemy
         
         if (isArmed)
         {
-            EnemyDeath();
-        }
-    }
-
-    protected override void EnemyDeath()
-    {
-        if (isArmed)
-        {
             isAlive = false;
             animator.SetBool("IsAlive", false);
-        }
-        else
-        {
-            base.EnemyDeath();
         }
     }
 
