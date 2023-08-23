@@ -649,6 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSliding: 0
+  hasSlideSpeed: 0
   playerStats: {fileID: 0}
   rigidBody2D: {fileID: 4793043954245440623}
   boxSize: {x: 1.12, y: 0.3, z: 0}
@@ -666,6 +667,7 @@ MonoBehaviour:
   jumpHeight: 16
   canDash: 1
   upwardsForce: 16
+  slideSpeed: 1.2
   maxDashes: 2
   numOfDashes: 0
   dashStrength: 20
@@ -676,6 +678,8 @@ MonoBehaviour:
   isAttacking: 0
   isEditingGizmos: 0
   yOffset: {x: 0, y: 0.07, z: 0}
+  forwardSlideMultiplier: 1.25
+  backwardsSlideMultipler: 0.75
   lastMoveHorizontal: 0
 --- !u!95 &4793043954245440914
 Animator:
@@ -949,5 +953,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed2950cc17a1284a869f8d9c01df3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  playerMovement: {fileID: 0}
