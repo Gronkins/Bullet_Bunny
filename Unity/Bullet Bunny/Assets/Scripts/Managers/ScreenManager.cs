@@ -37,9 +37,12 @@ public class ScreenManager : MonoBehaviour
         }
 
         //If the player resets zero or less HP, calls the death state
-        if (playerStats.playerHealth <= 0)
+        if (playerStats != null)
         {
-            StartCoroutine(PlayerDeath());
+            if (playerStats.playerHealth <= 0)
+            {
+                StartCoroutine(PlayerDeath());
+            }
         }
     }
 
@@ -63,7 +66,7 @@ public class ScreenManager : MonoBehaviour
         int height = 288;
         Screen.SetResolution(width, height, fullscreen);
     }
-
+    
     public void LoadNextScene()
     {
         //Loads the next scene, if at the final scene, goes back to the first one
