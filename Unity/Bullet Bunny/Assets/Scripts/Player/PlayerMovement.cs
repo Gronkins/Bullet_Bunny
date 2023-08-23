@@ -78,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
     private GameObject ammoObject;
 
     private IEnumerator slideCorotine;
+
+    public float forwardSlideMultiplier = 1.25f;
+    public float backwardsSlideMultipler = 0.75f;
     
 
     //Records the last direction the player was facing, useful for idling
@@ -254,7 +257,18 @@ public class PlayerMovement : MonoBehaviour
             //rigidBody2D.velocity = new Vector2(movementSpeed * 0.5f, jumpHeight);
         //}
         //else
-        rigidBody2D.velocity = new Vector2(movementSpeed * slideSpeed, rigidBody2D.velocity.y);
+        if (Input.GetAxisRaw("Horizontal") == 1)
+        {
+            rigidBody2D.velocity = new Vector2(movementSpeed * slideSpeed * forwardSlideMultiplier, rigidBody2D.velocity.y);
+        }
+        else if (Input.GetAxisRaw("Horizontal") == -1)
+        {
+            rigidBody2D.velocity = new Vector2(movementSpeed * slideSpeed * backwardsSlideMultipler, rigidBody2D.velocity.y);
+        }
+        else if (Input.GetAxisRaw("Horizontal") == 0)
+        {
+            rigidBody2D.velocity = new Vector2(movementSpeed * slideSpeed, rigidBody2D.velocity.y);
+        }
     }
 
     private bool CanBulletJump()
