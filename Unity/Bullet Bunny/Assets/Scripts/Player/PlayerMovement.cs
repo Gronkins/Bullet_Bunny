@@ -185,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
             
         //The player can move like normal if they are not dashing
-        if (isDashing == false && !isSliding)
+        if (isDashing == false && !hasSlideSpeed)
         {
             rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //Movement code
 
@@ -538,7 +538,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.collider.CompareTag("Sliding"))
         {
-            //isSliding = false;
+            isSliding = false;
             StartCoroutine(EndSlidingMomentum());
         }
     }
