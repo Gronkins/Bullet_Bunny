@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -218,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
 
             //StartCoroutine(Dash());
 
-            if (!(dashDirection == new Vector2(0, -1) && isGrounded))
+            if (CanBulletJump())
             {
                 StartCoroutine(Dash());
             }
@@ -254,6 +255,27 @@ public class PlayerMovement : MonoBehaviour
         //}
         //else
         rigidBody2D.velocity = new Vector2(movementSpeed * slideSpeed, rigidBody2D.velocity.y);
+    }
+
+    private bool CanBulletJump()
+    {
+        if (isSliding)
+        {
+            if(dashDirection == new Vector2(0, 0) || dashDirection == new Vector2(-1, 0) || dashDirection == new Vector2(1, 0))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else if (!(dashDirection == new Vector2(0, -1) && isGrounded))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void PickUpGun()
@@ -334,7 +356,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         animator.SetBool("IsDashing", true);
-
         /*
         if (dashDirection == Vector2.down)
         {
@@ -360,6 +381,8 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D.gravityScale = 0.0f; //Sets player gravity to zero, so they can dash in the air unaffected by gravity
         rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
         yield return new WaitForSeconds(0.01f);
+        isSliding = false;
+        hasSlideSpeed = false;
         numOfDashes -= 1;
 
         rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength); //Dash movement
@@ -469,9 +492,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.collider.CompareTag("Sliding"))
         {
-            isSliding = true;
-            hasSlideSpeed = true;
-            StopCoroutine(slideCorotine);
+            if (!isDashing)
+            {
+                isSliding = true;
+                hasSlideSpeed = true;
+                StopCoroutine(slideCorotine);
+            }
         }
 
         if(collision.collider.CompareTag("Terrain"))
@@ -485,9 +511,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.collider.CompareTag("Sliding"))
         {
-            isSliding = true;
-            hasSlideSpeed = true;
-            StopCoroutine(slideCorotine);
+            if (!isDashing)
+            {
+                isSliding = true;
+                hasSlideSpeed = true;
+                StopCoroutine(slideCorotine);
+            }
         }
     }
 
