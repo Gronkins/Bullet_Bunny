@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -30,10 +31,15 @@ public class PauseMenu : MonoBehaviour
         }
     }
     
+    private void Start()
+    {
+        pauseMenuUI.SetActive(false);
+    }
+    
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             if(isPaused)
             {
@@ -48,9 +54,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+        StartCoroutine(WaitForUnpause());
     }
 
     private void Pause()
@@ -78,5 +82,15 @@ public class PauseMenu : MonoBehaviour
     {
         screenManager.LoadNextScene();
         //Resume();
+    }
+
+    private IEnumerator WaitForUnpause()
+    {
+        Debug.Log("Test");
+        Time.timeScale = 1f;
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Test1");
+        pauseMenuUI.SetActive(false);
+        isPaused = false;
     }
 }

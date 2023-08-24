@@ -33,7 +33,7 @@ public class ScreenManager : MonoBehaviour
         //Closes the game
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            //Application.Quit();
         }
 
         //If the player resets zero or less HP, calls the death state
