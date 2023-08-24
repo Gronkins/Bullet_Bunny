@@ -116,6 +116,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PauseMenu.isPaused)
+        {
+            return;
+        }
+        
         //Controls the player's death
         if(playerStats.playerHealth <= 0)
         {
