@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System;
 
 public class PauseMenu : MonoBehaviour
@@ -10,8 +11,9 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu Instance;
     
     public static bool isPaused = false;
-
+    public Button startingButton;
     public GameObject pauseMenuUI;
+    public GameObject checkBox;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
@@ -78,18 +80,22 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetButton()
+    {
+        startingButton.Select();
+    }
+
     public void SkipLevel()
     {
-        screenManager.LoadNextScene();
+        //screenManager.LoadNextScene();
+        checkBox.SetActive(true);
         //Resume();
     }
 
     private IEnumerator WaitForUnpause()
     {
-        Debug.Log("Test");
         Time.timeScale = 1f;
         yield return new WaitForSeconds(0.1f);
-        Debug.Log("Test1");
         pauseMenuUI.SetActive(false);
         isPaused = false;
     }
