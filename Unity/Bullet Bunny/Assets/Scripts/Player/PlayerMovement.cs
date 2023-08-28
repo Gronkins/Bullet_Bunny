@@ -134,10 +134,16 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-
+        
         if (hasSlideSpeed)
         {
             ApplySlideForce();
+        }
+
+        if(isSliding)
+        {
+            StopCoroutine(slideCorotine);
+            //StopCoroutine(EndSlidingMomentum());
         }
 
         //Collecting horizontal and vertical input
@@ -513,14 +519,17 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isDashing)
             {
+                //Debug.Log("Sliding");
                 isSliding = true;
                 hasSlideSpeed = true;
+                //StopCoroutine(EndSlidingMomentum());
                 StopCoroutine(slideCorotine);
             }
         }
 
         if(collision.collider.CompareTag("Terrain"))
         {
+            Debug.Log("Touched terrain");
             isSliding = false;
             hasSlideSpeed = false;
         }
@@ -534,6 +543,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isSliding = true;
                 hasSlideSpeed = true;
+                //StopCoroutine(EndSlidingMomentum());
                 StopCoroutine(slideCorotine);
             }
         }
@@ -543,15 +553,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.collider.tag == "Sliding")
         {
+            //Debug.Log("Stop sliding");
             isSliding = false;
-            StartCoroutine(EndSlidingMomentum());
+            //StartCoroutine(EndSlidingMomentum());
+            StartCoroutine(slideCorotine);
         }
     }
 
     private IEnumerator EndSlidingMomentum()
     {
         yield return new WaitForSeconds(4.0f);
-
+        Debug.Log("End Sliding Momentum");
         hasSlideSpeed = false;
     }
 }
