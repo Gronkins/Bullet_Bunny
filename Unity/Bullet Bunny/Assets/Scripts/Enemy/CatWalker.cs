@@ -24,8 +24,6 @@ public class CatWalker : Enemy
     {
         base.Start();
         isArmed = false;
-        animator.SetBool("IsArming", isArmed);
-        animator.SetBool("IsAlive", true);
     }
 
     public void Initialise(GameObject newStartPoint, GameObject newEndPoint)
@@ -55,7 +53,6 @@ public class CatWalker : Enemy
         if (isArmed)
         {
             isAlive = false;
-            animator.SetBool("IsAlive", false);
         }
     }
 
