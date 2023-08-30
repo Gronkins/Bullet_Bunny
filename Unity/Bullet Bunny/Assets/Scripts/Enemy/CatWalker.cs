@@ -10,7 +10,7 @@ public class CatWalker : Enemy
     private bool isStopped = false;
     public Transform startPoint;
     public Transform endPoint;
-    public CatWalkerManager catWalkerManager;
+    private CatWalkerManager catWalkerManager;
     private MoveThenStop moveThenStop;
     
     private void Awake()
@@ -28,7 +28,6 @@ public class CatWalker : Enemy
 
     public void Initialise(GameObject newStartPoint, GameObject newEndPoint, CatWalkerManager newCatWalkerManager)
     {
-        Debug.Log("Initialise called");
         startPoint = newStartPoint.transform;
         endPoint = newEndPoint.transform;
         catWalkerManager = newCatWalkerManager;
