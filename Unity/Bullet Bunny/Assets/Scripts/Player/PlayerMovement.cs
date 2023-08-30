@@ -366,14 +366,22 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        isAttacking = true;
-        //rigidBody2D.isKinematic = true;
-        animator.SetBool("IsAttacking", true);
-        animator.SetTrigger("Attacking");
-        yield return new WaitForSeconds(0.25f); //Waits for the attack animation to finish
-        isAttacking = false;
-        animator.SetBool("IsAttacking", false);
-        //rigidBody2D.isKinematic = false;
+        if (vertical < 0 && isGrounded)
+        {
+            //Don't attack if the player is pressing downwards and is on the ground
+        }
+        else
+        {
+            isAttacking = true;
+            //rigidBody2D.isKinematic = true;
+            animator.SetBool("IsAttacking", true);
+            animator.SetTrigger("Attacking");
+            yield return new WaitForSeconds(0.25f); //Waits for the attack animation to finish
+            isAttacking = false;
+            animator.SetBool("IsAttacking", false);
+            //rigidBody2D.isKinematic = false;
+        }
+
         yield return null;
     }
     
