@@ -18,7 +18,7 @@ public class CatWalkerManager : MonoBehaviour
     private void Start()
     {
         catWalkerObject = Instantiate(catWalker, startingPoint.transform.position, Quaternion.identity);
-        catWalkerObject.GetComponent<CatWalker>().Initialise(startingPoint, endPoint);
+        catWalkerObject.GetComponent<CatWalker>().Initialise(startingPoint, endPoint, this);
         //Instantiate(catWalker, transform.position, Quaternion.identity);
         hasSpawn = true;
     }
@@ -29,7 +29,7 @@ public class CatWalkerManager : MonoBehaviour
         if (!hasSpawn)
         {
             catWalkerObject = Instantiate(catWalker, startingPoint.transform.position, Quaternion.identity);
-            catWalkerObject.GetComponent<CatWalker>().Initialise(startingPoint, endPoint);
+            catWalkerObject.GetComponent<CatWalker>().Initialise(startingPoint, endPoint, this);
             //Instantiate(catWalker, transform.position, Quaternion.identity);
             hasSpawn = true;
         }

@@ -15,7 +15,7 @@ public class CatWalker : Enemy
     
     private void Awake()
     {
-        catWalkerManager = FindObjectOfType<CatWalkerManager>();
+        //catWalkerManager = FindObjectOfType<CatWalkerManager>();
         moveThenStop = GetComponent<MoveThenStop>();
     }
     
@@ -26,11 +26,12 @@ public class CatWalker : Enemy
         isArmed = false;
     }
 
-    public void Initialise(GameObject newStartPoint, GameObject newEndPoint)
+    public void Initialise(GameObject newStartPoint, GameObject newEndPoint, CatWalkerManager newCatWalkerManager)
     {
         Debug.Log("Initialise called");
         startPoint = newStartPoint.transform;
         endPoint = newEndPoint.transform;
+        catWalkerManager = newCatWalkerManager;
         moveThenStop.SetCatWalkerStart(startPoint, endPoint);
     }
 
