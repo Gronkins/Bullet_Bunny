@@ -366,7 +366,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        if (vertical < 0 && isGrounded)
+        if (vertical < 0 && isGrounded && absoluteHorizontal < 0)
         {
             //Don't attack if the player is pressing downwards and is on the ground
         }
