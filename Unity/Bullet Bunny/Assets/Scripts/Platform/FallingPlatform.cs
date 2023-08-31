@@ -22,6 +22,7 @@ public class FallingPlatform : MonoBehaviour
         {
             Debug.Log("Player touched");
             controller.SetFalling();
+            animator.SetTrigger("Falling");
             StartCoroutine(StartFall());
         }
     }
@@ -29,14 +30,15 @@ public class FallingPlatform : MonoBehaviour
     private IEnumerator StartFall()
     {
         yield return new WaitForSeconds(timeBeforeFall);
-        animator.SetTrigger("Falling");
+        //animator.SetTrigger("Falling");
         //controller.SetFalling();
         StartCoroutine(Fall());
     }
     
     private IEnumerator Fall()
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
+        animator.SetTrigger("FallingLoop");
         rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
         rigidBody2D.mass = 1000f;
         rigidBody2D.gravityScale = 2f;
