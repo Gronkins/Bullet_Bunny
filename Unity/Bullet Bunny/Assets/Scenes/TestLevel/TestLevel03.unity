@@ -3394,6 +3394,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 426079726}
     m_Modifications:
+    - target: {fileID: 114892570906328359, guid: e1cc728f220db814c98431640727c4e8, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.w
+      value: 0.0625
+      objectReference: {fileID: 0}
     - target: {fileID: 480661408291155160, guid: e1cc728f220db814c98431640727c4e8, type: 3}
       propertyPath: m_Name
       value: CAT_SlidingPipe_EndR
@@ -3662,6 +3666,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 426079726}
     m_Modifications:
+    - target: {fileID: 6907319703772810080, guid: e1b3a0496a1880e428c054854140d270, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6907319703772810083, guid: e1b3a0496a1880e428c054854140d270, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -29235,10 +29243,6 @@ PrefabInstance:
     - target: {fileID: 6907319703772810085, guid: e1b3a0496a1880e428c054854140d270, type: 3}
       propertyPath: m_Name
       value: CAT_SlidingPipe_Middle (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907319703772810085, guid: e1b3a0496a1880e428c054854140d270, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

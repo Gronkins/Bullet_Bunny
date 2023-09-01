@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public bool isSliding;
     public bool hasSlideSpeed;
+    private bool isTouchingSliding;
+    [SerializeField] private float notTouchingSlidingTimer = 0f;
+    private float notTouchingSlidingDuration = 4f;
     
     public PlayerStats playerStats;
     
@@ -134,6 +137,17 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
+
+        if (!isTouchingSliding)
+        {
+            notTouchingSlidingTimer += Time.deltaTime;
+
+            if (notTouchingSlidingTimer >= notTouchingSlidingDuration)
+            {
+                //StartCoroutine(EndSlidingMomentum());
+                EndSlideForce();
+            }
+        }
         
         if (hasSlideSpeed)
         {
@@ -142,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(isSliding)
         {
-            StopCoroutine(slideCorotine);
+            //StopCoroutine(slideCorotine);
             //StopCoroutine(EndSlidingMomentum());
         }
 
@@ -414,8 +428,7 @@ public class PlayerMovement : MonoBehaviour
         rigidBody2D.gravityScale = 0.0f; //Sets player gravity to zero, so they can dash in the air unaffected by gravity
         rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
         yield return new WaitForSeconds(0.01f);
-        isSliding = false;
-        hasSlideSpeed = false;
+        EndSlideForce();
         numOfDashes -= 1;
 
         rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength); //Dash movement
@@ -530,8 +543,10 @@ public class PlayerMovement : MonoBehaviour
                 //Debug.Log("Sliding");
                 isSliding = true;
                 hasSlideSpeed = true;
+                isTouchingSliding = true;
+                notTouchingSlidingTimer = 0f;
                 //StopCoroutine(EndSlidingMomentum());
-                StopCoroutine(slideCorotine);
+                //StopCoroutine(slideCorotine);
             }
         }
 
@@ -540,6 +555,57 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Touched terrain");
             isSliding = false;
             hasSlideSpeed = false;
+            isTouchingSliding = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.tag == "Sliding")
+        {
+            if (!isDashing)
+            {
+                //Debug.Log("Sliding");
+                isSliding = true;
+                hasSlideSpeed = true;
+                isTouchingSliding = true;
+                notTouchingSlidingTimer = 0f;
+                //StopCoroutine(EndSlidingMomentum());
+                //StopCoroutine(slideCorotine);
+            }
+        }
+
+        if(collider.CompareTag("Terrain"))
+        {
+            Debug.Log("Touched terrain");
+            isSliding = false;
+            hasSlideSpeed = false;
+            isTouchingSliding = false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if(collider.tag == "Sliding")
+        {
+            if (!isDashing)
+            {
+                //Debug.Log("Sliding");
+                isSliding = true;
+                hasSlideSpeed = true;
+                isTouchingSliding = true;
+                notTouchingSlidingTimer = 0f;
+                //StopCoroutine(EndSlidingMomentum());
+                //StopCoroutine(slideCorotine);
+            }
+        }
+
+        if(collider.CompareTag("Terrain"))
+        {
+            Debug.Log("Touched terrain");
+            isSliding = false;
+            hasSlideSpeed = false;
+            isTouchingSliding = false;
         }
     }
 
@@ -551,8 +617,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 isSliding = true;
                 hasSlideSpeed = true;
+                isTouchingSliding = true;
                 //StopCoroutine(EndSlidingMomentum());
-                StopCoroutine(slideCorotine);
+                //StopCoroutine(slideCorotine);
             }
         }
     }
@@ -561,17 +628,36 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.collider.tag == "Sliding")
         {
+            isTouchingSliding = false;
+        }
+    }
+
+    private IEnumerator StopSliding()
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        if (!isTouchingSliding)
+        {
             //Debug.Log("Stop sliding");
             isSliding = false;
             //StartCoroutine(EndSlidingMomentum());
-            StartCoroutine(slideCorotine);
+            //StartCoroutine(slideCorotine);
         }
+    }
+
+    private void EndSlideForce()
+    {
+        Debug.Log("End slide called");
+        hasSlideSpeed = false;
+        isSliding = false;
     }
 
     private IEnumerator EndSlidingMomentum()
     {
-        yield return new WaitForSeconds(4.0f);
-        Debug.Log("End Sliding Momentum");
         hasSlideSpeed = false;
+        Debug.Log("End slide called");
+        yield return new WaitForSeconds(4);
+        Debug.Log("End Sliding Momentum");
+        //hasSlideSpeed = false;
     }
 }
