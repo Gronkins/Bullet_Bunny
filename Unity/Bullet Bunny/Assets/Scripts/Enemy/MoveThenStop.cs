@@ -9,6 +9,7 @@ public class MoveThenStop : MonoBehaviour
     public Transform endPoint;
     private EnemyMine enemyMine;
     private CatWalker catWalker;
+    private AcidBubbleEnemy acidBubbleEnemy;
     
     /*
     private void Awake()
@@ -33,6 +34,7 @@ public class MoveThenStop : MonoBehaviour
         transform.position = startingPoint.position;
         enemyMine = GetComponent<EnemyMine>();
         catWalker = GetComponent<CatWalker>();
+        acidBubbleEnemy = GetComponent<AcidBubbleEnemy>();
 
         if (catWalker != null)
         {
@@ -79,6 +81,21 @@ public class MoveThenStop : MonoBehaviour
                 if (catWalker != null)
                 {
                     catWalker.SetIsStopped();
+                }
+            }
+        }
+
+        if (acidBubbleEnemy != null)
+        {
+            if (Vector2.Distance(transform.position, endPoint.position) > 0.02f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, endPoint.position, speed * Time.deltaTime);
+            }
+            else
+            {
+                if (enemyMine != null)
+                {
+                    enemyMine.SetIsArming();
                 }
             }
         }
