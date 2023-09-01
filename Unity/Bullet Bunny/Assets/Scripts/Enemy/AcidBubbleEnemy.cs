@@ -12,22 +12,28 @@ public class AcidBubbleEnemy : Enemy
     {
         newPlayerStats = FindObjectOfType<PlayerStats>();
         newPlayerMovement = FindObjectOfType<PlayerMovement>();
+        isAlive = true;
     }
     
     protected override void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Collided with something");
-        if (collider.tag == "PlayerWeapon" && newPlayerStats.playerHealth > 0)
+        if (collider.tag == "PlayerWeapon")
         {
             Debug.Log("Player hit enemy with weapon");
             EnemyDeath();
         }
 
-        if (collider.tag == "PlayerDownwardsWeapon" && newPlayerStats.playerHealth > 0)
+        if (collider.tag == "PlayerDownwardsWeapon")
         {
             Debug.Log("Player hit enemy with downwards attack");
             newPlayerMovement.ApplyUpwardsForce(upwardsForce);
             EnemyDeath();
         }
+    }
+
+    protected override void DealDamageToPlayer()
+    {
+        newPlayerStats.playerHealth -=1;
     }
 }

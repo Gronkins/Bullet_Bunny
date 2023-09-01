@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Collided with something");
+        
         if (collider.tag == "PlayerWeapon" && playerStats.playerHealth > 0)
         {
             Debug.Log("Player hit enemy with weapon");
@@ -38,6 +39,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Touched something");
+
         if (collision.collider.tag == "Player" && isAlive == true)
         {
             Debug.Log("Enemy hit player");

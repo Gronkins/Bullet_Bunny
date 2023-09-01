@@ -458,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CatSlidingPipeRusted (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8048285640818846184, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8048285640818846186, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10210,6 +10214,10 @@ PrefabInstance:
     - target: {fileID: 8048285640818846184, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
       propertyPath: m_Name
       value: CatSlidingPipeRusted
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048285640818846184, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8048285640818846186, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
       propertyPath: m_RootOrder
@@ -25428,7 +25436,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2964549158175265201, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
       propertyPath: intervalDelay
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2964549158175265201, guid: bda681a11df9a95499f8bf23c6b31141, type: 3}
       propertyPath: timeBeforeStart
@@ -25896,6 +25904,10 @@ PrefabInstance:
     - target: {fileID: 6752141810971021535, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724591952866951232, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
