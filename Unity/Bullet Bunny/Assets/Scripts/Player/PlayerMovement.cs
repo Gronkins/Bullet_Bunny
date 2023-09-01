@@ -240,6 +240,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Jump());
         }
 
+        if (numOfDashes < 1)
+        {
+            canDash = false;
+        }
+        else
+            canDash = true;
+
         //Dash
         if ((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canDash  && canBulletJump)
         {
@@ -252,13 +259,6 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(Dash());
             }
         }
-
-        if (numOfDashes < 1)
-        {
-            canDash = false;
-        }
-        else
-            canDash = true;
 
         //Resets the number of dashes once the player touches the ground
         if (isGrounded == true)
