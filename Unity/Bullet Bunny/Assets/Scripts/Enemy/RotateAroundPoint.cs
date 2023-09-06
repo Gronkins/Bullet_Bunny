@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingEnemy : Enemy
+public class RotateAroundPoint : MonoBehaviour
 {
-    private PlayerStats newPlayerStats;
-    private PlayerMovement newPlayerMovement;
     public GameObject target;
     public float speed = 100f;
 

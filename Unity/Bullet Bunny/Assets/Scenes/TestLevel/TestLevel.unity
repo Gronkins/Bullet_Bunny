@@ -25958,6 +25958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6144406471785620737}
   - component: {fileID: 6144406471785620766}
+  - component: {fileID: 6144406471785620768}
   - component: {fileID: 6144406471785620767}
   - component: {fileID: 6144406471785620764}
   - component: {fileID: 6144406471785620765}
@@ -26080,9 +26081,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2912c146edbb834b9bfc4f662cfb19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 5747144418298470286, guid: acd25d3a1c851f54183a5850198c15ec, type: 3}
   target: {fileID: 7188448033024944302}
   speed: 100
+--- !u!114 &6144406471785620768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144406471785620762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25c6494b135e394da34391032d8a305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 5747144418298470286, guid: acd25d3a1c851f54183a5850198c15ec, type: 3}
 --- !u!1001 &6363951434768313368
 PrefabInstance:
   m_ObjectHideFlags: 0
