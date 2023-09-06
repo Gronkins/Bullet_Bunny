@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rigidBody2D;
 
     public Vector3 boxSize; // Box size for the new ground check boxCast
+    public Vector3 jumpableBoxSize; // Box size for the new ground check boxCast
     public float maxDistance; // Maximum distance for the box size for the boxCast (the Y direction)
 
     public BoxCollider2D boxCollider2D; //Terrain box collider, not used for Buck's hurtbox
@@ -27,7 +28,11 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     [SerializeField]
     bool isJumping;
+    public int numOfJumps = 1;
+    public int maxJumps = 1;
     public bool isOnPlatform;
+    public float coyoteTime;
+    public float coyoteTimeDuration = 0.3f;
     
     [SerializeField]
     float movementSpeed = 10.0f;
@@ -68,8 +73,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     bool isAttacking;
-    float attackTime = 0.15f;
-    float attackCounter = 0.15f;
 
     public bool isEditingGizmos;
     public Vector3 yOffset;
@@ -78,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
 
     private TutorialCharacter tutorialCharacter;
     private AmmoDisplay ammoDisplay;
-    private GameObject ammoObject;
 
     private IEnumerator slideCorotine;
 
@@ -147,6 +149,15 @@ public class PlayerMovement : MonoBehaviour
                 //StartCoroutine(EndSlidingMomentum());
                 EndSlideForce();
             }
+        }
+
+        if(!IsGrounded())
+        {
+            coyoteTime += Time.deltaTime;
+        }
+        else
+        {
+            coyoteTime = 0f;
         }
         
         if (hasSlideSpeed)
@@ -229,13 +240,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Jump
         
-        if (isGrounded == true && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
-        {
-            //StartCoroutine(Jump());
-        }
-        
-
-        if (IsGrounded() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
+        if (numOfJumps > 0 && CanJump() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
         {
             StartCoroutine(Jump());
         }
@@ -296,6 +301,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool CanJump()
+    {
+        if (IsGrounded())
+        {
+            return true;
+        }
+
+        if (IsInJumpableArea())
+        {
+            return true;
+        }
+
+        if (coyoteTime <= coyoteTimeDuration)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private bool CanBulletJump()
     {
         if (isSliding)
@@ -349,13 +374,29 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
         if (isEditingGizmos)
         {
-            Gizmos.DrawCube(transform.position - transform.up * maxDistance - yOffset, boxSize); // Code to draw the box cast for the ground check, uncomment if editing it
+            //Gizmos.DrawCube(transform.position - transform.up * maxDistance - yOffset, boxSize); // Code to draw the box cast for the ground check, uncomment if editing it
+            Gizmos.DrawCube(transform.position - transform.up * maxDistance - yOffset, jumpableBoxSize); // Code to draw the box cast for the ground check, uncomment if editing it
         }
     }
     
     private bool IsGrounded()
     {
         if(Physics2D.BoxCast(transform.position - yOffset, boxSize, 0f, -transform.up, maxDistance, layerMask) || isOnPlatform)
+        {            
+            // isGrounded = true;
+            numOfJumps = maxJumps;
+            return true;
+        }
+        else
+        {
+            // isGrounded = false;
+            return false;
+        }
+    }
+
+    private bool IsInJumpableArea()
+    {
+        if(Physics2D.BoxCast(transform.position - yOffset, jumpableBoxSize, 0f, -transform.up, maxDistance, layerMask) || isOnPlatform)
         {            
             // isGrounded = true;
             return true;
@@ -373,6 +414,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.05f); //Waits for the player to actually get off the ground
         isJumping = true;
         animator.SetBool("IsJumping", true);
+        numOfJumps = 0;
         yield return new WaitForSeconds(0.2f);
 
         yield return null;

@@ -650,9 +650,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSliding: 0
   hasSlideSpeed: 0
+  notTouchingSlidingTimer: 0
   playerStats: {fileID: 0}
   rigidBody2D: {fileID: 4793043954245440623}
   boxSize: {x: 1.12, y: 0.3, z: 0}
+  jumpableBoxSize: {x: 1.12, y: 2, z: 0}
   maxDistance: 1
   boxCollider2D: {fileID: 4793043954245440912}
   animator: {fileID: 4793043954245440914}
@@ -662,7 +664,11 @@ MonoBehaviour:
   bulletJumpParticles: {fileID: 5592245324429522909, guid: ca9fcfe08e5b8e4488c7021e7349c121, type: 3}
   isGrounded: 0
   isJumping: 0
+  numOfJumps: 1
+  maxJumps: 1
   isOnPlatform: 0
+  coyoteTime: 0
+  coyoteTimeDuration: 0.1
   movementSpeed: 10
   jumpHeight: 16
   canDash: 1
