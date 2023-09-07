@@ -6,12 +6,14 @@ public class AcidBubbleEnemy : Enemy
 {
     private PlayerStats newPlayerStats;
     private PlayerMovement newPlayerMovement;
+    public bool isMovingUp;
     [SerializeField] private float upwardsForce = 25f;
 
     protected override void Start() 
     {
         newPlayerStats = FindObjectOfType<PlayerStats>();
         newPlayerMovement = FindObjectOfType<PlayerMovement>();
+        animator = GetComponent<Animator>();
         isAlive = true;
     }
     
@@ -35,5 +37,16 @@ public class AcidBubbleEnemy : Enemy
     protected override void DealDamageToPlayer()
     {
         newPlayerStats.playerHealth -=1;
+    }
+
+    public void SetIsMovingUp()
+    {
+        isMovingUp = true;
+        animator.SetBool("IsMovingUp", true);
+    }
+
+    public void Ascension()
+    {
+        animator.SetTrigger("Ascended");
     }
 }

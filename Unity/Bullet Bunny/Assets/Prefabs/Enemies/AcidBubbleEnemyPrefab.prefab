@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -799110719
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9df2ac180b353ec468ac07abda608002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88fdc2d9e37e7024bbb421f405f95039, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_SortingLayerID: -799110719
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9df2ac180b353ec468ac07abda608002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88fdc2d9e37e7024bbb421f405f95039, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
@@ -345,11 +345,11 @@ GameObject:
   - component: {fileID: 7724591952866951236}
   - component: {fileID: 7724591952866951238}
   - component: {fileID: 7724591952866951239}
-  - component: {fileID: 7724591952866951235}
   - component: {fileID: 7724591952866951288}
   - component: {fileID: 7724591952866951289}
+  - component: {fileID: 2118033752}
   m_Layer: 0
-  m_Name: Enemy_RatFlyer
+  m_Name: AcidBubble
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +412,7 @@ SpriteRenderer:
   m_SortingLayerID: -799110719
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9df2ac180b353ec468ac07abda608002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88fdc2d9e37e7024bbb421f405f95039, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -461,7 +461,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -470,26 +470,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2435141, y: 1.4319733}
   m_EdgeRadius: 0
---- !u!95 &7724591952866951235
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7724591952866951232}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ac82fbe11f3fb3408b73d64adf4eef4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7724591952866951288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab26825fe023f7e4e88528c0a6d459be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 5747144418298470286, guid: acd25d3a1c851f54183a5850198c15ec, type: 3}
+  explosionPrefab: {fileID: 5505250795638600475, guid: 36307c8d4e2e3f546825e288628835ae, type: 3}
+  isMovingUp: 0
   upwardsForce: 25
 --- !u!114 &7724591952866951289
 MonoBehaviour:
@@ -519,3 +500,23 @@ MonoBehaviour:
   speed: 3.5
   startingPoint: {fileID: 6752141809525444087}
   endPoint: {fileID: 6752141809644117929}
+--- !u!95 &2118033752
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724591952866951232}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52adf453d3b1b534a95099289e2c61c9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

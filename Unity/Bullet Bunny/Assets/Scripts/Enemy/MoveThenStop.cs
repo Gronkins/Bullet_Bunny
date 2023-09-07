@@ -85,7 +85,7 @@ public class MoveThenStop : MonoBehaviour
             }
         }
 
-        if (acidBubbleEnemy != null)
+        if (acidBubbleEnemy != null && acidBubbleEnemy.isMovingUp)
         {
             if (Vector2.Distance(transform.position, endPoint.position) > 0.02f)
             {
@@ -93,10 +93,7 @@ public class MoveThenStop : MonoBehaviour
             }
             else
             {
-                if (enemyMine != null)
-                {
-                    enemyMine.SetIsArming();
-                }
+                acidBubbleEnemy.Ascension();
             }
         }
     }
