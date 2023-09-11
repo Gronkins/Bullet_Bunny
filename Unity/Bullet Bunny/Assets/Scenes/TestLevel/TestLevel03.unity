@@ -2896,6 +2896,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6907319703772810083, guid: e1b3a0496a1880e428c054854140d270, type: 3}
   m_PrefabInstance: {fileID: 750117072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &767151121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7724591952866951232, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
+  m_PrefabInstance: {fileID: 1815276552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &767151129
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767151121}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.42
 --- !u!4 &771524053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6907319703772810083, guid: e1b3a0496a1880e428c054854140d270, type: 3}
@@ -30569,11 +30590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752141810971021534, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.0002
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 6752141810971021534, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.50017
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6752141810971021534, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30611,9 +30632,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: AcidBubbleEnemyPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7724591952866951239, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7724591952866951288, guid: b36eb649b4033484cab913fe888d17c9, type: 3}
       propertyPath: upwardsForce
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
