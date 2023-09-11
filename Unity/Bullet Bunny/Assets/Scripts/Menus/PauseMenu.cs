@@ -5,6 +5,7 @@ using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PauseMenu : MonoBehaviour
     public Button startingButton;
     public GameObject pauseMenuUI;
     public GameObject checkBox;
+    public TextMeshProUGUI deathText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
@@ -63,6 +65,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        deathText.text = "x " + GameManager.Instance.deaths;
         isPaused = true;
     }
 
@@ -70,6 +73,9 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
+        GameManager.Instance.isPlayingGame = false;
+        GameManager.Instance.time = 0f;
+        Destroy(GameManager.Instance.gameObject);
         SceneManager.LoadScene(mainMenu);
         Destroy(this.gameObject);
     }

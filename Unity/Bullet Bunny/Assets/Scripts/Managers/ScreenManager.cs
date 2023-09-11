@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ScreenManager : MonoBehaviour
 {
     PlayerStats playerStats;
+    private bool hasDied;
     
     // Start is called before the first frame update
     void Start()
@@ -13,6 +15,7 @@ public class ScreenManager : MonoBehaviour
         //Screen.SetResolution(512, 288, true);
         playerStats = FindObjectOfType<PlayerStats>();
         Application.targetFrameRate = 30;
+        hasDied = false;
         //playerStats = player.GetComponent<PlayerStats>();
     }
 
@@ -39,8 +42,15 @@ public class ScreenManager : MonoBehaviour
         //If the player resets zero or less HP, calls the death state
         if (playerStats != null)
         {
-            if (playerStats.playerHealth <= 0)
+            if (hasDied)
             {
+                return;
+            }
+
+            if (playerStats.playerHealth <= 0 && !hasDied)
+            {
+                hasDied = true;
+                GameManager.Instance.deaths += 0.5f;
                 StartCoroutine(PlayerDeath());
             }
         }
@@ -53,10 +63,10 @@ public class ScreenManager : MonoBehaviour
         Destroy(playerStats.sideHitbox);
         Destroy(playerStats.downHitbox);
         yield return new WaitForSeconds(0.3f);
-        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         yield return null;
+        hasDied = false;
     }
 
     void SetScreenSize()

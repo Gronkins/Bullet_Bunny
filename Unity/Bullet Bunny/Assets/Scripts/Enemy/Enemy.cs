@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void DealDamageToPlayer()
     {
-        playerStats.playerHealth -=1;
+        playerStats.TakeDamage();
     }
 
     protected virtual void EnemyDeath()

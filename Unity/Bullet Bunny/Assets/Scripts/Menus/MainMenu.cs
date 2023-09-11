@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame()
     {
+        //GameManager.Instance.isPlayingGame = true;
         SceneManager.LoadScene(1);
     }
 

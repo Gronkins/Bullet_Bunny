@@ -35,4 +35,10 @@ public class PlayerStats : MonoBehaviour
             //Debug.Log("Is touching");
         }
     }
+
+    public void TakeDamage()
+    {
+        playerHealth -= 1;
+        //GameManager.Instance.deaths += 1;
+    }
 }

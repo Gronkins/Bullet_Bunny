@@ -24106,6 +24106,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1143567824}
     m_Modifications:
+    - target: {fileID: 6240308020625128592, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
+      propertyPath: m_Points.Array.data[0].x
+      value: -1.5117979
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240308020625128592, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
+      propertyPath: m_Points.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240308020625128592, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
+      propertyPath: m_Points.Array.data[1].x
+      value: 1.5142837
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240308020625128592, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
+      propertyPath: m_Points.Array.data[1].y
+      value: 0.0028018951
+      objectReference: {fileID: 0}
     - target: {fileID: 6240308020635769740, guid: dff7e4526145ebe46aa614bb4703b575, type: 3}
       propertyPath: m_Name
       value: MovingPlatformPrefab
