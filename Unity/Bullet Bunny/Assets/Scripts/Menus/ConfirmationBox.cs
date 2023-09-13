@@ -30,6 +30,7 @@ public class ConfirmationBox : MonoBehaviour
         screenManager.LoadNextScene();
         pauseMenu.SetButton();
         gameObject.SetActive(false);
+        pauseMenu.GetStageNumberPlus1();
         //Resume();
     }
 

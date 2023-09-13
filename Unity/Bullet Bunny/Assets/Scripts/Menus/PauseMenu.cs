@@ -78,6 +78,12 @@ public class PauseMenu : MonoBehaviour
         screenAndLevelText.text = "1 - " + number;
     }
 
+    public void GetStageNumberPlus1()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        int number = scene.buildIndex + 1;
+        screenAndLevelText.text = "1 - " + number;
+    }
     public void LoadMenu()
     {
         Time.timeScale = 1f;
@@ -104,6 +110,7 @@ public class PauseMenu : MonoBehaviour
     {
         //screenManager.LoadNextScene();
         checkBox.SetActive(true);
+        //GetStageNumber();
         //Resume();
     }
 
