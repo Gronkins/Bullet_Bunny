@@ -13,10 +13,12 @@ public class Bullet : MonoBehaviour
     private bool isFacingDown = false;
     private Animator animator;
     private bool hasCollided = false;
+    private bool hasBeenDestroyed;
 
     // Start is called before the first frame update
     void Start()
     {
+        hasBeenDestroyed = false;
         playerStats = FindObjectOfType<PlayerStats>();
         animator = GetComponent<Animator>();
 
@@ -61,11 +63,15 @@ public class Bullet : MonoBehaviour
         if (collision.collider.tag == "PlayerHurtbox" || collision.collider.tag == "Player")
         {
             //Debug.Log("Bullet hit player");
-            playerStats.playerHealth -= 1;
-            HandleBulletDestruction();
+            if (!hasBeenDestroyed)
+            {
+                hasBeenDestroyed = true;
+                playerStats.TakeDamage();
+                HandleBulletDestruction();
+            }
         }
 
-        //Debug.Log("Collided with something (Bullet)");
+        Debug.Log("Collided with something (Bullet)");
 
         if (collision.collider.tag == "Terrain")
         {
@@ -79,10 +85,14 @@ public class Bullet : MonoBehaviour
     {
         if (collider.tag == "PlayerHurtbox" || collider.tag == "Player")
         {
-            //Debug.Log("Bullet hit player");
-            playerStats.playerHealth -= 1;
-            HandleBulletDestruction();
-            //Destroy(gameObject);
+            if (!hasBeenDestroyed)
+            {
+                //Debug.Log("Bullet hit player");
+                hasBeenDestroyed = true;
+                playerStats.TakeDamage();
+                HandleBulletDestruction();
+                //Destroy(gameObject);
+            }
         }
 
         Debug.Log("Collided with something (Bullet)");

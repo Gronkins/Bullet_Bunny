@@ -7,13 +7,14 @@ public class PlayerStats : MonoBehaviour
     public GameObject sideHitbox;
     public GameObject upHitbox;
     public GameObject downHitbox;
+    public bool isDead;
     
     public int playerHealth = 1; //The player technically has health, but only 1, and everything deals 1 damage. Pretty much it's easier to manage the player dying this way
 
     // Start is called before the first frame update
     void Start()
     {
-
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -38,7 +39,9 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage()
     {
-        playerHealth -= 1;
+        //playerHealth -= 1;
+        isDead = true;
+        GameManager.Instance.PlayerDeath();
         //GameManager.Instance.deaths += 1;
     }
 }

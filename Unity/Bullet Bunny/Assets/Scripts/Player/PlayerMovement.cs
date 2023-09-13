@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         //Controls the player's death
-        if(playerStats.playerHealth <= 0)
+        if(playerStats.isDead)
         {
             animator.SetBool("IsAlive", false);
             ammoDisplay.gameObject.SetActive(false);
@@ -689,7 +689,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void EndSlideForce()
     {
-        Debug.Log("End slide called");
+        //Debug.Log("End slide called");
         hasSlideSpeed = false;
         isSliding = false;
     }

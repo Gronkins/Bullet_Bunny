@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject checkBox;
     public TextMeshProUGUI deathText;
+    public TextMeshProUGUI screenAndLevelText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
@@ -66,7 +67,15 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         deathText.text = "x " + GameManager.Instance.deaths;
+        GetStageNumber();
         isPaused = true;
+    }
+
+    public void GetStageNumber()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        int number = scene.buildIndex;
+        screenAndLevelText.text = "1 - " + number;
     }
 
     public void LoadMenu()

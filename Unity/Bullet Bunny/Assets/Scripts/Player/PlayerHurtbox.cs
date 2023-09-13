@@ -18,7 +18,8 @@ public class PlayerHurtbox : MonoBehaviour
         if (collider.CompareTag("Hazards") && gameObject.CompareTag("PlayerHurtbox"))
         {
             Debug.Log("Player collided with hazard");
-            playerStats.playerHealth -= 1;
+            //playerStats.playerHealth -= 1;
+            playerStats.TakeDamage();
         }
     }
 }

@@ -42,23 +42,24 @@ public class ScreenManager : MonoBehaviour
         //If the player resets zero or less HP, calls the death state
         if (playerStats != null)
         {
-            if (hasDied)
+            if (playerStats.playerHealth <= 0)
             {
-                return;
-            }
-
-            if (playerStats.playerHealth <= 0 && !hasDied)
-            {
-                hasDied = true;
-                GameManager.Instance.deaths += 0.5f;
-                StartCoroutine(PlayerDeath());
+                if (!hasDied)
+                {
+                    hasDied = true;
+                    //GameManager.Instance.deaths += 1;
+                    //Debug.Log("Death called");
+                    StartCoroutine(PlayerDeath());
+                }
             }
         }
     }
 
     //Waits for a moment, then restarts the current scene
-    IEnumerator PlayerDeath()
+    public IEnumerator PlayerDeath()
     {
+        GameManager.Instance.deaths += 1;
+        Debug.Log("Death called");
         Destroy(playerStats.upHitbox);
         Destroy(playerStats.sideHitbox);
         Destroy(playerStats.downHitbox);
@@ -66,7 +67,8 @@ public class ScreenManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         yield return null;
-        hasDied = false;
+        playerStats.isDead = false;
+        //hasDied = false;
     }
 
     void SetScreenSize()

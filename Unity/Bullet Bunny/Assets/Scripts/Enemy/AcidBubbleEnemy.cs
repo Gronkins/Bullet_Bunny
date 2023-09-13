@@ -36,7 +36,8 @@ public class AcidBubbleEnemy : Enemy
 
     protected override void DealDamageToPlayer()
     {
-        newPlayerStats.playerHealth -=1;
+        //newPlayerStats.playerHealth -=1;
+        newPlayerStats.TakeDamage();
     }
 
     public void SetIsMovingUp()
