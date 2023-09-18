@@ -66,7 +66,42 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        deathText.text = "x " + GameManager.Instance.deaths;
+        //deathText.text = "x " + GameManager.Instance.deaths;
+        /*
+        if (GameManager.Instance.deaths == 0)
+        {
+            deathText.text = "000";
+        }
+
+        if (GameManager.Instance.deaths > 0 && GameManager.Instance.deaths < 10)
+        {
+            deathText.text = "00" + GameManager.Instance.deaths;
+        }
+
+        if (GameManager.Instance.deaths < 100)
+        {
+            deathText.text = "0" + GameManager.Instance.deaths;
+        }
+
+
+        if (GameManager.Instance.deaths >= 100)
+        {
+            deathText.text = GameManager.Instance.deaths.ToString();
+        }
+        */
+        if (GameManager.Instance.deaths < 10)
+        {
+            deathText.text = "00" + GameManager.Instance.deaths;
+        }
+        else if (GameManager.Instance.deaths > 9 && GameManager.Instance.deaths < 100)
+        {
+            deathText.text = "0" + GameManager.Instance.deaths;
+        }
+        else if (GameManager.Instance.deaths > 99)
+        {
+            deathText.text = GameManager.Instance.deaths.ToString();
+        }
+
         GetStageNumber();
         isPaused = true;
     }
