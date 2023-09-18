@@ -592,7 +592,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(collision.collider.CompareTag("Terrain"))
+        if(collision.collider.tag == "Terrain")
         {
             Debug.Log("Touched terrain");
             isSliding = false;
@@ -617,7 +617,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(collider.CompareTag("Terrain"))
+        if(collider.tag == "Terrain")
         {
             Debug.Log("Touched terrain");
             isSliding = false;
@@ -642,7 +642,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(collider.CompareTag("Terrain"))
+        if(collider.tag == "Terrain")
         {
             Debug.Log("Touched terrain");
             isSliding = false;
