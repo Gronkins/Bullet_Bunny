@@ -16,7 +16,6 @@ public class EndOfLevelMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject checkBox;
     public TextMeshProUGUI deathText;
-    public TextMeshProUGUI screenAndLevelText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
@@ -74,37 +73,12 @@ public class EndOfLevelMenu : MonoBehaviour
             deathText.text = GameManager.Instance.deaths.ToString();
         }
         */
-        if (GameManager.Instance.deaths < 10)
-        {
-            deathText.text = "00" + GameManager.Instance.deaths;
-        }
-        else if (GameManager.Instance.deaths > 9 && GameManager.Instance.deaths < 100)
-        {
-            deathText.text = "0" + GameManager.Instance.deaths;
-        }
-        else if (GameManager.Instance.deaths > 99)
-        {
-            deathText.text = GameManager.Instance.deaths.ToString();
-        }
 
-        GetStageNumber();
+        //if ()
+        
+        deathText.text = "You died " + GameManager.Instance.deaths + " times";
+
         isPaused = true;
-    }
-
-    public void GetStageNumber()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        //int number = scene.buildIndex;
-        GameManager.Instance.GetLevelNumber();
-        screenAndLevelText.text = GameManager.Instance.levelNumber + " - " + GameManager.Instance.stageNumber;
-    }
-
-    public void GetStageNumberPlus1()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        GameManager.Instance.GetLevelNumber();
-        int number = GameManager.Instance.stageNumber + 1;
-        screenAndLevelText.text = GameManager.Instance.levelNumber + " - " + number;
     }
     
     public void LoadMenu()
