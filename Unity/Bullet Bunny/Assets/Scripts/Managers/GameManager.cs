@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public float time;
     public int screenNumber;
     public int levelNumber;
+    public int stageNumber;
     
     private void Awake()
     {
@@ -43,6 +45,23 @@ public class GameManager : MonoBehaviour
     private void Initialise()
     {
         deaths = 0;
+    }
+
+    public void GetLevelNumber()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        int number = scene.buildIndex;
+
+        if (number <= 20)
+        {
+            levelNumber = 1;
+            stageNumber = number;
+        }
+        else if (number > 20)
+        {
+            levelNumber = 2;
+            stageNumber = number - 20;
+        }
     }
 
     public void PlayerDeath()

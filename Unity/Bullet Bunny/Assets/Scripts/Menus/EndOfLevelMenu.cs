@@ -7,9 +7,9 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 
-public class PauseMenu : MonoBehaviour
+public class EndOfLevelMenu : MonoBehaviour
 {
-    public static PauseMenu Instance;
+    //public static PauseMenu Instance;
     
     public static bool isPaused = false;
     public Button startingButton;
@@ -20,21 +20,6 @@ public class PauseMenu : MonoBehaviour
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
-    
-    private void Awake()
-    {
-        screenManager = FindObjectOfType<ScreenManager>();
-        DontDestroyOnLoad(this);
-
-        if (Instance != null & Instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
     
     private void Start()
     {
