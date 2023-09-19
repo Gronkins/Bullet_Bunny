@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public int screenNumber;
     public int levelNumber;
     public int stageNumber;
+    public bool isCounting;
+    public PauseMenu pauseMenu;
     
     private void Awake()
     {
@@ -33,13 +35,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //time = 5990;
+        isCounting = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        if (isCounting)
+        {
+            time += Time.deltaTime;
+        }
     }
 
     private void Initialise()
@@ -67,5 +72,11 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         StartCoroutine(screenManager.PlayerDeath());
+    }
+
+    public void ClearPauseMenu()
+    {
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        Destroy(pauseMenu.gameObject);
     }
 }

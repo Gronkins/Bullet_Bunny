@@ -16,31 +16,17 @@ public class EndOfLevelMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject checkBox;
     public TextMeshProUGUI deathText;
+    public TextMeshProUGUI timerText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
     
     private void Start()
     {
-        pauseMenuUI.SetActive(false);
+        SetButton();
+        GameManager.Instance.isCounting = false;
+        Pause();
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
-        {
-            if(isPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
-
     public void Resume()
     {
         StartCoroutine(WaitForUnpause());
@@ -76,7 +62,13 @@ public class EndOfLevelMenu : MonoBehaviour
 
         //if ()
         
-        deathText.text = "You died " + GameManager.Instance.deaths + " times";
+        deathText.text = "Deaths: " + GameManager.Instance.deaths;
+
+        int minutes = Mathf.FloorToInt(GameManager.Instance.time / 60f);
+        int seconds = Mathf.FloorToInt(GameManager.Instance.time % 60f);
+        int hundreths = Mathf.FloorToInt((GameManager.Instance.time * 100) % 100);
+        
+        timerText.text = "Time: " + string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
 
         isPaused = true;
     }
@@ -103,10 +95,11 @@ public class EndOfLevelMenu : MonoBehaviour
         startingButton.Select();
     }
 
-    public void SkipLevel()
+    public void NextLevel()
     {
         //screenManager.LoadNextScene();
-        checkBox.SetActive(true);
+        //checkBox.SetActive(true);
+        SkipLevel();
         //GetStageNumber();
         //Resume();
     }
@@ -117,5 +110,11 @@ public class EndOfLevelMenu : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         pauseMenuUI.SetActive(false);
         isPaused = false;
+    }
+
+    private void SkipLevel()
+    {
+        screenManager.LoadNextScene();
+        //gameObject.SetActive(false);
     }
 }
