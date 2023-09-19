@@ -9,6 +9,11 @@ public class EndLevelTransition : MonoBehaviour
     TilemapRenderer tilemapRenderer;
     private SpriteRenderer spriteRenderer;
 
+    private void Awake()
+    {
+        screenManager = FindObjectOfType<ScreenManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

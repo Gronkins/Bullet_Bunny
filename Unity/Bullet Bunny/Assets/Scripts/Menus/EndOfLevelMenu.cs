@@ -14,12 +14,18 @@ public class EndOfLevelMenu : MonoBehaviour
     public static bool isPaused = false;
     public Button startingButton;
     public GameObject pauseMenuUI;
-    public GameObject checkBox;
+    //public GameObject checkBox;
     public TextMeshProUGUI deathText;
     public TextMeshProUGUI timerText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
+
+    private void Awake()
+    {
+        screenManager = FindObjectOfType<ScreenManager>();
+    }
+
     
     private void Start()
     {
@@ -99,6 +105,7 @@ public class EndOfLevelMenu : MonoBehaviour
     {
         //screenManager.LoadNextScene();
         //checkBox.SetActive(true);
+        Time.timeScale = 1f;
         SkipLevel();
         //GetStageNumber();
         //Resume();
