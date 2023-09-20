@@ -203,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6752141810971021534}
+  - component: {fileID: 1431894656}
   m_Layer: 0
   m_Name: AcidBubbleEnemyPrefab
   m_TagString: Untagged
@@ -226,8 +227,22 @@ Transform:
   - {fileID: 6752141809525444087}
   - {fileID: 6752141809644117929}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1431894656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752141810971021535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3924704a9a3b7ee429ae51c1dbd81791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acidBubble: {fileID: 7724591952866951232}
+  respawnTime: 2
 --- !u!1 &7010733869764033025
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +359,6 @@ GameObject:
   - component: {fileID: 7724591952866951259}
   - component: {fileID: 7724591952866951236}
   - component: {fileID: 7724591952866951238}
-  - component: {fileID: 7724591952866951239}
   - component: {fileID: 7724591952866951288}
   - component: {fileID: 7724591952866951289}
   - component: {fileID: 2118033752}
@@ -445,32 +459,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 2
---- !u!61 &7724591952866951239
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7724591952866951232}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.009820461, y: -0.14716357}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.2435141, y: 1.4319733}
-  m_EdgeRadius: 0
 --- !u!114 &7724591952866951288
 MonoBehaviour:
   m_ObjectHideFlags: 0

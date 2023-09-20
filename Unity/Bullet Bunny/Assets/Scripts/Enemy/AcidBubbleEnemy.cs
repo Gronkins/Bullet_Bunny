@@ -6,6 +6,8 @@ public class AcidBubbleEnemy : Enemy
 {
     private PlayerStats newPlayerStats;
     private PlayerMovement newPlayerMovement;
+    private AcidBubbleManager acidBubbleManager;
+    private MoveThenStop moveThenStop;
     public bool isMovingUp;
     [SerializeField] private float upwardsForce = 25f;
 
@@ -14,6 +16,8 @@ public class AcidBubbleEnemy : Enemy
         newPlayerStats = FindObjectOfType<PlayerStats>();
         newPlayerMovement = FindObjectOfType<PlayerMovement>();
         animator = GetComponent<Animator>();
+        moveThenStop = GetComponent<MoveThenStop>();
+        acidBubbleManager = GetComponentInParent<AcidBubbleManager>();
         isAlive = true;
     }
     
@@ -34,6 +38,13 @@ public class AcidBubbleEnemy : Enemy
         }
     }
 
+    public void InitialiseBubble()
+    {
+        moveThenStop.SetStartPoint();
+        isAlive = true;
+        isMovingUp = false;
+    }
+
     protected override void DealDamageToPlayer()
     {
         //newPlayerStats.playerHealth -=1;
@@ -49,5 +60,14 @@ public class AcidBubbleEnemy : Enemy
     public void Ascension()
     {
         animator.SetTrigger("Ascended");
+    }
+
+    protected override void EnemyDeath()
+    {
+        isAlive = false;
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        //Destroy(gameObject);
+        acidBubbleManager.SetRespawnTimer();
+        gameObject.SetActive(false);
     }
 }

@@ -42,6 +42,11 @@ public class MoveThenStop : MonoBehaviour
         }
     }
 
+    public void SetStartPoint()
+    {
+        transform.position = startingPoint.position;
+    }
+
     public void SetCatWalkerStart(Transform startPoint, Transform newEndPoint)
     {
         startingPoint = startPoint;
