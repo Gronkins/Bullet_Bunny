@@ -95,6 +95,18 @@ public class ScreenManager : MonoBehaviour
         SceneManager.LoadScene(nextSceneIndex);
     }
 
+    public void LoadEndOfLevelScreen()
+    {
+        if (SceneManager.GetActiveScene().buildIndex <= 20)
+        {
+            SceneManager.LoadScene("EndOfLevelScreen");
+        }
+        else
+        {
+            SceneManager.LoadScene("EndOfGameScreen");
+        }
+    }
+
     void LoadPreviousScene()
     {
         //Loads the previous scene, if at the first scene, loads the final scene

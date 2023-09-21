@@ -43,7 +43,8 @@ public class EndLevelTransition : MonoBehaviour
         {
             Debug.Log("Is touching Transition");
             GameManager.Instance.ClearPauseMenu();
-            screenManager.LoadNextScene();
+            //screenManager.LoadNextScene();
+            screenManager.LoadEndOfLevelScreen();
         }
     }
 
@@ -53,7 +54,8 @@ public class EndLevelTransition : MonoBehaviour
         {
             Debug.Log("Is touching Transition");
             GameManager.Instance.ClearPauseMenu();
-            screenManager.LoadNextScene();
+            //screenManager.LoadNextScene();
+            screenManager.LoadEndOfLevelScreen();
         }
     }
 }

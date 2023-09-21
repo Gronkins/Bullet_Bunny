@@ -20,7 +20,7 @@ public class EndOfLevelMenu : MonoBehaviour
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
-    private PauseMenu pauseMenu;
+    [SerializeField] private PauseMenu pauseMenu;
 
     private void Awake()
     {
@@ -88,7 +88,10 @@ public class EndOfLevelMenu : MonoBehaviour
         GameManager.Instance.isPlayingGame = false;
         GameManager.Instance.time = 0f;
         Destroy(GameManager.Instance.gameObject);
-        Destroy(pauseMenu.gameObject);
+        if (pauseMenu!= null)
+        {
+            Destroy(pauseMenu.gameObject);
+        }
         SceneManager.LoadScene(mainMenu);
         Destroy(this.gameObject);
     }

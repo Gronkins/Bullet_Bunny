@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ConfirmationBox : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class ConfirmationBox : MonoBehaviour
     {
         screenManager.LoadNextScene();
         pauseMenu.SetButton();
+
+        Scene scene = SceneManager.GetActiveScene();
+        
+        if (scene.name == "19")
+        {
+            Debug.Log("TEST");
+            PauseMenu.isPaused = false;
+            Destroy(pauseMenu.gameObject);
+        }
         gameObject.SetActive(false);
         pauseMenu.GetStageNumberPlus1();
         //Resume();
