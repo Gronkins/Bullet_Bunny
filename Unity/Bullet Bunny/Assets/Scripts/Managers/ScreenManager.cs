@@ -22,7 +22,7 @@ public class ScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
         //Cylcing through levels with 1, and 2 for testing
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -33,6 +33,7 @@ public class ScreenManager : MonoBehaviour
         {
             LoadPreviousScene();
         }
+        */
         
 
         //Closes the game
