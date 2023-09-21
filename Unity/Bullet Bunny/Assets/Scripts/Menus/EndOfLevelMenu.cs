@@ -20,10 +20,12 @@ public class EndOfLevelMenu : MonoBehaviour
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
+    private PauseMenu pauseMenu;
 
     private void Awake()
     {
         screenManager = FindObjectOfType<ScreenManager>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     
@@ -86,6 +88,7 @@ public class EndOfLevelMenu : MonoBehaviour
         GameManager.Instance.isPlayingGame = false;
         GameManager.Instance.time = 0f;
         Destroy(GameManager.Instance.gameObject);
+        Destroy(pauseMenu.gameObject);
         SceneManager.LoadScene(mainMenu);
         Destroy(this.gameObject);
     }
@@ -105,8 +108,10 @@ public class EndOfLevelMenu : MonoBehaviour
     {
         //screenManager.LoadNextScene();
         //checkBox.SetActive(true);
+        GameManager.Instance.time = 0f;
         Time.timeScale = 1f;
         SkipLevel();
+        GameManager.Instance.isCounting = true;
         //GetStageNumber();
         //Resume();
     }
