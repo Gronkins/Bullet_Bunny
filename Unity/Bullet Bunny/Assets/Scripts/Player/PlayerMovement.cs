@@ -323,7 +323,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CanBulletJump()
     {
-        if (isSliding)
+        if (isTouchingSliding) // was if (isSliding)
         {
             if(dashDirection == new Vector2(0, 0) || dashDirection == new Vector2(-1, 0) || dashDirection == new Vector2(1, 0) || vertical == -1 || (dashDirection == new Vector2(0, -1) && isGrounded))
             {
