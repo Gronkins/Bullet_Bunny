@@ -35,7 +35,12 @@ public class ConfirmationBox : MonoBehaviour
         
         if (scene.name == "19")
         {
-            Debug.Log("TEST");
+            PauseMenu.isPaused = false;
+            Destroy(pauseMenu.gameObject);
+        }
+
+        if (scene.name == "CatLevel15")
+        {
             PauseMenu.isPaused = false;
             Destroy(pauseMenu.gameObject);
         }
