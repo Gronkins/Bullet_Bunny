@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         else if (number > 20)
         {
             levelNumber = 2;
-            stageNumber = number - 20;
+            stageNumber = number - 21;
         }
     }
 

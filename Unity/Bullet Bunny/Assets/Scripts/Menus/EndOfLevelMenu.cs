@@ -110,6 +110,7 @@ public class EndOfLevelMenu : MonoBehaviour
         //checkBox.SetActive(true);
         GameManager.Instance.time = 0f;
         Time.timeScale = 1f;
+        //Destroy(pauseMenu.gameObject);
         SkipLevel();
         GameManager.Instance.isCounting = true;
         //GetStageNumber();
