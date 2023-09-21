@@ -29057,6 +29057,65 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6907319703772810083, guid: e1b3a0496a1880e428c054854140d270, type: 3}
   m_PrefabInstance: {fileID: 1273369247}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1284129551
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_RootOrder
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.703737
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.766426
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219392, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322605494318219393, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
+      propertyPath: m_Name
+      value: EnemyRotatingFlyerPrefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: e3f9e62ddaf5c4a41b07f8e4fc1870a4, type: 3}
 --- !u!1001 &1303655824
 PrefabInstance:
   m_ObjectHideFlags: 0
