@@ -188,10 +188,17 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
         animator.SetFloat("AbsoluteVertical", Mathf.Abs(absoluteVertical));
+        animator.SetBool("IsSliding", isSliding);
 
         // isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); // Outdated ground check code
 
-
+        if (isSliding)
+        {
+            if (!isFacingRight)
+            {
+                FlipSprite();
+            }
+        }
 
         //Attack
         if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.JoystickButton4)) && !isAttacking)
@@ -537,13 +544,13 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         //Flips the player's sprite if they move
-        if (lastMoveHorizontal > 0 && !isFacingRight)
+        if (lastMoveHorizontal > 0 && !isFacingRight && !isSliding)
         {
             FlipSprite();
             ammoDisplay.FlipSprite();
         }
         
-        if (lastMoveHorizontal < 0 && isFacingRight)
+        if (lastMoveHorizontal < 0 && isFacingRight && !isSliding)
         {
             FlipSprite();
             ammoDisplay.FlipSprite();
