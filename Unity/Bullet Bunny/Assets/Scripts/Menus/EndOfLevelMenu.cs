@@ -70,7 +70,18 @@ public class EndOfLevelMenu : MonoBehaviour
 
         //if ()
         
-        deathText.text = "Deaths: " + GameManager.Instance.deaths;
+        if (GameManager.Instance.deaths < 10)
+        {
+            deathText.text = "Deaths: 00" + GameManager.Instance.deaths;
+        }
+        else if (GameManager.Instance.deaths > 9 && GameManager.Instance.deaths < 100)
+        {
+            deathText.text = "Deaths: 0" + GameManager.Instance.deaths;
+        }
+        else if (GameManager.Instance.deaths > 99)
+        {
+            deathText.text = "Deaths: " + GameManager.Instance.deaths.ToString();
+        }
 
         int minutes = Mathf.FloorToInt(GameManager.Instance.time / 60f);
         int seconds = Mathf.FloorToInt(GameManager.Instance.time % 60f);
