@@ -21,6 +21,14 @@ public class ConfirmationBox : MonoBehaviour
         pauseMenu = GetComponentInParent<PauseMenu>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            CloseBox();
+        }
+    }
+
     private void OnEnable()
     {
         startingButton.Select();
