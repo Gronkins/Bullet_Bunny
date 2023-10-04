@@ -3,6 +3,7 @@ using System.Collections.Generic;
 //using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -83,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
     private AmmoDisplay ammoDisplay;
 
     private IEnumerator slideCorotine;
+    private IEnumerator dashCoroutine;
 
     public float forwardSlideMultiplier = 1.25f;
     public float backwardsSlideMultipler = 0.75f;
@@ -90,6 +92,9 @@ public class PlayerMovement : MonoBehaviour
 
     //Records the last direction the player was facing, useful for idling
     public float lastMoveHorizontal;
+    private float originalGravity;
+    private float originalVertical;
+    private bool isPogoing;
     //float lastMoveVertical;
 
     // Start is called before the first frame update
@@ -116,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         slideCorotine = EndSlidingMomentum();
+        dashCoroutine = Dash();
     }
 
     // Update is called once per frame
@@ -138,6 +144,11 @@ public class PlayerMovement : MonoBehaviour
             rigidBody2D.velocity = Vector2.zero; //Sets veloicty to zero so you don't keep moving
 
             return;
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            StopBulletJump();
         }
 
         if (!isTouchingSliding)
@@ -363,16 +374,38 @@ public class PlayerMovement : MonoBehaviour
 
     public void ApplyUpwardsForce()
     {
+        StartCoroutine(Pogo());
+        StopBulletJump();
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, upwardsForce);
         isJumping = true;
         animator.SetBool("IsJumping", true);
     }
 
+    private void StopBulletJump()
+    {
+        StopCoroutine(Dash());
+        StopCoroutine(dashCoroutine);
+        //rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
+        //rigidBody2D.gravityScale = originalGravity; //Resets gravity to normal
+        //rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
+        animator.SetBool("IsDashing", false);
+        isDashing = false;
+    }
+
     public void ApplyUpwardsForce(float newUpwardsForce)
     {
+        StartCoroutine(Pogo());
+        StopBulletJump();
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, newUpwardsForce);
         isJumping = true;
         animator.SetBool("IsJumping", true);
+    }
+
+    private IEnumerator Pogo()
+    {
+        isPogoing = true;
+        yield return new WaitForSeconds(0.25f);
+        isPogoing = false;
     }
 
     // This is just so the new ground check boxCast can be seen in the editor
@@ -471,8 +504,8 @@ public class PlayerMovement : MonoBehaviour
         GameObject dashParticle = Instantiate(bulletJumpParticles, transform.position - new Vector3(horizontal, vertical, 0), Quaternion.identity);
         HandleBulletJumpParticles(dashParticle);
 
-        float originalGravity = rigidBody2D.gravityScale; //Stores original gravity
-        float originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
+        originalGravity = rigidBody2D.gravityScale; //Stores original gravity
+        originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
         
         rigidBody2D.gravityScale = 0.0f; //Sets player gravity to zero, so they can dash in the air unaffected by gravity
         rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
@@ -485,7 +518,18 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashTime); //Waits for dash to finish
 
         rigidBody2D.gravityScale = originalGravity; //Resets gravity to normal
+
+        if (isPogoing)
+        {
+            //rigidBody2D.velocity = Vector2.zero;
+            rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y / 2f);
+            animator.SetBool("IsDashing", false);
+            isDashing = false;
+            yield break;
+        }
+        
         rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
+
         animator.SetBool("IsDashing", false);
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
