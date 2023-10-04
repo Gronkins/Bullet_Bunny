@@ -23,7 +23,7 @@ public class ConfirmationBox : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             CloseBox();
         }
