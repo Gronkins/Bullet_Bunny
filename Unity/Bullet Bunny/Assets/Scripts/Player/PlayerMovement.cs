@@ -201,6 +201,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("AbsoluteVertical", Mathf.Abs(absoluteVertical));
         animator.SetBool("IsSliding", isSliding);
 
+
+
         // isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); // Outdated ground check code
 
         if (isSliding)
@@ -418,6 +420,22 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawCube(transform.position - transform.up * maxDistance - yOffset, jumpableBoxSize); // Code to draw the box cast for the ground check, uncomment if editing it
         }
     }
+
+    private void FixedUpdate()
+    {
+            //Flips the player's sprite if they move
+        if (lastMoveHorizontal > 0 && !isFacingRight && !isSliding)
+        {
+            FlipSprite();
+            ammoDisplay.FlipSprite();
+        }
+        
+        if (lastMoveHorizontal < 0 && isFacingRight && !isSliding)
+        {
+            FlipSprite();
+            ammoDisplay.FlipSprite();
+        }
+    }
     
     private bool IsGrounded()
     {
@@ -584,23 +602,6 @@ public class PlayerMovement : MonoBehaviour
         */
     
     }
-    
-    void FixedUpdate()
-    {
-        //Flips the player's sprite if they move
-        if (lastMoveHorizontal > 0 && !isFacingRight && !isSliding)
-        {
-            FlipSprite();
-            ammoDisplay.FlipSprite();
-        }
-        
-        if (lastMoveHorizontal < 0 && isFacingRight && !isSliding)
-        {
-            FlipSprite();
-            ammoDisplay.FlipSprite();
-        }
-    }
-
     //Umm... Actually you are flipping the player's gameObject and not the sprite (nerd emoji)
     void FlipSprite()
     {

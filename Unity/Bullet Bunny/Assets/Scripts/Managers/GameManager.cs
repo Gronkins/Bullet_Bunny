@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int levelNumber;
     public int stageNumber;
     public bool isCounting;
+    public int score;
     public PauseMenu pauseMenu;
     
     private void Awake()
