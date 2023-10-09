@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     private ScreenManager screenManager;
+    public GameObject stageSelectMenu;
+    public Button startingButton;
     
     // Start is called before the first frame update
     void Start()
@@ -13,10 +16,20 @@ public class MainMenu : MonoBehaviour
         screenManager = FindObjectOfType<ScreenManager>();
     }
 
+    public void SetButton()
+    {
+        startingButton.Select();
+    }
+
     public void LoadGame()
     {
         //GameManager.Instance.isPlayingGame = true;
         SceneManager.LoadScene(1);
+    }
+
+    public void StageSelect()
+    {
+        stageSelectMenu.SetActive(true);
     }
 
     public void QuitGame()
