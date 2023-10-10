@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int levelNumber;
     public int stageNumber;
     public bool isCounting;
+    public bool isCarryingCollectible;
     public int score;
     public PauseMenu pauseMenu;
     
@@ -79,5 +80,13 @@ public class GameManager : MonoBehaviour
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
         Destroy(pauseMenu.gameObject);
+    }
+
+    public void ApplyScore()
+    {
+        if (isCarryingCollectible)
+        {
+            score += 1;
+        }
     }
 }

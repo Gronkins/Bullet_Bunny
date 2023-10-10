@@ -61,6 +61,7 @@ public class ScreenManager : MonoBehaviour
     //Waits for a moment, then restarts the current scene
     public IEnumerator PlayerDeath()
     {
+        GameManager.Instance.isCarryingCollectible = false;
         GameManager.Instance.deaths += 1;
         Debug.Log("Death called");
         Destroy(playerStats.upHitbox);
@@ -84,6 +85,8 @@ public class ScreenManager : MonoBehaviour
     
     public void LoadNextScene()
     {
+        GameManager.Instance.ApplyScore();
+        
         //Loads the next scene, if at the final scene, goes back to the first one
         
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -100,6 +103,8 @@ public class ScreenManager : MonoBehaviour
 
     public void LoadEndOfLevelScreen()
     {
+        GameManager.Instance.ApplyScore();
+        
         if (SceneManager.GetActiveScene().buildIndex <= 20)
         {
             SceneManager.LoadScene("EndOfLevelScreen");
