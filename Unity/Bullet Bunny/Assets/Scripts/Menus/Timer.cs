@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+    public GameObject carrotIcon;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -21,5 +17,24 @@ public class Timer : MonoBehaviour
         int hundreths = Mathf.FloorToInt((GameManager.Instance.time * 100) % 100);
         
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
+
+        if (GameManager.Instance.isCarryingCollectible)
+        {
+            DisplayCarrotIcon();
+        }
+        else
+        {
+            HideCarrotIcon();
+        }
+    }
+
+    public void DisplayCarrotIcon()
+    {
+        carrotIcon.SetActive(true);
+    }
+
+    public void HideCarrotIcon()
+    {
+        carrotIcon.SetActive(false);
     }
 }
