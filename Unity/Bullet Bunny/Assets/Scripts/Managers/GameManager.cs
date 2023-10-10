@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         if (isCarryingCollectible)
         {
             score += 1;
+            isCarryingCollectible = false;
         }
     }
 }
