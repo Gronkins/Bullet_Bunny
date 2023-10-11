@@ -13,6 +13,14 @@ public class StageSelect : MonoBehaviour
     {
         mainMenu = FindObjectOfType<MainMenu>();
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        {
+            CloseBox();
+        }
+    }
     
     public void LoadStage1()
     {

@@ -723,6 +723,7 @@ public class PlayerMovement : MonoBehaviour
         if(collision.collider.tag == "Sliding")
         {
             isTouchingSliding = false;
+            isSliding = false;
         }
     }
 

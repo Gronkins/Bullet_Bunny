@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeFall: 1
+  timeBeforeShake: 0.5
 --- !u!50 &150553764996588778
 Rigidbody2D:
   serializedVersion: 4
@@ -185,9 +186,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: -0.25}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.5096135, y: 0.41614938}
+  - {x: -1.586055, y: 0.41614938}
   - {x: -0.004378319, y: 0.43185306}
-  - {x: 1.532299, y: 0.4318533}
+  - {x: 1.6002469, y: 0.4233594}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
