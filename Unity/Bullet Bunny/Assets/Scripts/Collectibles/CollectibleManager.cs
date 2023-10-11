@@ -5,19 +5,11 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour
 {
     float respawnTime = 2.5f;
+    public Sprite startingSprite;
+    public Sprite greySprite;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
+    /*
     //Once the collectible is deactivated, it waits, then reactivates the collectible
     public void DeactivateCollectible(Collectible collectible)
     {
@@ -25,11 +17,30 @@ public class CollectibleManager : MonoBehaviour
 
         StartCoroutine(RespawnCollectible(collectible));
     }
+    */
 
-    private IEnumerator RespawnCollectible(Collectible collectible)
+    // Once the collectible is deactivated, it waits, then reactivates the collectible
+    public void DeactivateCollectible(Collectible collectible)
+    {
+        BoxCollider2D boxCollider2D = collectible.GetComponent<BoxCollider2D>();
+        SpriteRenderer spriteRenderer = collectible.GetComponent<SpriteRenderer>();
+
+        boxCollider2D.enabled = false;
+        spriteRenderer.sprite = greySprite;
+
+
+        //collectible.gameObject.SetActive(false);
+
+        StartCoroutine(RespawnCollectible(collectible, boxCollider2D, spriteRenderer));
+    }
+
+    private IEnumerator RespawnCollectible(Collectible collectible, BoxCollider2D boxCollider2D, SpriteRenderer spriteRenderer)
     {
         yield return new WaitForSeconds(respawnTime);
 
-        collectible.gameObject.SetActive(true);
+        boxCollider2D.enabled = true;
+        spriteRenderer.sprite = startingSprite;
+
+        //collectible.gameObject.SetActive(true);
     }
 }
