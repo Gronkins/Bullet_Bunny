@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     private void Initialise()
     {
         deaths = 0;
+        carrotsCollected = 0;
     }
 
     public void GetLevelNumber()

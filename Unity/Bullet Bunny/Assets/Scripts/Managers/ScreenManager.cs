@@ -62,7 +62,13 @@ public class ScreenManager : MonoBehaviour
     public IEnumerator PlayerDeath()
     {
         GameManager.Instance.isCarryingCollectible = false;
-        GameManager.Instance.deaths += 1;
+
+        if (!hasDied)
+        {
+            hasDied = true;
+            GameManager.Instance.deaths += 1;
+        }
+
         Debug.Log("Death called");
         Destroy(playerStats.upHitbox);
         Destroy(playerStats.sideHitbox);
@@ -72,6 +78,7 @@ public class ScreenManager : MonoBehaviour
 
         yield return null;
         playerStats.isDead = false;
+        hasDied = false;
         //hasDied = false;
     }
 
