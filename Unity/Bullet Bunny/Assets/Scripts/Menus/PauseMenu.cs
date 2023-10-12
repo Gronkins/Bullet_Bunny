@@ -17,6 +17,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject checkBox;
     public TextMeshProUGUI deathText;
     public TextMeshProUGUI screenAndLevelText;
+    public TextMeshProUGUI scoreText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
@@ -100,6 +101,15 @@ public class PauseMenu : MonoBehaviour
         else if (GameManager.Instance.deaths > 99)
         {
             deathText.text = GameManager.Instance.deaths.ToString();
+        }
+
+        if (GameManager.Instance.carrotsCollected < 10)
+        {
+            scoreText.text = "x 0" + GameManager.Instance.carrotsCollected;
+        }
+        else if (GameManager.Instance.carrotsCollected > 9)
+        {
+            scoreText.text = "x " + GameManager.Instance.deaths.ToString();
         }
 
         GetStageNumber();

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int stageNumber;
     public bool isCounting;
     public bool isCarryingCollectible;
-    public int score;
+    public int carrotsCollected;
     public PauseMenu pauseMenu;
     
     private void Awake()
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     {
         if (isCarryingCollectible)
         {
-            score += 1;
+            carrotsCollected += 1;
             isCarryingCollectible = false;
         }
     }

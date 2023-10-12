@@ -17,6 +17,7 @@ public class EndOfLevelMenu : MonoBehaviour
     //public GameObject checkBox;
     public TextMeshProUGUI deathText;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI scoreText;
     private string mainMenu = "MainMenu";
 
     private ScreenManager screenManager;
@@ -81,6 +82,15 @@ public class EndOfLevelMenu : MonoBehaviour
         else if (GameManager.Instance.deaths > 99)
         {
             deathText.text = "Deaths: " + GameManager.Instance.deaths.ToString();
+        }
+
+        if (GameManager.Instance.carrotsCollected < 10)
+        {
+            scoreText.text = "Carrots Collected: 0" + GameManager.Instance.carrotsCollected;
+        }
+        else if (GameManager.Instance.carrotsCollected > 9)
+        {
+            scoreText.text = "Carrots Collected: " + GameManager.Instance.deaths.ToString();
         }
 
         int minutes = Mathf.FloorToInt(GameManager.Instance.time / 60f);
