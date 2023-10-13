@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    PlayerStats playerStats;
     PlayerMovement playerMovement;
     CollectibleManager collectibleManager;
 

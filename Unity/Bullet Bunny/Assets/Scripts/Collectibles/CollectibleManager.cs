@@ -4,43 +4,25 @@ using UnityEngine;
 
 public class CollectibleManager : MonoBehaviour
 {
-    float respawnTime = 2.5f;
-    public Sprite startingSprite;
-    public Sprite greySprite;
-    
-    
-    /*
-    //Once the collectible is deactivated, it waits, then reactivates the collectible
-    public void DeactivateCollectible(Collectible collectible)
-    {
-        collectible.gameObject.SetActive(false);
-
-        StartCoroutine(RespawnCollectible(collectible));
-    }
-    */
+    private float respawnTime = 2.5f;
 
     // Once the collectible is deactivated, it waits, then reactivates the collectible
     public void DeactivateCollectible(Collectible collectible)
     {
         BoxCollider2D boxCollider2D = collectible.GetComponent<BoxCollider2D>();
-        SpriteRenderer spriteRenderer = collectible.GetComponent<SpriteRenderer>();
+        Animator animator = collectible.GetComponent<Animator>();
 
         boxCollider2D.enabled = false;
-        spriteRenderer.sprite = greySprite;
+        animator.SetTrigger("Pickup");
 
-
-        //collectible.gameObject.SetActive(false);
-
-        StartCoroutine(RespawnCollectible(collectible, boxCollider2D, spriteRenderer));
+        StartCoroutine(RespawnCollectible(boxCollider2D, animator));
     }
 
-    private IEnumerator RespawnCollectible(Collectible collectible, BoxCollider2D boxCollider2D, SpriteRenderer spriteRenderer)
+    private IEnumerator RespawnCollectible(BoxCollider2D boxCollider2D, Animator animator)
     {
         yield return new WaitForSeconds(respawnTime);
 
         boxCollider2D.enabled = true;
-        spriteRenderer.sprite = startingSprite;
-
-        //collectible.gameObject.SetActive(true);
+        animator.SetTrigger("Refresh");
     }
 }
