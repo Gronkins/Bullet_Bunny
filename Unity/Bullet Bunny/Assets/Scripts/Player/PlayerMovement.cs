@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool isSliding;
-    public bool hasSlideSpeed;
-    private bool isTouchingSliding;
+    public bool isSliding; // Used to control the sliding animation itself
+    public bool hasSlideSpeed; // Where or not the player is carrying sliding momentum
+    private bool isTouchingSliding; // If the player is currently touching something that would allow them to slide
     [SerializeField] private float notTouchingSlidingTimer = 0f;
     private float notTouchingSlidingDuration = 4f;
     
@@ -120,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
             ammoDisplay.gameObject.SetActive(false);
         }
 
-        slideCorotine = EndSlidingMomentum();
         dashCoroutine = Dash();
     }
 
@@ -176,12 +175,6 @@ public class PlayerMovement : MonoBehaviour
             ApplySlideForce();
         }
 
-        if(isSliding)
-        {
-            //StopCoroutine(slideCorotine);
-            //StopCoroutine(EndSlidingMomentum());
-        }
-
         //Collecting horizontal and vertical input
         horizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
         absoluteHorizontal = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
@@ -199,9 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("AbsoluteHorizontal", Mathf.Abs(absoluteHorizontal));
         animator.SetFloat("AbsoluteVertical", Mathf.Abs(absoluteVertical));
-        animator.SetBool("IsSliding", isSliding);
-
-
+        //animator.SetBool("IsSliding", isSliding);
 
         // isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0.0f, layerMask); // Outdated ground check code
 
@@ -634,22 +625,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isDashing)
             {
-                //Debug.Log("Sliding");
-                isSliding = true;
-                hasSlideSpeed = true;
-                isTouchingSliding = true;
-                notTouchingSlidingTimer = 0f;
-                //StopCoroutine(EndSlidingMomentum());
-                //StopCoroutine(slideCorotine);
+                CollisionWithSliding();
             }
         }
 
         if(collision.collider.tag == "Terrain")
         {
-            Debug.Log("Touched terrain");
-            isSliding = false;
-            hasSlideSpeed = false;
-            isTouchingSliding = false;
+            CollisionWithTerrain();
         }
     }
 
@@ -659,22 +641,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isDashing)
             {
-                //Debug.Log("Sliding");
-                isSliding = true;
-                hasSlideSpeed = true;
-                isTouchingSliding = true;
-                notTouchingSlidingTimer = 0f;
-                //StopCoroutine(EndSlidingMomentum());
-                //StopCoroutine(slideCorotine);
+                CollisionWithSliding();
             }
         }
 
         if(collider.tag == "Terrain")
         {
-            Debug.Log("Touched terrain");
-            isSliding = false;
-            hasSlideSpeed = false;
-            isTouchingSliding = false;
+            CollisionWithTerrain();
         }
     }
 
@@ -684,22 +657,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isDashing)
             {
-                //Debug.Log("Sliding");
-                isSliding = true;
-                hasSlideSpeed = true;
-                isTouchingSliding = true;
-                notTouchingSlidingTimer = 0f;
-                //StopCoroutine(EndSlidingMomentum());
-                //StopCoroutine(slideCorotine);
+                CollisionWithSliding();
             }
         }
 
         if(collider.tag == "Terrain")
         {
-            Debug.Log("Touched terrain");
-            isSliding = false;
-            hasSlideSpeed = false;
-            isTouchingSliding = false;
+            CollisionWithTerrain();
         }
     }
 
@@ -709,12 +673,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isDashing)
             {
-                isSliding = true;
-                hasSlideSpeed = true;
-                isTouchingSliding = true;
-                //StopCoroutine(EndSlidingMomentum());
-                //StopCoroutine(slideCorotine);
+                CollisionWithSliding();
             }
+        }
+
+        if(collision.collider.tag == "Terrain")
+        {
+            CollisionWithTerrain();
         }
     }
 
@@ -723,20 +688,8 @@ public class PlayerMovement : MonoBehaviour
         if(collision.collider.tag == "Sliding")
         {
             isTouchingSliding = false;
-            isSliding = false;
-        }
-    }
-
-    private IEnumerator StopSliding()
-    {
-        yield return new WaitForSeconds(0.05f);
-
-        if (!isTouchingSliding)
-        {
-            //Debug.Log("Stop sliding");
-            isSliding = false;
-            //StartCoroutine(EndSlidingMomentum());
-            //StartCoroutine(slideCorotine);
+            //animator.SetBool("IsSliding", false);
+            //isSliding = false;
         }
     }
 
@@ -745,14 +698,31 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("End slide called");
         hasSlideSpeed = false;
         isSliding = false;
+        animator.SetBool("CanSlide", true);
+        animator.SetBool("IsSliding", false);
     }
 
-    private IEnumerator EndSlidingMomentum()
+    private void CollisionWithTerrain()
     {
+        Debug.Log("Touched terrain");
+        isSliding = false;
+        animator.SetBool("CanSlide", false);
+        animator.SetBool("IsSliding", false);
         hasSlideSpeed = false;
-        Debug.Log("End slide called");
-        yield return new WaitForSeconds(4);
-        Debug.Log("End Sliding Momentum");
-        //hasSlideSpeed = false;
+        isTouchingSliding = false;
     }
+
+    private void CollisionWithSliding()
+    {
+        //Debug.Log("Sliding");
+        isSliding = true;
+        hasSlideSpeed = true;
+        isTouchingSliding = true;
+        notTouchingSlidingTimer = 0f;
+        animator.SetBool("CanSlide", true);
+        animator.SetBool("IsSliding", true);
+        //StopCoroutine(EndSlidingMomentum());
+        //StopCoroutine(slideCorotine);
+    }
+
 }
