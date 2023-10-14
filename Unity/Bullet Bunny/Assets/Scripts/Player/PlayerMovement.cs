@@ -154,6 +154,11 @@ public class PlayerMovement : MonoBehaviour
         {
             notTouchingSlidingTimer += Time.deltaTime;
 
+            if(notTouchingSlidingTimer >= 0.20f)
+            {
+                animator.SetBool("IsSliding", false);
+            }
+
             if (notTouchingSlidingTimer >= notTouchingSlidingDuration)
             {
                 //StartCoroutine(EndSlidingMomentum());
@@ -621,38 +626,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.collider.tag == "Terrain")
+        {
+            CollisionWithTerrain();
+        }
+        
         if(collision.collider.tag == "Sliding")
         {
             if (!isDashing)
             {
                 CollisionWithSliding();
             }
-        }
-
-        if(collision.collider.tag == "Terrain")
-        {
-            CollisionWithTerrain();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        if(collider.tag == "Terrain")
+        {
+            CollisionWithTerrain();
+        }
+        
         if(collider.tag == "Sliding")
         {
             if (!isDashing)
             {
                 CollisionWithSliding();
             }
-        }
-
-        if(collider.tag == "Terrain")
-        {
-            CollisionWithTerrain();
         }
     }
 
     private void OnTriggerStay2D(Collider2D collider)
     {
+        if(collider.tag == "Terrain")
+        {
+            CollisionWithTerrain();
+        }
+        
         if(collider.tag == "Sliding")
         {
             if (!isDashing)
@@ -660,26 +670,21 @@ public class PlayerMovement : MonoBehaviour
                 CollisionWithSliding();
             }
         }
-
-        if(collider.tag == "Terrain")
-        {
-            CollisionWithTerrain();
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {   
+        if(collision.collider.tag == "Terrain")
+        {
+            CollisionWithTerrain();
+        }
+
         if(collision.collider.tag == "Sliding")
         {
             if (!isDashing)
             {
                 CollisionWithSliding();
             }
-        }
-
-        if(collision.collider.tag == "Terrain")
-        {
-            CollisionWithTerrain();
         }
     }
 
@@ -695,31 +700,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void EndSlideForce()
     {
+        animator.SetBool("IsSliding", false);
         //Debug.Log("End slide called");
         hasSlideSpeed = false;
         isSliding = false;
-        animator.SetBool("CanSlide", true);
-        animator.SetBool("IsSliding", false);
+        //animator.SetBool("CanSlide", true);
     }
 
     private void CollisionWithTerrain()
     {
-        Debug.Log("Touched terrain");
-        isSliding = false;
         animator.SetBool("CanSlide", false);
         animator.SetBool("IsSliding", false);
+        Debug.Log("Touched terrain");
+        isSliding = false;
         hasSlideSpeed = false;
         isTouchingSliding = false;
     }
 
     private void CollisionWithSliding()
     {
+        animator.SetBool("CanSlide", true);
         //Debug.Log("Sliding");
         isSliding = true;
         hasSlideSpeed = true;
         isTouchingSliding = true;
         notTouchingSlidingTimer = 0f;
-        animator.SetBool("CanSlide", true);
         animator.SetBool("IsSliding", true);
         //StopCoroutine(EndSlidingMomentum());
         //StopCoroutine(slideCorotine);
