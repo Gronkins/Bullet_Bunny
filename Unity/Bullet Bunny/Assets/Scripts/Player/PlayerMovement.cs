@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public bool isSliding; // Used to control the sliding animation itself
-    public bool hasSlideSpeed; // Where or not the player is carrying sliding momentum
+    public bool hasSlideSpeed; // Whether or not the player is carrying sliding momentum
     private bool isTouchingSliding; // If the player is currently touching something that would allow them to slide
     [SerializeField] private float notTouchingSlidingTimer = 0f;
     private float notTouchingSlidingDuration = 4f;
