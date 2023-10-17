@@ -71,6 +71,27 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    public void MoveCamera()
+    {
+        // I know this should have been a switch case but I'm lazy
+        if (useVerticalCamera)
+        {
+            playerPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
+        }
+        
+        if (useHorizontalCamera)
+        {
+            playerPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
+        }
+
+        if (useVerticalCamera && useHorizontalCamera)
+        {
+            playerPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
+        }
+
+        transform.position = new Vector3(Mathf.Clamp(playerPosition.x, leftLimit, rightLimit), Mathf.Clamp(playerPosition.y, bottomLimit, topLimit), transform.position.z);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

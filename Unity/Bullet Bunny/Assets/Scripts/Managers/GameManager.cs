@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
     private ScreenManager screenManager;
+    private CameraManager cameraManager;
     private GameObject player;
     [SerializeField] private Vector3 checkpointPosition;
     public bool hasCheckpoint;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         }
 
         screenManager = FindObjectOfType<ScreenManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         Initialise();
     }
@@ -52,6 +54,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         player = GameObject.FindGameObjectWithTag("Player");
+        screenManager = FindObjectOfType<ScreenManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
     }
     
     // Start is called before the first frame update
@@ -85,6 +89,7 @@ public class GameManager : MonoBehaviour
         //player = GameObject.FindGameObjectWithTag("Player");
         //player.transform.position = new Vector2 (5, 5);
         player.transform.position = checkpointPosition;
+        cameraManager.MoveCamera();
     }
 
     public void GetLevelNumber()
