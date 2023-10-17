@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
     private ScreenManager screenManager;
+    private GameObject player;
+    [SerializeField] private Vector3 checkpointPosition;
+    public bool hasCheckpoint;
     public bool isPlayingGame;
     public float deaths;
     public float time;
@@ -31,7 +34,24 @@ public class GameManager : MonoBehaviour
         }
 
         screenManager = FindObjectOfType<ScreenManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
         Initialise();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("OnSceneLoaded: " + scene.name);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     
     // Start is called before the first frame update
@@ -48,11 +68,23 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
     }
-
     private void Initialise()
     {
         deaths = 0;
         carrotsCollected = 0;
+    }
+
+    public void SetCheckpoint(Vector3 newCheckpointPosition)
+    {
+        hasCheckpoint = true;
+        checkpointPosition = newCheckpointPosition;
+    }
+
+    public void RespawnAtCheckpoint()
+    {
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //player.transform.position = new Vector2 (5, 5);
+        player.transform.position = checkpointPosition;
     }
 
     public void GetLevelNumber()

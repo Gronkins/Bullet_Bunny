@@ -74,11 +74,18 @@ public class ScreenManager : MonoBehaviour
         Destroy(playerStats.sideHitbox);
         Destroy(playerStats.downHitbox);
         yield return new WaitForSeconds(0.3f);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         yield return null;
         playerStats.isDead = false;
         hasDied = false;
+
+        if (GameManager.Instance.hasCheckpoint)
+        {
+            GameManager.Instance.RespawnAtCheckpoint();
+        }
+
         //hasDied = false;
     }
 
@@ -93,6 +100,7 @@ public class ScreenManager : MonoBehaviour
     public void LoadNextScene()
     {
         GameManager.Instance.ApplyScore();
+        GameManager.Instance.hasCheckpoint = false;
         
         //Loads the next scene, if at the final scene, goes back to the first one
         
@@ -111,6 +119,7 @@ public class ScreenManager : MonoBehaviour
     public void LoadEndOfLevelScreen()
     {
         GameManager.Instance.ApplyScore();
+        GameManager.Instance.hasCheckpoint = false;
         
         if (SceneManager.GetActiveScene().buildIndex <= 20)
         {
