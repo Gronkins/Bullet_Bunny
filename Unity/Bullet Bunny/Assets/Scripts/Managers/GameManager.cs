@@ -14,13 +14,14 @@ public class GameManager : MonoBehaviour
     public bool isPlayingGame;
     public float deaths;
     public float time;
-    public int screenNumber;
     public int levelNumber;
     public int stageNumber;
     public bool isCounting;
     public bool isCarryingCollectible;
     public int carrotsCollected;
     public PauseMenu pauseMenu;
+    [SerializeField] private bool isInDevMode;
+    public bool isHoldingRight;
     
     private void Awake()
     {
@@ -59,17 +60,37 @@ public class GameManager : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         isCounting = true;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isCounting)
         {
             time += Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            isInDevMode = true;
+        }
+
+        if (isInDevMode)
+        {
+            if(Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                Debug.Log("Back");
+                screenManager.LoadPreviousScene();
+            }
+
+            if(Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Debug.Log("Forward");
+                screenManager.LoadNextScene();
+            }
         }
     }
     private void Initialise()

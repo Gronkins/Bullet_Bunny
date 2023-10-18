@@ -144,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
+        
 
         if (Input.GetKey(KeyCode.R))
         {
@@ -294,6 +295,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", true);
         }
 
+    }
+
+    public void SetHorizontal()
+    {
+        horizontal = 1;
     }
 
     private void ApplySlideForce()

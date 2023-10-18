@@ -7,7 +7,13 @@ using UnityEngine.SceneManagement;
 public class ScreenManager : MonoBehaviour
 {
     PlayerStats playerStats;
+    private PlayerMovement playerMovement;
     private bool hasDied;
+    
+    private void Awake()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -100,6 +106,10 @@ public class ScreenManager : MonoBehaviour
     public void LoadNextScene()
     {
         GameManager.Instance.ApplyScore();
+        if (playerMovement.horizontal == 1)
+        {
+            GameManager.Instance.isHoldingRight = true;
+        }
         GameManager.Instance.hasCheckpoint = false;
         
         //Loads the next scene, if at the final scene, goes back to the first one
@@ -131,7 +141,7 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
-    void LoadPreviousScene()
+    public void LoadPreviousScene()
     {
         //Loads the previous scene, if at the first scene, loads the final scene
         
