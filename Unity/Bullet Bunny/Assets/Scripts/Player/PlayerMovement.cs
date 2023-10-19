@@ -145,10 +145,9 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         
-
         if (Input.GetKey(KeyCode.R))
         {
-            StopBulletJump();
+            //StopBulletJump();
         }
 
         if (!isTouchingSliding)

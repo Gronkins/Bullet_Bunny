@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
+    public PlayerMovement playerMovement;
     private ScreenManager screenManager;
     private CameraManager cameraManager;
     private GameObject player;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         screenManager = FindObjectOfType<ScreenManager>();
         cameraManager = FindObjectOfType<CameraManager>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
         player = GameObject.FindGameObjectWithTag("Player");
         Initialise();
     }
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         player = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = FindObjectOfType<PlayerMovement>();
         screenManager = FindObjectOfType<ScreenManager>();
         cameraManager = FindObjectOfType<CameraManager>();
     }

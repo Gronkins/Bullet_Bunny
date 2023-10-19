@@ -7,6 +7,7 @@ public class FallingPlatform : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rigidBody2D;
     private FallingPlatformController controller;
+    private bool isFalling;
     public float timeBeforeFall = 0.5f;
     public float timeBeforeShake = 0.5f;
 
@@ -19,13 +20,41 @@ public class FallingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Player")
+        if(collision.collider.tag == "PlayerPlatformHitbox")
         {
             Debug.Log("Player touched");
-            controller.SetFalling();
-            animator.SetTrigger("Falling");
 
-            StartCoroutine(StartFall());
+            if ((GameManager.Instance.playerMovement.rigidBody2D.velocity.y < 0))
+            {
+                if (!isFalling)
+                {
+                    isFalling = true;
+                    controller.SetFalling();
+                    animator.SetTrigger("Falling");
+
+                    StartCoroutine(StartFall());
+                }
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "PlayerPlatformHitbox")
+        {
+            Debug.Log("Player touched");
+
+            if (!(GameManager.Instance.playerMovement.rigidBody2D.velocity.y > 0))
+            {
+                if (!isFalling)
+                {
+                    isFalling = true;
+                    controller.SetFalling();
+                    animator.SetTrigger("Falling");
+
+                    StartCoroutine(StartFall());
+                }
+            }
         }
     }
 
