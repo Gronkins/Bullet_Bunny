@@ -43,7 +43,7 @@ public class MovingPlatform : MonoBehaviour
         //if(collision.transform.position.y > transform.position.y)
         if (collision.collider.CompareTag("Player"))
         {
-            if(transform.position.y < collision.transform.position.y - yOffset)
+            if(transform.position.y < collision.transform.position.y - yOffset && !(GameManager.Instance.playerMovement.rigidBody2D.velocity.y > 0))
             {
                 collision.transform.SetParent(transform);
                 playerMovement.isOnPlatform = true;
@@ -56,7 +56,7 @@ public class MovingPlatform : MonoBehaviour
         //if(collision.transform.position.y > transform.position.y)
         if (collision.collider.CompareTag("Player"))
         {
-            if(transform.position.y < collision.transform.position.y - yOffset)
+            if(transform.position.y < collision.transform.position.y - yOffset && !(GameManager.Instance.playerMovement.rigidBody2D.velocity.y > 0))
             {
                 collision.transform.SetParent(transform);
                 playerMovement.isOnPlatform = true;
