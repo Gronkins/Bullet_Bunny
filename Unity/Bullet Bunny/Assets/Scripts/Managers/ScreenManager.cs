@@ -106,10 +106,6 @@ public class ScreenManager : MonoBehaviour
     public void LoadNextScene()
     {
         GameManager.Instance.ApplyScore();
-        if (playerMovement.horizontal == 1)
-        {
-            GameManager.Instance.isHoldingRight = true;
-        }
         GameManager.Instance.hasCheckpoint = false;
         
         //Loads the next scene, if at the final scene, goes back to the first one
@@ -133,6 +129,8 @@ public class ScreenManager : MonoBehaviour
         
         if (SceneManager.GetActiveScene().buildIndex <= 20)
         {
+            GameManager.Instance.stageProgress = 1;
+            GameManager.Instance.SaveGame();
             SceneManager.LoadScene("EndOfLevelScreen");
         }
         else

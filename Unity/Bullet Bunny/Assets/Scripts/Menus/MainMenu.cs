@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
     {
         //GameManager.Instance.isPlayingGame = true;
         SceneManager.LoadScene(1);
+        GameManager.Instance.isCounting = true;
     }
 
     public void StageSelect()

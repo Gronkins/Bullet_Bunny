@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9130893103017588579}
   - component: {fileID: 9130893103017588578}
+  - component: {fileID: 8871187373947967741}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,8 +45,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d0b820c0198a744933881493f0787d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  checkpointPosition: {x: 0, y: 0, z: 0}
+  hasCheckpoint: 0
   isPlayingGame: 0
   deaths: 0
   time: 0
-  screenNumber: 0
   levelNumber: 0
+  stageNumber: 0
+  stageProgress: 0
+  isCounting: 0
+  isCarryingCollectible: 0
+  carrotsCollected: 0
+  pauseMenu: {fileID: 0}
+  isInDevMode: 0
+  isHoldingRight: 0
+--- !u!114 &8871187373947967741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130893103017588577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea270cea138abd348b66c9e49b85a207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData:
+    stageProgress: 0
