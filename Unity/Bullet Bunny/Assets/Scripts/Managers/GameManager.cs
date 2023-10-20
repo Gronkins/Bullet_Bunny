@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public bool isCarryingCollectible;
     public int carrotsCollected;
     public PauseMenu pauseMenu;
-    [SerializeField] private bool isInDevMode;
+    public bool isInDevMode;
     public bool isHoldingRight;
     
     private void Awake()
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Tilde))
+        if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha0))
         {
             isInDevMode = true;
         }
