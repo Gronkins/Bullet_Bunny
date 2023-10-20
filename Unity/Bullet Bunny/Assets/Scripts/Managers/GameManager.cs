@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerMovement playerMovement;
     private ScreenManager screenManager;
     private CameraManager cameraManager;
+    private SaveData saveData;
     private GameObject player;
     [SerializeField] private Vector3 checkpointPosition;
     public bool hasCheckpoint;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float time;
     public int levelNumber;
     public int stageNumber;
+    public int stageProgress;
     public bool isCounting;
     public bool isCarryingCollectible;
     public int carrotsCollected;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         screenManager = FindObjectOfType<ScreenManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
+        saveData = GetComponent<SaveData>();
         player = GameObject.FindGameObjectWithTag("Player");
         Initialise();
     }
@@ -65,7 +68,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        isCounting = true;
+        Initialise();
+        LoadGame();
     }
 
     // Update is called once per frame
@@ -76,30 +80,55 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.Keypad8))
+        if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Tilde))
         {
             isInDevMode = true;
         }
 
         if (isInDevMode)
         {
-            if(Input.GetKeyDown(KeyCode.Keypad4))
+            if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Minus))
             {
                 Debug.Log("Back");
                 screenManager.LoadPreviousScene();
             }
 
-            if(Input.GetKeyDown(KeyCode.Keypad6))
+            if(Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Equals))
             {
                 Debug.Log("Forward");
                 screenManager.LoadNextScene();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            SaveGame();
+        }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            LoadGame();
+        }
     }
-    private void Initialise()
+    public void Initialise()
     {
+        isCounting = false;
         deaths = 0;
         carrotsCollected = 0;
+        time = 0f;
+    }
+
+    public void SaveGame()
+    {
+        saveData.playerData.stageProgress = stageProgress;
+        saveData.SaveToJson();
+    }
+
+    public void LoadGame()
+    {
+        saveData.LoadFromJson();
+        //stageProgress = playerData.stageProgress;
+        stageProgress = saveData.playerData.stageProgress;
     }
 
     public void SetCheckpoint(Vector3 newCheckpointPosition)
