@@ -154,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         {
             notTouchingSlidingTimer += Time.deltaTime;
 
-            if(notTouchingSlidingTimer >= 0.20f)
+            if(notTouchingSlidingTimer >= 0.10f)
             {
                 animator.SetBool("IsSliding", false);
             }
