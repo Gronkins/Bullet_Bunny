@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public bool isCarryingCollectible;
     public int carrotsCollected;
     public PauseMenu pauseMenu;
-    [SerializeField] private bool isInDevMode;
+    public bool isInDevMode;
     public bool isHoldingRight;
     
     private void Awake()

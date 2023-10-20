@@ -26,7 +26,7 @@ public class StageSelect : MonoBehaviour
 
     private void Initialise()
     {
-        if (GameManager.Instance.stageProgress > 0)
+        if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.isInDevMode)
         {
             Destroy(image.gameObject);
         }
@@ -40,7 +40,7 @@ public class StageSelect : MonoBehaviour
 
     public void LoadStage2()
     {
-        if (GameManager.Instance.stageProgress > 0)
+        if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.isInDevMode)
         {
             SceneManager.LoadScene(22);
             GameManager.Instance.isCounting = true;
