@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Tilde))
+        if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha0))
         {
             isInDevMode = true;
         }
