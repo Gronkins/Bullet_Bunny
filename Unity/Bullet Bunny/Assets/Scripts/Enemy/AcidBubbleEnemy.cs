@@ -9,6 +9,7 @@ public class AcidBubbleEnemy : Enemy
     private AcidBubbleManager acidBubbleManager;
     private MoveThenStop moveThenStop;
     public bool isMovingUp;
+    public bool isStationary;
     [SerializeField] private float upwardsForce = 25f;
 
     protected override void Start() 
@@ -40,9 +41,13 @@ public class AcidBubbleEnemy : Enemy
 
     public void InitialiseBubble()
     {
-        moveThenStop.SetStartPoint();
+        if (!isStationary)
+        {
+            moveThenStop.SetStartPoint();
+            isMovingUp = false;
+        }
+        
         isAlive = true;
-        isMovingUp = false;
     }
 
     protected override void DealDamageToPlayer()
