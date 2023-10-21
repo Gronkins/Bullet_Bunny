@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject ghost;
     public bool isSliding; // Used to control the sliding animation itself
     public bool hasSlideSpeed; // Whether or not the player is carrying sliding momentum
     private bool isTouchingSliding; // If the player is currently touching something that would allow them to slide
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     bool canDash = true;
-    bool isDashing;
+    public bool isDashing;
     [SerializeField]
     float upwardsForce = 16.0f;
 
