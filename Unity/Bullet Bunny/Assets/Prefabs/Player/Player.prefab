@@ -566,6 +566,7 @@ GameObject:
   - component: {fileID: 4793043954245440912}
   - component: {fileID: 4793043954245440913}
   - component: {fileID: 4793043954245440914}
+  - component: {fileID: 7366998410556928165}
   - component: {fileID: 4793043954245440916}
   m_Layer: 10
   m_Name: Player
@@ -707,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e0d2f4e3abaa140914f585f0f87252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghost: {fileID: 0}
   isSliding: 0
   hasSlideSpeed: 0
   notTouchingSlidingTimer: 0
@@ -731,6 +733,7 @@ MonoBehaviour:
   movementSpeed: 10
   jumpHeight: 16
   canDash: 1
+  isDashing: 0
   upwardsForce: 16
   slideSpeed: 1.2
   maxDashes: 2
@@ -766,6 +769,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7366998410556928165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793043954245440620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84690578b950d1844953a4ae3715633c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghost: {fileID: 2505004920680684579, guid: 2160cd841a31fbe4e9cef24a1a5c0930, type: 3}
+  ghostDelay: 0.05
 --- !u!114 &4793043954245440916
 MonoBehaviour:
   m_ObjectHideFlags: 0
