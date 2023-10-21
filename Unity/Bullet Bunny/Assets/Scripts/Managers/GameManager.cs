@@ -169,6 +169,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearPauseMenu()
     {
+        Debug.Log("Clear pause menu called");
         pauseMenu = FindObjectOfType<PauseMenu>();
         Destroy(pauseMenu.gameObject);
     }
