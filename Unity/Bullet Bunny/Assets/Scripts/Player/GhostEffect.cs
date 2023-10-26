@@ -36,7 +36,7 @@ public class GhostEffect : MonoBehaviour
                 ghostObject.transform.localScale = this.transform.localScale;
                 ghostObject.GetComponent<SpriteRenderer>().sprite = currentSprite;
                 ghostDelayTimer = ghostDelay;
-                Destroy(ghostObject, 1f);
+                Destroy(ghostObject, 0.25f);
             }
         }
     }
