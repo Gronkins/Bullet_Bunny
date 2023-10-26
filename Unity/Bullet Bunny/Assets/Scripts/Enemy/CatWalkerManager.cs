@@ -9,6 +9,8 @@ public class CatWalkerManager : MonoBehaviour
     public GameObject endPoint;
     public bool hasSpawn;
     private GameObject catWalkerObject;
+    public bool isFacingRight;
+    public bool isFacingDown;
     
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class CatWalkerManager : MonoBehaviour
     {
         catWalkerObject = Instantiate(catWalker, startingPoint.transform.position, Quaternion.identity);
         catWalkerObject.GetComponent<CatWalker>().Initialise(startingPoint, endPoint, this);
+        ApplyDirection();
         //Instantiate(catWalker, transform.position, Quaternion.identity);
         hasSpawn = true;
     }
@@ -30,8 +33,27 @@ public class CatWalkerManager : MonoBehaviour
         {
             catWalkerObject = Instantiate(catWalker, startingPoint.transform.position, Quaternion.identity);
             catWalkerObject.GetComponent<CatWalker>().Initialise(startingPoint, endPoint, this);
+            ApplyDirection();
             //Instantiate(catWalker, transform.position, Quaternion.identity);
             hasSpawn = true;
+        }
+    }
+
+    private void ApplyDirection()
+    {
+        if (isFacingRight)
+        {
+            catWalkerObject.transform.localScale = new Vector3 (-1, 1, 1);
+        }
+
+        if (isFacingDown)
+        {
+            catWalkerObject.transform.localScale = new Vector3 (1, -1, 1);
+        }
+
+        if (isFacingRight && isFacingDown)
+        {
+            catWalkerObject.transform.localScale = new Vector3 (-1, -1, 1);
         }
     }
 }
