@@ -114,8 +114,17 @@ public class GameManager : MonoBehaviour
     {
         isCounting = false;
         deaths = 0;
+        isCarryingCollectible = false;
         carrotsCollected = 0;
         time = 0f;
+    }
+
+    public void ResetForNewLevel()
+    {
+        time = 0f;
+        deaths = 0;
+        carrotsCollected = 0;
+        Time.timeScale = 1f;
     }
 
     public void SaveGame()

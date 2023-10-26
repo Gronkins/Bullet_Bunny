@@ -132,9 +132,7 @@ public class EndOfLevelMenu : MonoBehaviour
     {
         //screenManager.LoadNextScene();
         //checkBox.SetActive(true);
-        GameManager.Instance.time = 0f;
-        GameManager.Instance.deaths = 0;
-        Time.timeScale = 1f;
+        GameManager.Instance.ResetForNewLevel();
         //Destroy(pauseMenu.gameObject);
         SkipLevel();
         GameManager.Instance.isCounting = true;
