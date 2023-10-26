@@ -46,6 +46,11 @@ public class AcidBubbleEnemy : Enemy
             moveThenStop.SetStartPoint();
             isMovingUp = false;
         }
+
+        if(isStationary)
+        {
+            animator.SetTrigger("Respawn");
+        }
         
         isAlive = true;
     }
