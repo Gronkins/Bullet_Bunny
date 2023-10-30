@@ -109,7 +109,7 @@ public class PauseMenu : MonoBehaviour
         }
         else if (GameManager.Instance.carrotsCollected > 9)
         {
-            scoreText.text = "x " + GameManager.Instance.deaths.ToString();
+            scoreText.text = "x " + GameManager.Instance.carrotsCollected.ToString();
         }
 
         GetStageNumber();
