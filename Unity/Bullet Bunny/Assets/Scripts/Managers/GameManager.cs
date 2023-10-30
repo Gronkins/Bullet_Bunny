@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                 screenManager.LoadNextScene();
             }
         }
-
+        /*
         if(Input.GetKeyDown(KeyCode.I))
         {
             SaveGame();
@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         {
             LoadGame();
         }
+        */
     }
     public void Initialise()
     {
