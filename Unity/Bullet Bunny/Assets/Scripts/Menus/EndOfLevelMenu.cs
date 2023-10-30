@@ -90,7 +90,7 @@ public class EndOfLevelMenu : MonoBehaviour
         }
         else if (GameManager.Instance.carrotsCollected > 9)
         {
-            scoreText.text = "Carrots Collected: " + GameManager.Instance.deaths.ToString();
+            scoreText.text = "Carrots Collected: " + GameManager.Instance.carrotsCollected.ToString();
         }
 
         int minutes = Mathf.FloorToInt(GameManager.Instance.time / 60f);
