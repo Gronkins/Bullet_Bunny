@@ -45,4 +45,6 @@ public class PlayerData
     public int stageProgress;
     public int carrotsCollectedStageOne;
     public int carrotsCollectedStageTwo;
+    public float bestTimeStageOne;
+    public float bestTimeStageTwo;
 }

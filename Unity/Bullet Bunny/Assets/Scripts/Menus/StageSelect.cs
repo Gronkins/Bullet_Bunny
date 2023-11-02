@@ -13,6 +13,8 @@ public class StageSelect : MonoBehaviour
     public Image image;
     public TextMeshProUGUI stageOneCarrots;
     public TextMeshProUGUI stageTwoCarrots;
+    public TextMeshProUGUI stageOneTime;
+    public TextMeshProUGUI stageTwoTime;
 
     private void Awake()
     {
@@ -28,6 +30,24 @@ public class StageSelect : MonoBehaviour
 
         stageOneCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageOne + " / 13";
         stageTwoCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageTwo + " / 13";
+
+        if (GameManager.Instance.bestTimeStageOne > 0)
+        {
+            int minutes = Mathf.FloorToInt(GameManager.Instance.bestTimeStageOne / 60f);
+            int seconds = Mathf.FloorToInt(GameManager.Instance.bestTimeStageOne % 60f);
+            int hundreths = Mathf.FloorToInt((GameManager.Instance.bestTimeStageOne * 100) % 100);
+        
+            stageOneTime.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
+        }
+
+        if (GameManager.Instance.bestTimeStageTwo > 0)
+        {
+            int minutes = Mathf.FloorToInt(GameManager.Instance.bestTimeStageTwo / 60f);
+            int seconds = Mathf.FloorToInt(GameManager.Instance.bestTimeStageTwo % 60f);
+            int hundreths = Mathf.FloorToInt((GameManager.Instance.bestTimeStageTwo * 100) % 100);
+        
+            stageTwoTime.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
+        }
     }
 
     private void Initialise()
