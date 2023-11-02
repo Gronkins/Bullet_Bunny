@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using TMPro;
 
 public class StageSelect : MonoBehaviour
 {
     public Button startingButton;
     private MainMenu mainMenu;
     public Image image;
-    
+    public TextMeshProUGUI stageOneCarrots;
+    public TextMeshProUGUI stageTwoCarrots;
+
     private void Awake()
     {
         mainMenu = FindObjectOfType<MainMenu>();
@@ -22,13 +25,19 @@ public class StageSelect : MonoBehaviour
         {
             CloseBox();
         }
+
+        stageOneCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageOne + " / 13";
+        stageTwoCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageTwo + " / 13";
     }
 
     private void Initialise()
     {
         if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.isInDevMode)
         {
-            Destroy(image.gameObject);
+            if (image != null)
+            {
+                Destroy(image.gameObject);
+            }
         }
     }
     

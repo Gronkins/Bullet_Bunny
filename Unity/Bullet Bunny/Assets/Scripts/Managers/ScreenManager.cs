@@ -126,17 +126,19 @@ public class ScreenManager : MonoBehaviour
     {
         GameManager.Instance.ApplyScore();
         GameManager.Instance.hasCheckpoint = false;
+        UpdateCarrotsCollected();
         
         if (SceneManager.GetActiveScene().buildIndex <= 20)
         {
             GameManager.Instance.stageProgress = 1;
-            GameManager.Instance.SaveGame();
             SceneManager.LoadScene("EndOfLevelScreen");
         }
         else
         {
             SceneManager.LoadScene("EndOfGameScreen");
         }
+
+        GameManager.Instance.SaveGame();
     }
 
     public void LoadPreviousScene()
@@ -153,5 +155,25 @@ public class ScreenManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(previousSceneIndex);
+    }
+
+    private void UpdateCarrotsCollected()
+    {
+        if (GameManager.Instance.currentStage == Stages.Stage1)
+        {
+            if (GameManager.Instance.carrotsCollectedStageOne < GameManager.Instance.carrotsCollected)
+            {
+                GameManager.Instance.carrotsCollectedStageOne = GameManager.Instance.carrotsCollected;
+            }
+        }
+        
+        if (GameManager.Instance.currentStage == Stages.Stage2)
+        {
+            Debug.Log("Trigger");
+            if (GameManager.Instance.carrotsCollectedStageTwo < GameManager.Instance.carrotsCollected)
+            {
+                GameManager.Instance.carrotsCollectedStageTwo = GameManager.Instance.carrotsCollected;
+            }
+        }
     }
 }
