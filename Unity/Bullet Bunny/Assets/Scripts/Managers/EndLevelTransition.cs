@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class EndLevelTransition : MonoBehaviour
 {
+    public Stages currentStage;
     ScreenManager screenManager;
     TilemapRenderer tilemapRenderer;
     private SpriteRenderer spriteRenderer;
@@ -44,6 +46,7 @@ public class EndLevelTransition : MonoBehaviour
             Debug.Log("Is touching Transition");
             GameManager.Instance.ClearPauseMenu();
             //screenManager.LoadNextScene();
+            GameManager.Instance.currentStage = currentStage;
             screenManager.LoadEndOfLevelScreen();
         }
     }
@@ -55,6 +58,7 @@ public class EndLevelTransition : MonoBehaviour
             Debug.Log("Is touching Transition");
             GameManager.Instance.ClearPauseMenu();
             //screenManager.LoadNextScene();
+            GameManager.Instance.currentStage = currentStage;
             screenManager.LoadEndOfLevelScreen();
         }
     }

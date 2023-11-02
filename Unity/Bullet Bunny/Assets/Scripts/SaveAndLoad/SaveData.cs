@@ -43,4 +43,6 @@ public class SaveData : MonoBehaviour
 public class PlayerData
 {
     public int stageProgress;
+    public int carrotsCollectedStageOne;
+    public int carrotsCollectedStageTwo;
 }

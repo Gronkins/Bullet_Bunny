@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,13 +14,17 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     [SerializeField] private Vector3 checkpointPosition;
     private Dictionary<int, bool> checkpointDictionary = new Dictionary<int, bool>();
+    public Stages currentStage;
     public bool hasCheckpoint;
     public bool isPlayingGame;
     public float deaths;
     public float time;
     public int levelNumber;
     public int stageNumber;
+    // Save Data
     public int stageProgress;
+    public int carrotsCollectedStageOne;
+    public int carrotsCollectedStageTwo;
     public bool isCounting;
     public bool isCarryingCollectible;
     public int carrotsCollected;
@@ -132,6 +137,8 @@ public class GameManager : MonoBehaviour
     public void SaveGame()
     {
         saveData.playerData.stageProgress = stageProgress;
+        saveData.playerData.carrotsCollectedStageOne = carrotsCollectedStageOne;
+        saveData.playerData.carrotsCollectedStageTwo = carrotsCollectedStageTwo;
         saveData.SaveToJson();
     }
 
@@ -140,6 +147,8 @@ public class GameManager : MonoBehaviour
         saveData.LoadFromJson();
         //stageProgress = playerData.stageProgress;
         stageProgress = saveData.playerData.stageProgress;
+        carrotsCollectedStageOne = saveData.playerData.carrotsCollectedStageOne;
+        carrotsCollectedStageTwo = saveData.playerData.carrotsCollectedStageTwo;
     }
 
     public void SetCheckpoint(Vector3 newCheckpointPosition)
