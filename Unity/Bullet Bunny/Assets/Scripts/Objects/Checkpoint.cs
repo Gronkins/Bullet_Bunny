@@ -6,15 +6,27 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     private Animator animator;
+    private CheckpointManager checkpointManager;
+    public bool isActive;
+    public int checkpointID;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        checkpointManager = GetComponentInParent<CheckpointManager>();
     }
 
     private void Start()
     {
-        if (GameManager.Instance.hasCheckpoint)
+        if (checkpointManager == null && isActive)
+        {
+            animator.SetBool("IsActive", true);
+        }
+    }
+
+    public void InitialiseCheckpoint()
+    {
+        if (isActive)
         {
             animator.SetBool("IsActive", true);
         }
@@ -24,9 +36,16 @@ public class Checkpoint : MonoBehaviour
     {
         if (collider2D.tag == "Player")
         {
-            GameManager.Instance.SetCheckpoint(gameObject.transform.position);
-            animator.SetTrigger("Activate");
-            Debug.Log("Player has checkpoint!");
+            CheckCheckpoint();
         }
+    }
+
+    private void CheckCheckpoint()
+    {
+        GameManager.Instance.SetCheckpoint(gameObject.transform.position);
+        animator.SetTrigger("Activate");
+        isActive = true;
+        GameManager.Instance.SetCheckpointState(checkpointID, isActive);
+        Debug.Log("Player has checkpoint!");
     }
 }

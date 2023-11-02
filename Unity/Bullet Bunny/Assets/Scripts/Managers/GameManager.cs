@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private SaveData saveData;
     private GameObject player;
     [SerializeField] private Vector3 checkpointPosition;
+    private Dictionary<int, bool> checkpointDictionary = new Dictionary<int, bool>();
     public bool hasCheckpoint;
     public bool isPlayingGame;
     public float deaths;
@@ -153,6 +154,28 @@ public class GameManager : MonoBehaviour
         //player.transform.position = new Vector2 (5, 5);
         player.transform.position = checkpointPosition;
         cameraManager.MoveCamera();
+    }
+
+    public void SetCheckpointState(int checkpointID, bool isActive)
+    {
+        if (checkpointDictionary.ContainsKey(checkpointID))
+        {
+            checkpointDictionary[checkpointID] = isActive;
+        }
+        else
+        {
+            checkpointDictionary.Add(checkpointID, isActive);
+        }
+    }
+
+    public bool GetCheckpointState(int checkpointID)
+    {
+        if (checkpointDictionary.ContainsKey(checkpointID))
+        {
+            return checkpointDictionary[checkpointID];
+        }
+
+        return false;
     }
 
     public void GetLevelNumber()
