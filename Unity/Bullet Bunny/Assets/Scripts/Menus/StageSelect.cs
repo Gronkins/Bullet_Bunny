@@ -28,8 +28,8 @@ public class StageSelect : MonoBehaviour
             CloseBox();
         }
 
-        stageOneCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageOne + " / 13";
-        stageTwoCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageTwo + " / 13";
+        stageOneCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageOne + " / 15";
+        stageTwoCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedStageTwo + " / 14";
 
         if (GameManager.Instance.bestTimeStageOne > 0)
         {
