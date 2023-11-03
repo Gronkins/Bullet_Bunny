@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public int stageProgress;
     public int carrotsCollectedStageOne;
     public int carrotsCollectedStageTwo;
+    public float bestTimeStageOne;
+    public float bestTimeStageTwo;
     public bool isCounting;
     public bool isCarryingCollectible;
     public int carrotsCollected;
@@ -139,6 +141,9 @@ public class GameManager : MonoBehaviour
         saveData.playerData.stageProgress = stageProgress;
         saveData.playerData.carrotsCollectedStageOne = carrotsCollectedStageOne;
         saveData.playerData.carrotsCollectedStageTwo = carrotsCollectedStageTwo;
+
+        saveData.playerData.bestTimeStageOne = bestTimeStageOne;
+        saveData.playerData.bestTimeStageTwo = bestTimeStageTwo;
         saveData.SaveToJson();
     }
 
@@ -149,6 +154,9 @@ public class GameManager : MonoBehaviour
         stageProgress = saveData.playerData.stageProgress;
         carrotsCollectedStageOne = saveData.playerData.carrotsCollectedStageOne;
         carrotsCollectedStageTwo = saveData.playerData.carrotsCollectedStageTwo;
+
+        bestTimeStageOne = saveData.playerData.bestTimeStageOne;
+        bestTimeStageTwo = saveData.playerData.bestTimeStageTwo;
     }
 
     public void SetCheckpoint(Vector3 newCheckpointPosition)

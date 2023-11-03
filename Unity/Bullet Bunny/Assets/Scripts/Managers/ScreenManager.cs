@@ -165,14 +165,23 @@ public class ScreenManager : MonoBehaviour
             {
                 GameManager.Instance.carrotsCollectedStageOne = GameManager.Instance.carrotsCollected;
             }
+
+            if (GameManager.Instance.bestTimeStageOne > GameManager.Instance.time || GameManager.Instance.bestTimeStageOne == 0)
+            {
+                GameManager.Instance.bestTimeStageOne = GameManager.Instance.time;
+            }
         }
         
         if (GameManager.Instance.currentStage == Stages.Stage2)
         {
-            Debug.Log("Trigger");
             if (GameManager.Instance.carrotsCollectedStageTwo < GameManager.Instance.carrotsCollected)
             {
                 GameManager.Instance.carrotsCollectedStageTwo = GameManager.Instance.carrotsCollected;
+            }
+
+            if (GameManager.Instance.bestTimeStageTwo > GameManager.Instance.time || GameManager.Instance.bestTimeStageTwo == 0)
+            {
+                GameManager.Instance.bestTimeStageTwo = GameManager.Instance.time;
             }
         }
     }
