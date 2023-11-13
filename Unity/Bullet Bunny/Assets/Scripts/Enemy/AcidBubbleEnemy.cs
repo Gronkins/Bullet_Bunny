@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AcidBubbleEnemy : Enemy
 {
@@ -8,8 +9,10 @@ public class AcidBubbleEnemy : Enemy
     private PlayerMovement newPlayerMovement;
     private AcidBubbleManager acidBubbleManager;
     private MoveThenStop moveThenStop;
+    public GameObject particles;
     public bool isMovingUp;
     public bool isStationary;
+    public bool isSuperBubble;
     [SerializeField] private float upwardsForce = 25f;
 
     protected override void Start() 
@@ -20,6 +23,11 @@ public class AcidBubbleEnemy : Enemy
         moveThenStop = GetComponent<MoveThenStop>();
         acidBubbleManager = GetComponentInParent<AcidBubbleManager>();
         isAlive = true;
+
+        if (IsSuperBubble())
+        {
+            particles.SetActive(false);
+        }
     }
     
     protected override void OnTriggerEnter2D(Collider2D collider)
@@ -47,6 +55,11 @@ public class AcidBubbleEnemy : Enemy
             isMovingUp = false;
         }
 
+        if(IsSuperBubble())
+        {
+            particles.SetActive(false);
+        }
+
         if(isStationary)
         {
             animator.SetTrigger("Respawn");
@@ -65,6 +78,11 @@ public class AcidBubbleEnemy : Enemy
     {
         isMovingUp = true;
         animator.SetBool("IsMovingUp", true);
+
+        if (IsSuperBubble())
+        {
+            particles.SetActive(true);
+        }
     }
 
     public void Ascension()
@@ -77,7 +95,24 @@ public class AcidBubbleEnemy : Enemy
         isAlive = false;
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //Destroy(gameObject);
+        if (IsSuperBubble())
+        {
+            particles.SetActive(false);
+        }
+
         acidBubbleManager.SetRespawnTimer();
         gameObject.SetActive(false);
+    }
+
+    private bool IsSuperBubble()
+    {
+        if (isSuperBubble && particles != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
