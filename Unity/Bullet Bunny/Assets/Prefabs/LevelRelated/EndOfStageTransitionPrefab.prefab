@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2557914560606010586}
   - component: {fileID: 2557914560606010589}
   - component: {fileID: 6622801273998801832}
+  - component: {fileID: 1796557077887525833}
   - component: {fileID: 1655821565}
   m_Layer: 0
   m_Name: EndOfStageTransitionPrefab
@@ -96,6 +97,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc17ecf6146e79e48a3bb603b1158222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStage: 0
+  isEndOfStage: 1
+--- !u!114 &1796557077887525833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2557914560606010591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e64c82ae6816345bc8b72e406c57d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &1655821565

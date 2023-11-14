@@ -138,13 +138,16 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        saveData.playerData.stageProgress = stageProgress;
-        saveData.playerData.carrotsCollectedStageOne = carrotsCollectedStageOne;
-        saveData.playerData.carrotsCollectedStageTwo = carrotsCollectedStageTwo;
+        if (!isInDevMode)
+        {
+            saveData.playerData.stageProgress = stageProgress;
+            saveData.playerData.carrotsCollectedStageOne = carrotsCollectedStageOne;
+            saveData.playerData.carrotsCollectedStageTwo = carrotsCollectedStageTwo;
 
-        saveData.playerData.bestTimeStageOne = bestTimeStageOne;
-        saveData.playerData.bestTimeStageTwo = bestTimeStageTwo;
-        saveData.SaveToJson();
+            saveData.playerData.bestTimeStageOne = bestTimeStageOne;
+            saveData.playerData.bestTimeStageTwo = bestTimeStageTwo;
+            saveData.SaveToJson();
+        }
     }
 
     public void LoadGame()
