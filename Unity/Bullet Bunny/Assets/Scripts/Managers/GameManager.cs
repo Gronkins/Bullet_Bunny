@@ -138,15 +138,15 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        //if (!isInDevMode)
-        //{
+        if (!isInDevMode)
+        {
             saveData.playerData.stageProgress = stageProgress;
 
             Array.Copy(carrotsCollectedPerStage, saveData.playerData.carrotsCollectedPerStage, carrotsCollectedPerStage.Length);
             Array.Copy(bestTimePerStage, saveData.playerData.bestTimePerStage, bestTimePerStage.Length);
 
             saveData.SaveToJson();
-        //}
+        }
     }
 
     public void LoadGame()
