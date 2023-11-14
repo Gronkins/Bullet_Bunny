@@ -43,6 +43,7 @@ public class SaveData : MonoBehaviour
 public class PlayerData
 {
     public int stageProgress;
+    public int[] carrotsCollectedPerStage = new int[GameInformation.numberOfStages + 1];
     public int carrotsCollectedStageOne;
     public int carrotsCollectedStageTwo;
     public float bestTimeStageOne;

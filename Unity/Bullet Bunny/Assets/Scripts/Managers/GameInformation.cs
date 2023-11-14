@@ -6,7 +6,8 @@ public static class GameInformation
 {
     // First index is zero, so the stages can be called like normal. Stage 1 = index 1, Stage 2 = index 2, etc.
     private static int [] numberOfCarrotsPerStage = { 0, 15, 14 };
-    private static int [] numberOfLevelsPerStage = { 0, 20 };
+    private static int [] numberOfLevelsPerStage = { 0, 21 };
+    public const int numberOfStages = 2;
 
     public static int GetNumberOfCarrotsInStage(int stage)
     {

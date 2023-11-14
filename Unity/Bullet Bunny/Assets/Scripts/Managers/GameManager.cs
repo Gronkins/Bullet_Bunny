@@ -21,8 +21,10 @@ public class GameManager : MonoBehaviour
     public float time;
     public int levelNumber;
     public int stageNumber;
+
     // Save Data
     public int stageProgress;
+    public int[] carrotsCollectedPerStage = new int[GameInformation.numberOfStages + 1];
     public int carrotsCollectedStageOne;
     public int carrotsCollectedStageTwo;
     public float bestTimeStageOne;
@@ -204,7 +206,7 @@ public class GameManager : MonoBehaviour
         int sceneNumber = scene.buildIndex;
         Debug.Log("Scene index = " + scene.buildIndex);
 
-        if (sceneNumber <= GameInformation.GetNumberOfLevelsInStage(1))
+        if (sceneNumber < GameInformation.GetNumberOfLevelsInStage(1))
         {
             stageNumber = 1;
             levelNumber = sceneNumber;
@@ -212,7 +214,7 @@ public class GameManager : MonoBehaviour
         else if (sceneNumber > GameInformation.GetNumberOfLevelsInStage(1))
         {
             stageNumber = 2;
-            levelNumber = sceneNumber - ( GameInformation.GetNumberOfLevelsInStage(1) + 1 );
+            levelNumber = sceneNumber - GameInformation.GetNumberOfLevelsInStage(1);
         }
     }
 
