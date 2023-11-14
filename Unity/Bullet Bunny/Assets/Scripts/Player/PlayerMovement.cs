@@ -37,15 +37,15 @@ public class PlayerMovement : MonoBehaviour
     public float coyoteTimeDuration = 0.3f;
     
     [SerializeField]
-    float movementSpeed = 10.0f;
+    private float movementSpeed = 10.0f;
     [SerializeField]
-    float jumpHeight = 16.0f;
+    private float jumpHeight = 16.0f;
 
     [SerializeField]
     bool canDash = true;
     public bool isDashing;
     [SerializeField]
-    float upwardsForce = 16.0f;
+    private float upwardsForce = 16.0f;
 
     public float slideSpeed = 1.2f;
 
@@ -53,12 +53,12 @@ public class PlayerMovement : MonoBehaviour
     public int maxDashes = 2;
     public int numOfDashes;
     [SerializeField]
-    float dashStrength = 20.0f;
-    float dashTime = 0.2f;
-    float dashCooldown = 0.1f; //Initial value was 1.0f
+    private float dashStrength = 20.0f;
+    private float dashTime = 0.2f;
+    private float dashCooldown = 0.1f; //Initial value was 1.0f
 
     //[SerializeField]
-    float threshold = 0.15f; //0.35f is the initial value, later changed to 0.01f
+    private float threshold = 0.15f; //0.35f is the initial value, later changed to 0.01f
 
     //Variables for collecting horizontal and vertical input
     public float horizontal;
@@ -68,18 +68,16 @@ public class PlayerMovement : MonoBehaviour
     public float absoluteHorizontal;
     public float absoluteVertical;
 
-    bool isFacingRight;
+    private bool isFacingRight;
     private float maximumFallVelocity = -25f;
 
-    bool isAlive;
-
     [SerializeField]
-    bool isAttacking;
+    private bool isAttacking;
 
     public bool isEditingGizmos;
     public Vector3 yOffset;
 
-    Vector2 dashDirection;
+    private Vector2 dashDirection;
 
     private TutorialCharacter tutorialCharacter;
     private AmmoDisplay ammoDisplay;
@@ -111,7 +109,6 @@ public class PlayerMovement : MonoBehaviour
         numOfDashes = maxDashes;
         lastMoveHorizontal = 1;
         isFacingRight = true;
-        isAlive = true;
         canBulletJump = true;
 
         if (tutorialCharacter != null)

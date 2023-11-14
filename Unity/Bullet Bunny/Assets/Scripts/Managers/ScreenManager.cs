@@ -7,13 +7,7 @@ using UnityEngine.SceneManagement;
 public class ScreenManager : MonoBehaviour
 {
     PlayerStats playerStats;
-    private PlayerMovement playerMovement;
     private bool hasDied;
-    
-    private void Awake()
-    {
-        playerMovement = FindObjectOfType<PlayerMovement>();
-    }
     
     // Start is called before the first frame update
     void Start()

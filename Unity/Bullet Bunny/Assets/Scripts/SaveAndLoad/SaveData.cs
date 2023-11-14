@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class SaveData : MonoBehaviour
@@ -18,11 +20,19 @@ public class SaveData : MonoBehaviour
     public void LoadFromJson()
     {
         string filePath = Application.persistentDataPath + "/PlayerData.json";
-        string playerSavedData = System.IO.File.ReadAllText(filePath);
 
-        playerData = JsonUtility.FromJson<PlayerData>(playerSavedData);
-        Debug.Log("Game loaded");
-        //GameManager.Instance.LoadData(playerData);
+        if(System.IO.File.Exists(filePath))
+        {
+            string playerSavedData = System.IO.File.ReadAllText(filePath);
+
+            playerData = JsonUtility.FromJson<PlayerData>(playerSavedData);
+            Debug.Log("Game loaded");
+        }
+        else
+        {
+            Debug.Log("No save data");
+            SaveToJson();
+        }
     }
 }
 
