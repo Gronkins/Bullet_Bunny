@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6752141809525444087}
   - component: {fileID: 6752141809525444086}
-  - component: {fileID: 6752141809525444081}
+  - component: {fileID: 1888549669101375065}
   m_Layer: 0
   m_Name: Point0
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6752141809525444081
+--- !u!114 &1888549669101375065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6752141809525444084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d664c5b0a0262444b7d5373f6d0e9b3, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e64c82ae6816345bc8b72e406c57d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6752141809644117934
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6752141809644117929}
   - component: {fileID: 6752141809644117928}
-  - component: {fileID: 6752141809644117931}
+  - component: {fileID: 1799969400404852152}
   m_Layer: 0
   m_Name: Point1
   m_TagString: Untagged
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6752141809644117931
+--- !u!114 &1799969400404852152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6752141809644117934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d664c5b0a0262444b7d5373f6d0e9b3, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e64c82ae6816345bc8b72e406c57d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6752141810971021535
@@ -472,8 +472,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 5505250795638600475, guid: 36307c8d4e2e3f546825e288628835ae, type: 3}
+  particles: {fileID: 0}
   isMovingUp: 0
   isStationary: 0
+  isSuperBubble: 0
   upwardsForce: 25
 --- !u!114 &7724591952866951289
 MonoBehaviour:

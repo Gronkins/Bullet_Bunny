@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     [SerializeField] private Vector3 checkpointPosition;
     private Dictionary<int, bool> checkpointDictionary = new Dictionary<int, bool>();
-    public Stages currentStage;
+    public int currentStage;
     public bool hasCheckpoint;
     public bool isPlayingGame;
     public float deaths;
@@ -25,10 +26,7 @@ public class GameManager : MonoBehaviour
     // Save Data
     public int stageProgress;
     public int[] carrotsCollectedPerStage = new int[GameInformation.numberOfStages + 1];
-    public int carrotsCollectedStageOne;
-    public int carrotsCollectedStageTwo;
-    public float bestTimeStageOne;
-    public float bestTimeStageTwo;
+    public float[] bestTimePerStage = new float[GameInformation.numberOfStages + 1];
     public bool isCounting;
     public bool isCarryingCollectible;
     public int carrotsCollected;
@@ -140,16 +138,15 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        if (!isInDevMode)
-        {
+        //if (!isInDevMode)
+        //{
             saveData.playerData.stageProgress = stageProgress;
-            saveData.playerData.carrotsCollectedStageOne = carrotsCollectedStageOne;
-            saveData.playerData.carrotsCollectedStageTwo = carrotsCollectedStageTwo;
 
-            saveData.playerData.bestTimeStageOne = bestTimeStageOne;
-            saveData.playerData.bestTimeStageTwo = bestTimeStageTwo;
+            Array.Copy(carrotsCollectedPerStage, saveData.playerData.carrotsCollectedPerStage, carrotsCollectedPerStage.Length);
+            Array.Copy(bestTimePerStage, saveData.playerData.bestTimePerStage, bestTimePerStage.Length);
+
             saveData.SaveToJson();
-        }
+        //}
     }
 
     public void LoadGame()
@@ -157,11 +154,9 @@ public class GameManager : MonoBehaviour
         saveData.LoadFromJson();
         //stageProgress = playerData.stageProgress;
         stageProgress = saveData.playerData.stageProgress;
-        carrotsCollectedStageOne = saveData.playerData.carrotsCollectedStageOne;
-        carrotsCollectedStageTwo = saveData.playerData.carrotsCollectedStageTwo;
 
-        bestTimeStageOne = saveData.playerData.bestTimeStageOne;
-        bestTimeStageTwo = saveData.playerData.bestTimeStageTwo;
+        Array.Copy(saveData.playerData.carrotsCollectedPerStage, carrotsCollectedPerStage, saveData.playerData.carrotsCollectedPerStage.Length);
+        Array.Copy(saveData.playerData.bestTimePerStage, bestTimePerStage, saveData.playerData.bestTimePerStage.Length);
     }
 
     public void SetCheckpoint(Vector3 newCheckpointPosition)
@@ -237,5 +232,46 @@ public class GameManager : MonoBehaviour
             carrotsCollected += 1;
             isCarryingCollectible = false;
         }
+    }
+
+    public void UpdateSaveGameData()
+    {
+        if (carrotsCollectedPerStage[currentStage] < carrotsCollected)
+        {
+            carrotsCollectedPerStage[currentStage] = carrotsCollected;
+        }
+
+        if (bestTimePerStage[currentStage] > time || bestTimePerStage[currentStage] == 0)
+        {
+            bestTimePerStage[currentStage] = time;
+        }
+    
+        /*
+        if (currentStage == 1)
+        {
+            if (carrotsCollectedStageOne < carrotsCollected)
+            {
+                carrotsCollectedStageOne = carrotsCollected;
+            }
+
+            if (bestTimeStageOne > time || bestTimeStageOne == 0)
+            {
+                bestTimeStageOne = time;
+            }
+        }
+        
+        if (currentStage == 2)
+        {
+            if (carrotsCollectedStageTwo < carrotsCollected)
+            {
+                carrotsCollectedStageTwo = carrotsCollected;
+            }
+
+            if (bestTimeStageTwo > time || bestTimeStageTwo == 0)
+            {
+                bestTimeStageTwo = Instance.time;
+            }
+        }
+        */
     }
 }

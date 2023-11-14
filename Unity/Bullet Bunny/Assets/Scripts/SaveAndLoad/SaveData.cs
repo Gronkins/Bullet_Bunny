@@ -5,19 +5,6 @@ using UnityEngine;
 public class SaveData : MonoBehaviour
 {
     public PlayerData playerData = new PlayerData();
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            //SaveToJson();
-        }
-
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            //LoadFromJson();
-        }
-    }
     
     public void SaveToJson()
     {
@@ -44,8 +31,5 @@ public class PlayerData
 {
     public int stageProgress;
     public int[] carrotsCollectedPerStage = new int[GameInformation.numberOfStages + 1];
-    public int carrotsCollectedStageOne;
-    public int carrotsCollectedStageTwo;
-    public float bestTimeStageOne;
-    public float bestTimeStageTwo;
+    public float[] bestTimePerStage = new float[GameInformation.numberOfStages + 1];
 }

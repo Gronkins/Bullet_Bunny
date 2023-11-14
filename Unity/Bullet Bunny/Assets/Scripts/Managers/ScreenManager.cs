@@ -87,7 +87,7 @@ public class ScreenManager : MonoBehaviour
     {
         GameManager.Instance.ApplyScore();
         GameManager.Instance.hasCheckpoint = false;
-        UpdateCarrotsCollected();
+        GameManager.Instance.UpdateSaveGameData();
         
         if (SceneManager.GetActiveScene().buildIndex <= GameInformation.GetNumberOfLevelsInStage(1))
         {
@@ -116,34 +116,5 @@ public class ScreenManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(previousSceneIndex);
-    }
-
-    private void UpdateCarrotsCollected()
-    {
-        if (GameManager.Instance.currentStage == Stages.Stage1)
-        {
-            if (GameManager.Instance.carrotsCollectedStageOne < GameManager.Instance.carrotsCollected)
-            {
-                GameManager.Instance.carrotsCollectedStageOne = GameManager.Instance.carrotsCollected;
-            }
-
-            if (GameManager.Instance.bestTimeStageOne > GameManager.Instance.time || GameManager.Instance.bestTimeStageOne == 0)
-            {
-                GameManager.Instance.bestTimeStageOne = GameManager.Instance.time;
-            }
-        }
-        
-        if (GameManager.Instance.currentStage == Stages.Stage2)
-        {
-            if (GameManager.Instance.carrotsCollectedStageTwo < GameManager.Instance.carrotsCollected)
-            {
-                GameManager.Instance.carrotsCollectedStageTwo = GameManager.Instance.carrotsCollected;
-            }
-
-            if (GameManager.Instance.bestTimeStageTwo > GameManager.Instance.time || GameManager.Instance.bestTimeStageTwo == 0)
-            {
-                GameManager.Instance.bestTimeStageTwo = GameManager.Instance.time;
-            }
-        }
     }
 }

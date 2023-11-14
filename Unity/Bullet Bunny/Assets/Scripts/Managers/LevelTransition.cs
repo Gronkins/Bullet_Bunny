@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class LevelTransition : MonoBehaviour
 {
-    public Stages currentStage;
+    public int currentStage;
     public bool isEndOfStage;
     ScreenManager screenManager;
 
