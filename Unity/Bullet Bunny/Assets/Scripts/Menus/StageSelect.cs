@@ -64,26 +64,31 @@ public class StageSelect : MonoBehaviour
 
     private void UpdateMenu()
     {
-        stageOneCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedPerStage[1] + " / " + GameInformation.GetNumberOfCarrotsInStage(1);
-        stageTwoCarrots.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedPerStage[2] + " / " + GameInformation.GetNumberOfCarrotsInStage(2);
+        UpdateCarrotsText(stageOneCarrots, 1);
+        UpdateCarrotsText(stageTwoCarrots, 2);
 
-        for (int i = 0; i < GameManager.Instance.bestTimePerStage.Length; i++)
+        UpdateTimeText(stageOneTime, 1);
+        UpdateTimeText(stageTwoTime, 2);
+    }
+
+    private void UpdateCarrotsText(TextMeshProUGUI text, int stageNumber)
+    {
+        text.text = "Carrots Collected " + GameManager.Instance.carrotsCollectedPerStage[stageNumber] + " / " + GameInformation.GetNumberOfCarrotsInStage(stageNumber);
+    }
+
+    private void UpdateTimeText(TextMeshProUGUI text, int stageNumber)
+    {
+        if (GameManager.Instance.bestTimePerStage[stageNumber] > 0)
         {
-            if (GameManager.Instance.bestTimePerStage[i] > 0)
-            {
-                int minutes = Mathf.FloorToInt(GameManager.Instance.bestTimePerStage[i] / 60f);
-                int seconds = Mathf.FloorToInt(GameManager.Instance.bestTimePerStage[i] % 60f);
-                int hundreths = Mathf.FloorToInt((GameManager.Instance.bestTimePerStage[i] * 100) % 100);
+            int minutes = Mathf.FloorToInt(GameManager.Instance.bestTimePerStage[stageNumber] / 60f);
+            int seconds = Mathf.FloorToInt(GameManager.Instance.bestTimePerStage[stageNumber] % 60f);
+            int hundreths = Mathf.FloorToInt((GameManager.Instance.bestTimePerStage[stageNumber] * 100) % 100);
 
-                if (i == 1)
-                {
-                    stageOneTime.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
-                }
-                else if (i == 2)
-                {
-                    stageTwoTime.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
-                }
-            }
+            text.text = "Best Time\n" + string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
+        }
+        else
+        {
+            text.text = "Best Time\n--:--:--";
         }
     }
     

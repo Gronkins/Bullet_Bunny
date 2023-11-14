@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         screenManager = FindObjectOfType<ScreenManager>();
+        //stageSelectMenu.SetActive(false);
     }
 
     public void SetButton()
