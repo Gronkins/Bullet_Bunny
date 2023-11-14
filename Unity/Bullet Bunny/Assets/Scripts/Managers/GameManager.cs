@@ -198,20 +198,21 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void GetLevelNumber()
+    public void GetLevelAndStageNumber()
     {
         Scene scene = SceneManager.GetActiveScene();
-        int number = scene.buildIndex;
+        int sceneNumber = scene.buildIndex;
+        Debug.Log("Scene index = " + scene.buildIndex);
 
-        if (number <= 20)
+        if (sceneNumber <= GameInformation.GetNumberOfLevelsInStage(1))
         {
-            levelNumber = 1;
-            stageNumber = number;
+            stageNumber = 1;
+            levelNumber = sceneNumber;
         }
-        else if (number > 20)
+        else if (sceneNumber > GameInformation.GetNumberOfLevelsInStage(1))
         {
-            levelNumber = 2;
-            stageNumber = number - 21;
+            stageNumber = 2;
+            levelNumber = sceneNumber - ( GameInformation.GetNumberOfLevelsInStage(1) + 1 );
         }
     }
 

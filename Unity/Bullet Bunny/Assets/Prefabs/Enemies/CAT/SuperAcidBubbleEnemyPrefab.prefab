@@ -318,7 +318,7 @@ Transform:
   - {fileID: 8949234624442475406}
   - {fileID: 8949234624294318544}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2415754907552191737
 MonoBehaviour:
@@ -344,7 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8949234624294318544}
   - component: {fileID: 8949234624294318545}
-  - component: {fileID: 8949234624294318546}
+  - component: {fileID: 1209285291525494800}
   m_Layer: 0
   m_Name: Point1
   m_TagString: Untagged
@@ -419,7 +419,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8949234624294318546
+--- !u!114 &1209285291525494800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8949234624294318551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d664c5b0a0262444b7d5373f6d0e9b3, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e64c82ae6816345bc8b72e406c57d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8949234624442475405
@@ -441,7 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8949234624442475406}
   - component: {fileID: 8949234624442475407}
-  - component: {fileID: 8949234624442475400}
+  - component: {fileID: 4714765566964854235}
   m_Layer: 0
   m_Name: Point0
   m_TagString: Untagged
@@ -516,7 +516,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8949234624442475400
+--- !u!114 &4714765566964854235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -525,6 +525,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8949234624442475405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d664c5b0a0262444b7d5373f6d0e9b3, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e64c82ae6816345bc8b72e406c57d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

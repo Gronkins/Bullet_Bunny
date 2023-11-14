@@ -120,16 +120,16 @@ public class PauseMenu : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
         //int number = scene.buildIndex;
-        GameManager.Instance.GetLevelNumber();
-        screenAndLevelText.text = GameManager.Instance.levelNumber + " - " + GameManager.Instance.stageNumber;
+        GameManager.Instance.GetLevelAndStageNumber();
+        screenAndLevelText.text = GameManager.Instance.stageNumber + " - " + GameManager.Instance.levelNumber;
     }
 
     public void GetStageNumberPlus1()
     {
         Scene scene = SceneManager.GetActiveScene();
-        GameManager.Instance.GetLevelNumber();
-        int number = GameManager.Instance.stageNumber + 1;
-        screenAndLevelText.text = GameManager.Instance.levelNumber + " - " + number;
+        GameManager.Instance.GetLevelAndStageNumber();
+        int sceneNumber = GameManager.Instance.levelNumber + 1;
+        screenAndLevelText.text = GameManager.Instance.stageNumber + " - " + sceneNumber;
     }
     
     public void LoadMenu()

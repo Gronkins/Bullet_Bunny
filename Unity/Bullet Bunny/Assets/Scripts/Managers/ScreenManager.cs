@@ -25,45 +25,6 @@ public class ScreenManager : MonoBehaviour
         //playerStats = player.GetComponent<PlayerStats>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        //Cylcing through levels with 1, and 2 for testing
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            LoadNextScene();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            LoadPreviousScene();
-        }
-        */
-        
-
-        //Closes the game
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            //Application.Quit();
-        }
-
-        //If the player resets zero or less HP, calls the death state
-        if (playerStats != null)
-        {
-            if (playerStats.playerHealth <= 0)
-            {
-                if (!hasDied)
-                {
-                    hasDied = true;
-                    //GameManager.Instance.deaths += 1;
-                    //Debug.Log("Death called");
-                    StartCoroutine(PlayerDeath());
-                }
-            }
-        }
-    }
-
     //Waits for a moment, then restarts the current scene
     public IEnumerator PlayerDeath()
     {
@@ -128,7 +89,7 @@ public class ScreenManager : MonoBehaviour
         GameManager.Instance.hasCheckpoint = false;
         UpdateCarrotsCollected();
         
-        if (SceneManager.GetActiveScene().buildIndex <= 20)
+        if (SceneManager.GetActiveScene().buildIndex <= GameInformation.GetNumberOfLevelsInStage(1))
         {
             GameManager.Instance.stageProgress = 1;
             SceneManager.LoadScene("EndOfLevelScreen");

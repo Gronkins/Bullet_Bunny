@@ -23,13 +23,13 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Collided with something");
         
-        if (collider.tag == "PlayerWeapon" && playerStats.playerHealth > 0)
+        if (collider.tag == "PlayerWeapon")
         {
             Debug.Log("Player hit enemy with weapon");
             EnemyDeath();
         }
 
-        if (collider.tag == "PlayerDownwardsWeapon" && playerStats.playerHealth > 0)
+        if (collider.tag == "PlayerDownwardsWeapon")
         {
             Debug.Log("Player hit enemy with downwards attack");
             playerMovement.ApplyUpwardsForce();
