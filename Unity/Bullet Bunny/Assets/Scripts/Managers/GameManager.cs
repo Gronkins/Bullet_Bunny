@@ -166,8 +166,6 @@ public class GameManager : MonoBehaviour
 
     public void RespawnAtCheckpoint()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //player.transform.position = new Vector2 (5, 5);
         player.transform.position = checkpointPosition;
         cameraManager.MoveCamera();
     }
@@ -244,33 +242,5 @@ public class GameManager : MonoBehaviour
         {
             bestTimePerStage[currentStage] = time;
         }
-    
-        /*
-        if (currentStage == 1)
-        {
-            if (carrotsCollectedStageOne < carrotsCollected)
-            {
-                carrotsCollectedStageOne = carrotsCollected;
-            }
-
-            if (bestTimeStageOne > time || bestTimeStageOne == 0)
-            {
-                bestTimeStageOne = time;
-            }
-        }
-        
-        if (currentStage == 2)
-        {
-            if (carrotsCollectedStageTwo < carrotsCollected)
-            {
-                carrotsCollectedStageTwo = carrotsCollected;
-            }
-
-            if (bestTimeStageTwo > time || bestTimeStageTwo == 0)
-            {
-                bestTimeStageTwo = Instance.time;
-            }
-        }
-        */
     }
 }
