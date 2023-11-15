@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int stageProgress;
     public int[] carrotsCollectedPerStage = new int[GameInformation.numberOfStages + 1];
     public float[] bestTimePerStage = new float[GameInformation.numberOfStages + 1];
+    public float[] bestTimePerStageFullyCompleted = new float[GameInformation.numberOfStages + 1];
     public bool isCounting;
     public bool isCarryingCollectible;
     public int carrotsCollected;
@@ -143,6 +144,7 @@ public class GameManager : MonoBehaviour
 
             Array.Copy(carrotsCollectedPerStage, saveData.playerData.carrotsCollectedPerStage, carrotsCollectedPerStage.Length);
             Array.Copy(bestTimePerStage, saveData.playerData.bestTimePerStage, bestTimePerStage.Length);
+            Array.Copy(bestTimePerStageFullyCompleted, saveData.playerData.bestTimePerStageFullyCompleted, bestTimePerStageFullyCompleted.Length);
 
             saveData.SaveToJson();
         }
@@ -151,11 +153,11 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         saveData.LoadFromJson();
-        //stageProgress = playerData.stageProgress;
         stageProgress = saveData.playerData.stageProgress;
 
         Array.Copy(saveData.playerData.carrotsCollectedPerStage, carrotsCollectedPerStage, saveData.playerData.carrotsCollectedPerStage.Length);
         Array.Copy(saveData.playerData.bestTimePerStage, bestTimePerStage, saveData.playerData.bestTimePerStage.Length);
+        Array.Copy(saveData.playerData.bestTimePerStageFullyCompleted, bestTimePerStageFullyCompleted, saveData.playerData.bestTimePerStageFullyCompleted.Length);
     }
 
     public void SetCheckpoint(Vector3 newCheckpointPosition)
@@ -241,6 +243,16 @@ public class GameManager : MonoBehaviour
         if (bestTimePerStage[currentStage] > time || bestTimePerStage[currentStage] == 0)
         {
             bestTimePerStage[currentStage] = time;
+        }
+
+        // If all carrots were collected in a particular stage, update the fully completed time
+        if (carrotsCollected >= GameInformation.GetNumberOfCarrotsInStage(currentStage))
+        {
+            Debug.Log("All carrots collected in a stage");
+            if (bestTimePerStageFullyCompleted[currentStage] > time || bestTimePerStageFullyCompleted[currentStage] == 0)
+            {
+                bestTimePerStageFullyCompleted[currentStage] = time;
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ public class StageSelect : MonoBehaviour
     public TextMeshProUGUI stageTwoCarrots;
     public TextMeshProUGUI stageOneTime;
     public TextMeshProUGUI stageTwoTime;
+    public TextMeshProUGUI stageOneTimeFullyComplete;
+    public TextMeshProUGUI stageTwoTimeFullyComplete;
 
     private void Awake()
     {
@@ -69,6 +71,9 @@ public class StageSelect : MonoBehaviour
 
         UpdateTimeText(stageOneTime, 1);
         UpdateTimeText(stageTwoTime, 2);
+
+        UpdateTimeTextFullyComplete(stageOneTimeFullyComplete, 1);
+        UpdateTimeTextFullyComplete(stageTwoTimeFullyComplete, 2);
     }
 
     private void UpdateCarrotsText(TextMeshProUGUI text, int stageNumber)
@@ -89,6 +94,22 @@ public class StageSelect : MonoBehaviour
         else
         {
             text.text = "Best Time\n--:--:--";
+        }
+    }
+
+    private void UpdateTimeTextFullyComplete(TextMeshProUGUI text, int stageNumber)
+    {
+        if (GameManager.Instance.bestTimePerStageFullyCompleted[stageNumber] > 0)
+        {
+            int minutes = Mathf.FloorToInt(GameManager.Instance.bestTimePerStageFullyCompleted[stageNumber] / 60f);
+            int seconds = Mathf.FloorToInt(GameManager.Instance.bestTimePerStageFullyCompleted[stageNumber] % 60f);
+            int hundreths = Mathf.FloorToInt((GameManager.Instance.bestTimePerStageFullyCompleted[stageNumber] * 100) % 100);
+
+            text.text = "Best Time (100%)\n" + string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundreths);
+        }
+        else
+        {
+            text.text = "Best Time (100%)\n--:--:--";
         }
     }
     

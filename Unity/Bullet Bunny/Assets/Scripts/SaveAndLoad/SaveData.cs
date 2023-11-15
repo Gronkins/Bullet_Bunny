@@ -42,4 +42,5 @@ public class PlayerData
     public int stageProgress;
     public int[] carrotsCollectedPerStage = new int[GameInformation.numberOfStages + 1];
     public float[] bestTimePerStage = new float[GameInformation.numberOfStages + 1];
+    public float[] bestTimePerStageFullyCompleted = new float[GameInformation.numberOfStages + 1];
 }
