@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void ClearAllCheckpoints()
+    private void ClearAllCheckpoints()
     {
         checkpointDictionary.Clear();
     }
