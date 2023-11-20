@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         isCarryingCollectible = false;
         carrotsCollected = 0;
         time = 0f;
+        ClearAllCheckpoints();
     }
 
     public void ResetForNewLevel()
@@ -192,6 +193,11 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ClearAllCheckpoints()
+    {
+        checkpointDictionary.Clear();
     }
 
     public void GetLevelAndStageNumber()
