@@ -53,7 +53,7 @@ public class StageSelect : MonoBehaviour
 
     private void Initialise()
     {
-        if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.isInDevMode)
+        if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.IsInDevMode())
         {
             if (image != null)
             {
@@ -121,7 +121,7 @@ public class StageSelect : MonoBehaviour
 
     public void LoadStage2()
     {
-        if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.isInDevMode)
+        if (GameManager.Instance.stageProgress > 0 || GameManager.Instance.IsInDevMode())
         {
             SceneManager.LoadScene(22);
             GameManager.Instance.isCounting = true;

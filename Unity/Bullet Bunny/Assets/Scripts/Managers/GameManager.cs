@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set;}
+    public static GameManager Instance { get; private set; }
     public PlayerMovement playerMovement;
     private ScreenManager screenManager;
     private CameraManager cameraManager;
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public float time;
     public int levelNumber;
     public int stageNumber;
+    private int targetFrameRate = 60;
 
     // Save Data
     public int stageProgress;
@@ -31,9 +32,9 @@ public class GameManager : MonoBehaviour
     public bool isCarryingCollectible;
     public int carrotsCollected;
     public PauseMenu pauseMenu;
-    public bool isInDevMode;
+    [SerializeField] private bool isInDevMode;
     public bool isHoldingRight;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != null)
@@ -72,10 +73,11 @@ public class GameManager : MonoBehaviour
         screenManager = FindObjectOfType<ScreenManager>();
         cameraManager = FindObjectOfType<CameraManager>();
     }
-    
+
     // Start is called before the first frame update
     private void Start()
     {
+        //Application.targetFrameRate = 30;
         Initialise();
         LoadGame();
     }
@@ -88,25 +90,34 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha0))
+        AdjustFrameRate();
+
+        if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha0))
         {
             isInDevMode = true;
         }
 
         if (isInDevMode)
         {
-            if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Minus))
+            if (Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Minus))
             {
                 Debug.Log("Back");
                 screenManager.LoadPreviousScene();
             }
 
-            if(Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Equals))
+            if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Equals))
             {
                 Debug.Log("Forward");
                 screenManager.LoadNextScene();
             }
         }
+
+        if (!isInDevMode)
+        {
+            return;
+        }
+
+
         /*
         if(Input.GetKeyDown(KeyCode.I))
         {
@@ -119,6 +130,25 @@ public class GameManager : MonoBehaviour
         }
         */
     }
+
+    private void AdjustFrameRate()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Application.targetFrameRate = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Application.targetFrameRate = 30;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Application.targetFrameRate = 60;
+        }
+    }
+
     public void Initialise()
     {
         isCounting = false;
@@ -260,5 +290,10 @@ public class GameManager : MonoBehaviour
                 bestTimePerStageFullyCompleted[currentStage] = time;
             }
         }
+    }
+
+    public bool IsInDevMode()
+    {
+        return isInDevMode;
     }
 }

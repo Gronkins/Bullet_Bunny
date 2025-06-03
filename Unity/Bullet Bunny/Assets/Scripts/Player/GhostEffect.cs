@@ -23,7 +23,7 @@ public class GhostEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement.isDashing)
+        if (playerMovement.dashTimer > 0)
         {
             if (ghostDelayTimer > 0)
             {

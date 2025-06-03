@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 //using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -52,10 +54,12 @@ public class PlayerMovement : MonoBehaviour
     private bool canBulletJump;
     public int maxDashes = 2;
     public int numOfDashes;
+    private float jumpTimer = 0f;
     [SerializeField]
     private float dashStrength = 20.0f;
     private float dashTime = 0.2f;
     private float dashCooldown = 0.1f; //Initial value was 1.0f
+    public float dashTimer { get; private set; }
 
     //[SerializeField]
     private float threshold = 0.15f; //0.35f is the initial value, later changed to 0.01f
@@ -94,6 +98,12 @@ public class PlayerMovement : MonoBehaviour
     private float originalGravity;
     private float originalVertical;
     private bool isPogoing;
+    private float initialDashTime;
+    [SerializeField] private float momentumTimer;
+    [SerializeField] private float initialSpeed;
+    [SerializeField] private float accelerationTime = 0.5f;
+    [SerializeField] private float maximumSpeed;
+    private float movementSpeedMultiplier;
     //float lastMoveVertical;
 
     // Start is called before the first frame update
@@ -107,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Initialising variables
         numOfDashes = maxDashes;
-        lastMoveHorizontal = 1;
+        lastMoveHorizontal = 1; // Default to facing right
         isFacingRight = true;
         canBulletJump = true;
 
@@ -129,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         
+        
         //Controls the player's death
         if(playerStats.isDead)
         {
@@ -142,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-        
+
         if (Input.GetKey(KeyCode.R))
         {
             //StopBulletJump();
@@ -222,18 +233,35 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDashing)
         {
+            //PerformDash();
             return;
         }
 
         //Collects horizontal input only if the plyaer is moving, useful for idling
         if (QuantizeAxis(Input.GetAxisRaw("Horizontal")) == 1 || QuantizeAxis(Input.GetAxisRaw("Horizontal")) == -1)
         {
-            //Records the last direction the player was facing such as left or right and sets the animation to that
-            lastMoveHorizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
+            momentumTimer += Time.deltaTime;
+            momentumTimer = Mathf.Min(momentumTimer, accelerationTime);
+
+            if (lastMoveHorizontal != QuantizeAxis(Input.GetAxisRaw("Horizontal")))
+            {
+                Debug.Log("Player changed directions!");
+            }
+
+            //momentumTimer = Mathf.Min()
+                //Records the last direction the player was facing such as left or right and sets the animation to that
+                lastMoveHorizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
             animator.SetFloat("LastMoveHorizontal", Input.GetAxisRaw("Horizontal"));
         }
+        else
+        {
+            momentumTimer = 0f;
+        }
 
-            
+
+        // Old Movement Code
+
+        /*
         //The player can move like normal if they are not dashing
         if (isDashing == false && !hasSlideSpeed)
         {
@@ -246,14 +274,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             if (isDashing == true)
-            {
-                //No movement while dashing
-            }
-
+        {
+            //No movement while dashing
+        }
+        */
 
 
         //Jump
-        
+
         if (numOfJumps > 0 && CanJump() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Z)))
         {
             StartCoroutine(Jump());
@@ -276,6 +304,7 @@ public class PlayerMovement : MonoBehaviour
             if (CanBulletJump())
             {
                 StartCoroutine(Dash());
+                //AsyncDash();
             }
         }
 
@@ -292,6 +321,158 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", true);
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        // Perform dash
+        if (dashTimer > 0)
+        {
+            dashTimer -= Time.fixedDeltaTime;
+            PerformDash(dashTimer);
+            return;
+        }
+
+        if (jumpTimer > 0)
+        {
+            jumpTimer -= Time.fixedDeltaTime;
+            //PerformJump(jumpTimer);
+            //return;
+        }
+
+        //Flips the player's sprite if they move
+        if (lastMoveHorizontal > 0 && !isFacingRight && !isSliding)
+        {
+            FlipSprite();
+            ammoDisplay.FlipSprite();
+        }
+
+        if (lastMoveHorizontal < 0 && isFacingRight && !isSliding)
+        {
+            FlipSprite();
+            ammoDisplay.FlipSprite();
+        }
+
+        
+        //The player can move like normal if they are not dashing
+        if (isDashing == false && !hasSlideSpeed)
+        {
+            rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //Movement code
+
+            if (rigidBody2D.velocity.y < maximumFallVelocity)
+            {
+                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, maximumFallVelocity);
+            }
+        }
+        else
+            if (isDashing == true)
+        {
+            //PerformDash();
+        }
+        
+        /*
+        if (!isDashing && !hasSlideSpeed)
+            {
+                rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y);
+
+                if (rigidBody2D.velocity.y < maximumFallVelocity)
+                {
+                    rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, maximumFallVelocity);
+                }
+            }
+            */
+
+    }
+
+    private void PerformDash(float dashDuration)
+    {
+        if (dashDirection == Vector2.down)
+        {
+            if (isGrounded == false)
+            {
+                StopCoroutine(Dash());
+            }
+        }
+
+        EndSlideForce();
+
+        //If there is no directional input the player will face in the direction they were last facing
+        if (dashDirection == Vector2.zero)
+        {
+            dashDirection = new Vector2(lastMoveHorizontal, 0);
+        }
+
+        //GameObject dashParticle = Instantiate(bulletJumpParticles, transform.position - new Vector3(horizontal, vertical, 0), Quaternion.identity);
+        //HandleBulletJumpParticles(dashParticle);
+
+        //originalGravity = rigidBody2D.gravityScale; //Stores original gravity
+        //originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
+
+        rigidBody2D.gravityScale = 0.0f; //Sets player gravity to zero, so they can dash in the air unaffected by gravity
+                                         //rigidBody2D.velocity = Vector2.zero; //Resets player velocity, so initial velocity doesn't have any strange interactions with the dash
+                                         //EndSlideForce();
+                                         //numOfDashes -= 1;
+
+
+        rigidBody2D.velocity = new Vector2(dashDirection.normalized.x * dashStrength, dashDirection.normalized.y * dashStrength); //Dash movement
+        Debug.Log("Our dash velocity is: " + rigidBody2D.velocity);
+
+        //rigidBody2D.gravityScale = originalGravity; //Resets gravity to normal
+
+        if (dashDuration < 0)
+        {
+            FinishDash();
+        }
+    }
+
+    private void PerformJump(float jumpDuration)
+    {
+        rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
+
+        if (jumpDuration < 0)
+        {
+            FinishJump();
+        }
+    }
+    
+
+    private void FinishDash(float originalGravity, float originalVertical)
+    {
+        if (isPogoing)
+        {
+            //rigidBody2D.velocity = Vector2.zero;
+            rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y / 2f);
+            animator.SetBool("IsDashing", false);
+            isDashing = false;
+        }
+
+        rigidBody2D.gravityScale = originalGravity;
+
+        rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
+    }
+
+    private void FinishDash()
+    {
+        if (isPogoing)
+        {
+            //rigidBody2D.velocity = Vector2.zero;
+            rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y / 2f);
+            animator.SetBool("IsDashing", false);
+            isDashing = false;
+        }
+
+        isDashing = false;
+
+        Debug.Log("Final Dash Duration was: " + (Time.time - initialDashTime));
+
+        rigidBody2D.gravityScale = originalGravity;
+        
+        rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
+    }
+
+    private void FinishJump()
+    {
+        //isJumping = false;
     }
 
     public void SetHorizontal()
@@ -426,22 +607,6 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawCube(transform.position - transform.up * maxDistance - yOffset, jumpableBoxSize); // Code to draw the box cast for the ground check, uncomment if editing it
         }
     }
-
-    private void FixedUpdate()
-    {
-            //Flips the player's sprite if they move
-        if (lastMoveHorizontal > 0 && !isFacingRight && !isSliding)
-        {
-            FlipSprite();
-            ammoDisplay.FlipSprite();
-        }
-        
-        if (lastMoveHorizontal < 0 && isFacingRight && !isSliding)
-        {
-            FlipSprite();
-            ammoDisplay.FlipSprite();
-        }
-    }
     
     private bool IsGrounded()
     {
@@ -475,6 +640,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Jump()
     {
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
+        jumpTimer = 0.05f;
         yield return new WaitForSeconds(0.05f); //Waits for the player to actually get off the ground
         isJumping = true;
         animator.SetBool("IsJumping", true);
@@ -509,6 +675,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         animator.SetBool("IsDashing", true);
+        float startTime = Time.time;
+        //float dashTimer = dashTime;
         /*
         if (dashDirection == Vector2.down)
         {
@@ -518,7 +686,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         */
-        
+        /*
         //If there is no directional input the player will face in the direction they were last facing
         if (dashDirection == Vector2.zero)
         {
@@ -553,23 +721,86 @@ public class PlayerMovement : MonoBehaviour
         }
         
         rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
+        */
 
+        originalGravity = rigidBody2D.gravityScale;
+        originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
+
+        //PerformDash();
+
+        yield return new WaitForSeconds(0.01f); // Wait for player to come off the ground
+        GameObject dashParticle = Instantiate(bulletJumpParticles, transform.position - new Vector3(horizontal, vertical, 0), Quaternion.identity);
+        HandleBulletJumpParticles(dashParticle);
+        EndSlideForce();
+        numOfDashes -= 1;
+        dashTimer = dashTime;
+        initialDashTime = Time.time;
+
+        //while (dashTimer > 0)
+        //{
+        //dashTimer -= Time.deltaTime;
+        //yield return null;
+        //}
+
+        //yield return new WaitForSeconds(dashTime); //Waits for dash to finish
         animator.SetBool("IsDashing", false);
         isDashing = false;
+        FinishDash(originalGravity, originalVertical);
+
+        float endTime = Time.time;
+
+        Debug.Log("Dash duration: " + (endTime - startTime));
+
         yield return new WaitForSeconds(dashCooldown);
+    }
+    
+    private async void AsyncDash()
+    {
+        isDashing = true;
+        animator.SetBool("IsDashing", true);
+        float startTime = Time.time;
+        float dashTimer = dashTime;
+        originalGravity = rigidBody2D.gravityScale;
+        originalVertical = QuantizeAxis(Input.GetAxisRaw("Vertical")); //Stores original vertical direction
+
+        //PerformDash();
+
+        //yield return new WaitForSeconds(0.01f); // Wait for player to come off the ground
+        await Task.Yield();
+        GameObject dashParticle = Instantiate(bulletJumpParticles, transform.position - new Vector3(horizontal, vertical, 0), Quaternion.identity);
+        HandleBulletJumpParticles(dashParticle);
+        EndSlideForce();
+        numOfDashes -= 1;
+
+        while (dashTimer > 0)
+        {
+            dashTimer -= Time.deltaTime;
+            await Task.Yield();
+        }
+
+        //yield return new WaitForSeconds(dashTime); //Waits for dash to finish
+            animator.SetBool("IsDashing", false);
+        isDashing = false;
+        FinishDash(originalGravity, originalVertical);
+
+        float endTime = Time.time;
+
+        Debug.Log("Dash duration: " + (endTime - startTime));
+
+        //yield return new WaitForSeconds(dashCooldown);
     }
 
     private void HandleBulletJumpParticles(GameObject dashParticle)
     {
         BulletJumpParticlesController dashParticleScript = dashParticle.GetComponent<BulletJumpParticlesController>();
         dashParticleScript.Initialise(dashDirection);
-        
+
         if (isFacingRight)
         {
             dashParticleScript.FlipSprite();
         }
-        
-        
+
+
         /*
         // Dash direction is (horizontal, vertical)
         switch (dashDirection)
@@ -606,7 +837,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
         */
-    
+
     }
     //Umm... Actually you are flipping the player's gameObject and not the sprite (nerd emoji)
     void FlipSprite()
@@ -729,6 +960,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CollisionWithSliding()
     {
+        Debug.Log("Setting is sliding...");
         animator.SetBool("CanSlide", true);
         //Debug.Log("Sliding");
         isSliding = true;
