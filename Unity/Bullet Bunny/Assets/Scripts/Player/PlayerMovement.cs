@@ -263,7 +263,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            // Resets momentum and movement speed
             momentumTimer = 0f;
+            movementSpeed = baseMovementSpeed;
         }
 
 
@@ -369,7 +371,7 @@ public class PlayerMovement : MonoBehaviour
 
         
         //The player can move like normal if they are not dashing
-        if (isDashing == false && !hasSlideSpeed)
+        if (dashTimer < 0.1 && !hasSlideSpeed)
         {
             rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, rigidBody2D.velocity.y); //Movement code
 
@@ -462,6 +464,12 @@ public class PlayerMovement : MonoBehaviour
 
         rigidBody2D.gravityScale = originalGravityScale;
 
+        // Ensures the player doesn't move upwards after the dash
+        if (originalVertical > 0)
+        {
+            originalVertical = 0f;
+        }
+
         rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
     }
 
@@ -480,8 +488,16 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Final Dash Duration was: " + (Time.time - initialDashTime));
 
         rigidBody2D.gravityScale = originalGravityScale;
+        float upwardsSpeed = originalVertical * movementSpeed;
+
+
+        // Caps upwards momentum
+        if (upwardsSpeed > 10)
+        {
+            upwardsSpeed = 10f;
+        }
         
-        rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
+        rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, upwardsSpeed); //Resets player's velocity
     }
 
     private void FinishJump()
