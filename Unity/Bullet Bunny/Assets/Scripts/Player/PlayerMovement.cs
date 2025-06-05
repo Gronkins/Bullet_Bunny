@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     private float originalGravity;
     private float originalVertical;
     private bool isPogoing;
+    private float originalGravityScale = 5f;
     private float initialDashTime;
     [SerializeField] private float momentumTimer;
     [SerializeField] private float initialSpeed;
@@ -446,7 +447,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
         }
 
-        rigidBody2D.gravityScale = originalGravity;
+        rigidBody2D.gravityScale = originalGravityScale;
 
         rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
     }
@@ -465,7 +466,7 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Final Dash Duration was: " + (Time.time - initialDashTime));
 
-        rigidBody2D.gravityScale = originalGravity;
+        rigidBody2D.gravityScale = originalGravityScale;
         
         rigidBody2D.velocity = new Vector2(horizontal * movementSpeed, originalVertical * movementSpeed); //Resets player's velocity
     }

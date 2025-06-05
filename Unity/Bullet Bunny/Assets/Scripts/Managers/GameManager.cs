@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        //Application.targetFrameRate = 30;
+        //Application.targetFrameRate = 60;
         Initialise();
         LoadGame();
     }
