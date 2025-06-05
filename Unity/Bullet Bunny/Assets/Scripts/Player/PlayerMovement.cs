@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject ghost;
     public bool isSliding; // Used to control the sliding animation itself
     public bool hasSlideSpeed; // Whether or not the player is carrying sliding momentum
     private bool isTouchingSliding; // If the player is currently touching something that would allow them to slide
@@ -29,9 +28,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask layerMask; //This is the layermask for the terrain
     public GameObject bulletJumpParticles;
 
-    public bool isGrounded;
-    [SerializeField]
-    bool isJumping;
+    private bool isGrounded;
+    private bool isJumping;
     public int numOfJumps = 1;
     public int maxJumps = 1;
     public bool isOnPlatform;
@@ -40,12 +38,11 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField]
     private float movementSpeed = 10.0f;
+    [SerializeField] private float baseMovementSpeed = 10f;
     [SerializeField]
     private float jumpHeight = 16.0f;
-
-    [SerializeField]
-    bool canDash = true;
-    public bool isDashing;
+    private bool canDash = true;
+    private bool isDashing;
     [SerializeField]
     private float upwardsForce = 16.0f;
 
@@ -65,17 +62,15 @@ public class PlayerMovement : MonoBehaviour
     private float threshold = 0.15f; //0.35f is the initial value, later changed to 0.01f
 
     //Variables for collecting horizontal and vertical input
-    public float horizontal;
-    public float vertical;
+    private float horizontal;
+    private float vertical;
 
     //Absolute horizontal means if there is any horizontal input at all, this variable will be possible
-    public float absoluteHorizontal;
-    public float absoluteVertical;
+    private float absoluteHorizontal;
+    private float absoluteVertical;
 
     private bool isFacingRight;
     private float maximumFallVelocity = -25f;
-
-    [SerializeField]
     private bool isAttacking;
 
     public bool isEditingGizmos;
@@ -94,16 +89,19 @@ public class PlayerMovement : MonoBehaviour
     
 
     //Records the last direction the player was facing, useful for idling
-    public float lastMoveHorizontal;
+    private float lastMoveHorizontal;
     private float originalGravity;
     private float originalVertical;
     private bool isPogoing;
     private float originalGravityScale = 5f;
     private float initialDashTime;
+    [Header("Momentum Stats")]
     [SerializeField] private float momentumTimer;
     [SerializeField] private float initialSpeed;
-    [SerializeField] private float accelerationTime = 0.5f;
     [SerializeField] private float maximumSpeed;
+    [SerializeField] private float accelerationTime = 0.5f;
+    [SerializeField] private bool bulletJumpMaxesMomentum;
+    private bool momentumResetsOnDirectionChanged;
     private float movementSpeedMultiplier;
     //float lastMoveVertical;
 
@@ -232,7 +230,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (isDashing)
+        //if (isDashing)
+        if (dashTimer > 0)
         {
             //PerformDash();
             return;
@@ -247,11 +246,19 @@ public class PlayerMovement : MonoBehaviour
             if (lastMoveHorizontal != QuantizeAxis(Input.GetAxisRaw("Horizontal")))
             {
                 Debug.Log("Player changed directions!");
+                if (momentumResetsOnDirectionChanged)
+                {
+                    momentumTimer = 0f;
+                }
             }
 
+            float time = momentumTimer / accelerationTime;
+
+            movementSpeed = Mathf.Lerp(baseMovementSpeed * initialSpeed, baseMovementSpeed * maximumSpeed, time);
+
             //momentumTimer = Mathf.Min()
-                //Records the last direction the player was facing such as left or right and sets the animation to that
-                lastMoveHorizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
+            //Records the last direction the player was facing such as left or right and sets the animation to that
+            lastMoveHorizontal = QuantizeAxis(Input.GetAxisRaw("Horizontal"));
             animator.SetFloat("LastMoveHorizontal", Input.GetAxisRaw("Horizontal"));
         }
         else
@@ -331,6 +338,12 @@ public class PlayerMovement : MonoBehaviour
         {
             dashTimer -= Time.fixedDeltaTime;
             PerformDash(dashTimer);
+
+            if (bulletJumpMaxesMomentum)
+            {
+                momentumTimer = accelerationTime;
+            }
+
             return;
         }
 
