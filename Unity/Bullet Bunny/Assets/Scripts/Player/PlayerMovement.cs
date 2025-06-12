@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maximumSpeed;
     [SerializeField] private float accelerationTime = 0.5f;
     [SerializeField] private bool bulletJumpMaxesMomentum;
+    [SerializeField] private bool gainMomentumWhileAirborne;
     private bool momentumResetsOnDirectionChanged;
     private float movementSpeedMultiplier;
     //float lastMoveVertical;
@@ -237,18 +238,21 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        //Collects horizontal input only if the plyaer is moving, useful for idling
+        //Collects horizontal input only if the player is moving, useful for idling
         if (QuantizeAxis(Input.GetAxisRaw("Horizontal")) == 1 || QuantizeAxis(Input.GetAxisRaw("Horizontal")) == -1)
         {
-            momentumTimer += Time.deltaTime;
-            momentumTimer = Mathf.Min(momentumTimer, accelerationTime);
-
-            if (lastMoveHorizontal != QuantizeAxis(Input.GetAxisRaw("Horizontal")))
+            if ((gainMomentumWhileAirborne && isJumping) || isGrounded)
             {
-                Debug.Log("Player changed directions!");
-                if (momentumResetsOnDirectionChanged)
+                momentumTimer += Time.deltaTime;
+                momentumTimer = Mathf.Min(momentumTimer, accelerationTime);
+
+                if (lastMoveHorizontal != QuantizeAxis(Input.GetAxisRaw("Horizontal")))
                 {
-                    momentumTimer = 0f;
+                    Debug.Log("Player changed directions!");
+                    if (momentumResetsOnDirectionChanged)
+                    {
+                        momentumTimer = 0f;
+                    }
                 }
             }
 
